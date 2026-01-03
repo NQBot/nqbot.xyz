@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free NT8 Indicators - NQBot LIVE</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        h1 {
+            font-size: 2.5rem;
+            color: #00d4ff;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #888;
+            font-size: 1.1rem;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 30px;
+            color: #00d4ff;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .license-badge {
+            display: inline-block;
+            background: #2d5a27;
+            color: #7fff7f;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 15px;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .section h2 {
+            color: #00d4ff;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #333;
+        }
+        .indicator-grid {
+            display: grid;
+            gap: 20px;
+        }
+        .indicator-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 25px;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .indicator-card:hover {
+            transform: translateY(-3px);
+            border-color: #00d4ff;
+        }
+        .indicator-card h3 {
+            color: #fff;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        .indicator-card p {
+            color: #aaa;
+            margin-bottom: 15px;
+        }
+        .features {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+        .features li {
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+            color: #ccc;
+            font-size: 0.95rem;
+        }
+        .features li::before {
+            content: ">";
+            position: absolute;
+            left: 0;
+            color: #00d4ff;
+        }
+        .download-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+            color: #000;
+            padding: 10px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .download-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.3);
+        }
+        .addon-badge {
+            display: inline-block;
+            background: #5a2d5a;
+            color: #ff7fff;
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            margin-left: 10px;
+        }
+        .install-section {
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid #00d4ff33;
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 40px;
+        }
+        .install-section h2 {
+            border: none;
+            padding: 0;
+            margin-bottom: 15px;
+        }
+        .install-section ol {
+            margin-left: 20px;
+        }
+        .install-section li {
+            margin-bottom: 10px;
+        }
+        code {
+            background: #1a1a2e;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'Consolas', monospace;
+            color: #00d4ff;
+        }
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+            color: #666;
+        }
+        footer a {
+            color: #00d4ff;
+            text-decoration: none;
+        }
+        .disclaimer {
+            background: rgba(255, 165, 0, 0.1);
+            border: 1px solid #664400;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 40px;
+            font-size: 0.9rem;
+            color: #cca;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">&larr; Back to NQBot LIVE</a>
+
+        <header>
+            <h1>Free NinjaTrader 8 Indicators</h1>
+            <p class="subtitle">Open-source tools for traders by PhillyFrank</p>
+            <span class="license-badge">MIT License - Free Forever</span>
+        </header>
+
+        <section class="section">
+            <h2>Session & Time Tools</h2>
+            <div class="indicator-grid">
+
+                <div class="indicator-card">
+                    <h3>WorldClock</h3>
+                    <p>Advanced world trading sessions indicator displaying live market status for 20+ global exchanges.</p>
+                    <ul class="features">
+                        <li>Real-time market open/closed status with countdown timers</li>
+                        <li>Holiday calendar engine (2026-2030) for NYSE, CME, LSE, JPX, and more</li>
+                        <li>CME Globex special handling (maintenance windows, evening reopens)</li>
+                        <li>Early close detection and alerts</li>
+                    </ul>
+                    <a href="indicators/worldclock.zip" class="download-btn">Download WorldClock</a>
+                </div>
+
+                <div class="indicator-card">
+                    <h3>FloatingLocalClock</h3>
+                    <p>Draggable floating clock overlay showing multiple time zones on your chart.</p>
+                    <ul class="features">
+                        <li>Display local time and up to 3 additional time zones</li>
+                        <li>Draggable positioning anywhere on chart</li>
+                        <li>Customizable colors and font</li>
+                    </ul>
+                    <a href="indicators/FloatingLocalClock.zip" class="download-btn">Download FloatingLocalClock</a>
+                </div>
+
+                <div class="indicator-card">
+                    <h3>LocalClock</h3>
+                    <p>Fixed-position clock displaying current time with multiple time zones.</p>
+                    <ul class="features">
+                        <li>Simple, clean time display</li>
+                        <li>Multiple timezone support</li>
+                        <li>Minimal chart footprint</li>
+                    </ul>
+                    <a href="indicators/localclock.zip" class="download-btn">Download LocalClock</a>
+                </div>
+
+                <div class="indicator-card">
+                    <h3>FloatingBarTimer</h3>
+                    <p>Shows countdown timer for current bar completion, floating near the active bar.</p>
+                    <ul class="features">
+                        <li>Supports Tick, Minute, and Second chart types</li>
+                        <li>Floats dynamically near current bar</li>
+                        <li>Customizable font and positioning</li>
+                    </ul>
+                    <a href="indicators/FloatingBarTimer.zip" class="download-btn">Download FloatingBarTimer</a>
+                </div>
+
+                <div class="indicator-card">
+                    <h3>AsianEuropeanSessionHighLow</h3>
+                    <p>Draws session high/low boxes for Asian and European trading sessions.</p>
+                    <ul class="features">
+                        <li>Configurable session times</li>
+                        <li>Visual session range boxes</li>
+                        <li>Customizable colors for each session</li>
+                    </ul>
+                    <a href="indicators/AsianEuropeanSessionHighLow.zip" class="download-btn">Download SessionHighLow</a>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Analysis Tools</h2>
+            <div class="indicator-grid">
+
+                <div class="indicator-card">
+                    <h3>BollingerBandWidth</h3>
+                    <p>Displays Bollinger Band width with squeeze detection for volatility analysis.</p>
+                    <ul class="features">
+                        <li>Band width calculation (upper - lower band)</li>
+                        <li>Squeeze detection (low volatility periods)</li>
+                        <li>Expansion/contraction coloring</li>
+                        <li>Keltner Channel squeeze method</li>
+                    </ul>
+                    <a href="indicators/BollingerBandWidth.zip" class="download-btn">Download BollingerBandWidth</a>
+                </div>
+
+                <div class="indicator-card">
+                    <h3>PFHistoricalDownloader</h3>
+                    <p>Downloads historical bar data to CSV files for external analysis.</p>
+                    <ul class="features">
+                        <li>Export minute or tick data</li>
+                        <li>Configurable date ranges</li>
+                        <li>Automatic chunking for large requests</li>
+                        <li>Progress feedback</li>
+                    </ul>
+                    <a href="indicators/PFHistoricaldownloader.zip" class="download-btn">Download HistoricalDownloader</a>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>AddOns</h2>
+            <div class="indicator-grid">
+
+                <div class="indicator-card">
+                    <h3>ChartExportAddOn <span class="addon-badge">AddOn</span></h3>
+                    <p>Exports chart images automatically for use with AI vision analysis systems.</p>
+                    <ul class="features">
+                        <li>Automatic chart screenshot export</li>
+                        <li>Configurable export intervals</li>
+                        <li>Multiple chart support</li>
+                        <li>Used by NQBot AI vision system</li>
+                    </ul>
+                    <a href="indicators/ChartExportAddOn.zip" class="download-btn">Download ChartExportAddOn</a>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="install-section">
+            <h2>Installation Instructions</h2>
+            <ol>
+                <li>Download the <code>.zip</code> file for the indicator you want</li>
+                <li>Extract the <code>.cs</code> file from the zip</li>
+                <li>Copy the <code>.cs</code> file to: <code>Documents\NinjaTrader 8\bin\Custom\Indicators\</code></li>
+                <li>Restart NinjaTrader 8, or compile manually via <strong>Tools &rarr; New NinjaScript &rarr; Compile</strong></li>
+                <li>Add indicators to charts: Right-click chart &rarr; <strong>Indicators</strong> &rarr; Look under <strong>PhillyFranksTools</strong></li>
+            </ol>
+        </div>
+
+        <div class="disclaimer">
+            <strong>Disclaimer:</strong> These indicators are provided as-is for educational purposes. They do not constitute trading advice or signals. Trading futures involves substantial risk. Use at your own discretion.
+        </div>
+
+        <footer>
+            <p>Made with care by PhillyFrank | <a href="https://github.com/nqbot/nqbot.xyz">GitHub</a> | <a href="index.html">NQBot LIVE</a></p>
+            <p style="margin-top: 10px;">MIT License - Free and Open Source</p>
+        </footer>
+    </div>
+</body>
+</html>
