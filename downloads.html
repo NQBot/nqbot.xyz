@@ -18,7 +18,7 @@
             line-height: 1.6;
         }
         .container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
             padding: 40px 20px;
         }
@@ -54,38 +54,67 @@
             margin-top: 15px;
         }
         .section {
-            margin-bottom: 40px;
+            margin-bottom: 50px;
         }
         .section h2 {
             color: #00d4ff;
             font-size: 1.5rem;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             padding-bottom: 10px;
             border-bottom: 1px solid #333;
         }
         .indicator-grid {
             display: grid;
-            gap: 20px;
+            gap: 30px;
         }
         .indicator-card {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid #333;
-            border-radius: 10px;
-            padding: 25px;
+            border-radius: 12px;
+            overflow: hidden;
             transition: transform 0.2s, border-color 0.2s;
         }
         .indicator-card:hover {
             transform: translateY(-3px);
             border-color: #00d4ff;
         }
+        .card-content {
+            padding: 25px;
+        }
         .indicator-card h3 {
             color: #fff;
-            font-size: 1.3rem;
-            margin-bottom: 10px;
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+        .tagline {
+            color: #00d4ff;
+            font-style: italic;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
         }
         .indicator-card p {
             color: #aaa;
             margin-bottom: 15px;
+        }
+        .screenshot-gallery {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 15px;
+            background: #0a0a0a;
+            border-bottom: 1px solid #222;
+        }
+        .screenshot-gallery img {
+            height: 180px;
+            width: auto;
+            border-radius: 6px;
+            border: 1px solid #333;
+            cursor: pointer;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .screenshot-gallery img:hover {
+            transform: scale(1.02);
+            border-color: #00d4ff;
         }
         .features {
             list-style: none;
@@ -108,7 +137,7 @@
             display: inline-block;
             background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
             color: #000;
-            padding: 10px 25px;
+            padding: 12px 28px;
             border-radius: 5px;
             text-decoration: none;
             font-weight: bold;
@@ -126,6 +155,58 @@
             border-radius: 10px;
             font-size: 0.8rem;
             margin-left: 10px;
+        }
+        .expand-btn {
+            background: none;
+            border: 1px solid #444;
+            color: #00d4ff;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-left: 15px;
+            transition: background 0.2s;
+        }
+        .expand-btn:hover {
+            background: rgba(0, 212, 255, 0.1);
+        }
+        .expanded-description {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            border-left: 3px solid #00d4ff;
+        }
+        .expanded-description.show {
+            display: block;
+        }
+        .expanded-description h4 {
+            color: #00d4ff;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+        .expanded-description ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        .expanded-description li {
+            color: #bbb;
+            margin-bottom: 5px;
+        }
+        .who-for {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #333;
+        }
+        .who-for span {
+            display: inline-block;
+            background: rgba(0, 212, 255, 0.1);
+            color: #00d4ff;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            margin: 3px 5px 3px 0;
         }
         .install-section {
             background: rgba(0, 212, 255, 0.05);
@@ -172,6 +253,39 @@
             font-size: 0.9rem;
             color: #cca;
         }
+        /* Lightbox for screenshots */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .lightbox.show {
+            display: flex;
+        }
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8rem; }
+            .screenshot-gallery img { height: 120px; }
+        }
     </style>
 </head>
 <body>
@@ -180,118 +294,280 @@
 
         <header>
             <h1>Free NinjaTrader 8 Indicators</h1>
-            <p class="subtitle">Open-source tools for traders by PhillyFrank</p>
+            <p class="subtitle">Open-source trading tools by PhillyFrank</p>
             <span class="license-badge">MIT License - Free Forever</span>
         </header>
 
+        <!-- Session & Time Tools -->
         <section class="section">
             <h2>Session & Time Tools</h2>
             <div class="indicator-grid">
 
-                <div class="indicator-card">
-                    <h3>WorldClock</h3>
-                    <p>Advanced world trading sessions indicator displaying live market status for 20+ global exchanges.</p>
-                    <ul class="features">
-                        <li>Real-time market open/closed status with countdown timers</li>
-                        <li>Holiday calendar engine (2026-2030) for NYSE, CME, LSE, JPX, and more</li>
-                        <li>CME Globex special handling (maintenance windows, evening reopens)</li>
-                        <li>Early close detection and alerts</li>
-                    </ul>
-                    <a href="indicators/worldclock.zip" class="download-btn">Download WorldClock</a>
+                <!-- World Clock -->
+                <div class="indicator-card" id="worldclock">
+                    <div class="screenshot-gallery">
+                        <img src="images/worldclock_03.png" alt="WorldClock showing global markets" onclick="openLightbox(this.src)">
+                        <img src="images/worldclock_05.png" alt="WorldClock session status" onclick="openLightbox(this.src)">
+                    </div>
+                    <div class="card-content">
+                        <h3>WorldClock</h3>
+                        <p class="tagline">"Which markets are ACTUALLY open right now - and why?"</p>
+                        <p>A full market-calendar engine embedded in NinjaTrader. Not just a clock - it's 5 years of validated holiday logic (2026-2030) for 18+ global exchanges.</p>
+                        <ul class="features">
+                            <li>Real-time LIVE/CLOSED/MAINTENANCE status for NYSE, CME, LSE, JPX, and more</li>
+                            <li>CME Globex handled correctly: Sunday opens, evening re-opens, early closes</li>
+                            <li>Countdown timers to next session transition</li>
+                            <li>Holiday awareness with same-day and next-day alerts</li>
+                            <li>DST boundary handling for US and international markets</li>
+                        </ul>
+                        <a href="indicators/worldclock.zip" class="download-btn">Download WorldClock</a>
+                        <button class="expand-btn" onclick="toggleExpand('worldclock-details')">Read More</button>
+                        <div id="worldclock-details" class="expanded-description">
+                            <h4>Markets Covered</h4>
+                            <p>CME Globex, NYSE/Nasdaq, Toronto (TSX), London (LSE), Frankfurt (Xetra), Paris (Euronext), Zurich (SIX), Tokyo (JPX), Hong Kong (HKEX), Singapore (SGX), Shanghai (SSE), Mumbai (NSE), Sydney (ASX), Wellington (NZX), Dubai (DFM), Riyadh (Tadawul), Johannesburg (JSE), Sao Paulo (B3)</p>
+                            <h4>Why It's Different</h4>
+                            <p>Most world clock indicators ignore holidays, break during early closes, completely mis-handle CME Globex, and fail around DST shifts. This one was built after those failures cost real trades - then rebuilt from the ground up with a 30+ test case harness.</p>
+                            <div class="who-for">
+                                <span>Futures Traders</span>
+                                <span>Global Macro</span>
+                                <span>London/Overnight Sessions</span>
+                                <span>Holiday-Aware Trading</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="indicator-card">
-                    <h3>FloatingLocalClock</h3>
-                    <p>Draggable floating clock overlay showing multiple time zones on your chart.</p>
-                    <ul class="features">
-                        <li>Display local time and up to 3 additional time zones</li>
-                        <li>Draggable positioning anywhere on chart</li>
-                        <li>Customizable colors and font</li>
-                    </ul>
-                    <a href="indicators/FloatingLocalClock.zip" class="download-btn">Download FloatingLocalClock</a>
+                <!-- Local Clock -->
+                <div class="indicator-card" id="localclock">
+                    <div class="screenshot-gallery">
+                        <img src="images/local_clock_01.png" alt="LocalClock on chart" onclick="openLightbox(this.src)">
+                    </div>
+                    <div class="card-content">
+                        <h3>LocalClock</h3>
+                        <p class="tagline">"I just need to see the time - on the chart - without leaving my workspace."</p>
+                        <p>When NinjaTrader charts go fullscreen or overlap the taskbar, the system clock disappears. This indicator puts the time back where traders can actually see it.</p>
+                        <ul class="features">
+                            <li>Clean, always-visible digital clock directly on your chart</li>
+                            <li>Multiple timezone support (Local, UTC, or custom)</li>
+                            <li>12-hour or 24-hour format with optional seconds</li>
+                            <li>Flexible positioning: top/center/bottom, left/center/right</li>
+                            <li>DirectX rendering - no flicker, no lag</li>
+                        </ul>
+                        <a href="indicators/localclock.zip" class="download-btn">Download LocalClock</a>
+                        <button class="expand-btn" onclick="toggleExpand('localclock-details')">Read More</button>
+                        <div id="localclock-details" class="expanded-description">
+                            <h4>Full Customization</h4>
+                            <p>Font family and size, text color, optional background box with opacity control, date display toggle. It can be subtle or impossible to miss - your choice.</p>
+                            <h4>Why This Exists</h4>
+                            <p>NinjaTrader charts don't always respect the Windows taskbar. Depending on layout, scaling, or fullscreen behavior, the system clock disappears and you're forced to alt-tab during live markets. This solves that one real problem.</p>
+                            <div class="who-for">
+                                <span>Fullscreen Charts</span>
+                                <span>Multi-Monitor</span>
+                                <span>Scalpers</span>
+                                <span>Session Traders</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
+                <!-- Floating Local Clock -->
                 <div class="indicator-card">
-                    <h3>LocalClock</h3>
-                    <p>Fixed-position clock displaying current time with multiple time zones.</p>
-                    <ul class="features">
-                        <li>Simple, clean time display</li>
-                        <li>Multiple timezone support</li>
-                        <li>Minimal chart footprint</li>
-                    </ul>
-                    <a href="indicators/localclock.zip" class="download-btn">Download LocalClock</a>
+                    <div class="card-content">
+                        <h3>FloatingLocalClock</h3>
+                        <p>Draggable floating clock overlay showing multiple time zones on your chart.</p>
+                        <ul class="features">
+                            <li>Display local time and up to 3 additional time zones</li>
+                            <li>Draggable positioning anywhere on chart</li>
+                            <li>Customizable colors and font</li>
+                        </ul>
+                        <a href="indicators/FloatingLocalClock.zip" class="download-btn">Download FloatingLocalClock</a>
+                    </div>
                 </div>
 
+                <!-- Floating Bar Timer -->
                 <div class="indicator-card">
-                    <h3>FloatingBarTimer</h3>
-                    <p>Shows countdown timer for current bar completion, floating near the active bar.</p>
-                    <ul class="features">
-                        <li>Supports Tick, Minute, and Second chart types</li>
-                        <li>Floats dynamically near current bar</li>
-                        <li>Customizable font and positioning</li>
-                    </ul>
-                    <a href="indicators/FloatingBarTimer.zip" class="download-btn">Download FloatingBarTimer</a>
+                    <div class="card-content">
+                        <h3>FloatingBarTimer</h3>
+                        <p>Shows countdown timer for current bar completion, floating near the active bar.</p>
+                        <ul class="features">
+                            <li>Supports Tick, Minute, and Second chart types</li>
+                            <li>Floats dynamically near current bar</li>
+                            <li>Customizable font and positioning</li>
+                        </ul>
+                        <a href="indicators/FloatingBarTimer.zip" class="download-btn">Download FloatingBarTimer</a>
+                    </div>
                 </div>
 
-                <div class="indicator-card">
-                    <h3>AsianEuropeanSessionHighLow</h3>
-                    <p>Draws session high/low boxes for Asian and European trading sessions.</p>
-                    <ul class="features">
-                        <li>Configurable session times</li>
-                        <li>Visual session range boxes</li>
-                        <li>Customizable colors for each session</li>
-                    </ul>
-                    <a href="indicators/AsianEuropeanSessionHighLow.zip" class="download-btn">Download SessionHighLow</a>
+                <!-- Asian European Session High Low -->
+                <div class="indicator-card" id="sessionhl">
+                    <div class="screenshot-gallery">
+                        <img src="images/AEHL_01.png" alt="Asian European Session High Low" onclick="openLightbox(this.src)">
+                    </div>
+                    <div class="card-content">
+                        <h3>AsianEuropeanSessionHighLow</h3>
+                        <p class="tagline">"If you're trading without knowing where Asia and Europe actually did business, you're trading blind."</p>
+                        <p>Precisely tracks and plots true Asian (7pm-3am ET) and European (3am-8am ET) session highs/lows using CME Globex trading-day logic, not naive calendar days.</p>
+                        <ul class="features">
+                            <li>CME Globex 5:00 PM ET trading-day rollover handled correctly</li>
+                            <li>Dashed lines while session develops, solid when complete</li>
+                            <li>Sunday evening opens and overnight sessions handled</li>
+                            <li>Fully configurable colors, widths, styles, and labels</li>
+                            <li>Exposes values programmatically for strategies/scanners</li>
+                        </ul>
+                        <a href="indicators/AsianEuropeanSessionHighLow.zip" class="download-btn">Download SessionHighLow</a>
+                        <button class="expand-btn" onclick="toggleExpand('sessionhl-details')">Read More</button>
+                        <div id="sessionhl-details" class="expanded-description">
+                            <h4>Why Most Session Indicators Fail</h4>
+                            <p>They break at midnight, mis-handle Sundays and Globex opens, reset incorrectly on holidays, and can't be trusted during real market transitions. This one was vibe-coded during live market use and refined by actual trading needs.</p>
+                            <h4>Trading Context</h4>
+                            <p>Gives you instant visual context for London fake-outs, NY open liquidity runs, prior session balance vs expansion, and mean reversion/breakout bias.</p>
+                            <div class="who-for">
+                                <span>ICT/Liquidity Traders</span>
+                                <span>NY Prep from Asia/London</span>
+                                <span>Session Structure</span>
+                                <span>Futures Traders</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
         </section>
 
+        <!-- Analysis Tools -->
         <section class="section">
             <h2>Analysis Tools</h2>
             <div class="indicator-grid">
 
-                <div class="indicator-card">
-                    <h3>BollingerBandWidth</h3>
-                    <p>Displays Bollinger Band width with squeeze detection for volatility analysis.</p>
-                    <ul class="features">
-                        <li>Band width calculation (upper - lower band)</li>
-                        <li>Squeeze detection (low volatility periods)</li>
-                        <li>Expansion/contraction coloring</li>
-                        <li>Keltner Channel squeeze method</li>
-                    </ul>
-                    <a href="indicators/BollingerBandWidth.zip" class="download-btn">Download BollingerBandWidth</a>
+                <!-- Bollinger Band Width -->
+                <div class="indicator-card" id="bbwidth">
+                    <div class="screenshot-gallery">
+                        <img src="images/bollinger_01.png" alt="Bollinger Band Width squeeze detection" onclick="openLightbox(this.src)">
+                    </div>
+                    <div class="card-content">
+                        <h3>BollingerBandWidth</h3>
+                        <p class="tagline">"Volatility tells the truth before price does."</p>
+                        <p>A volatility state engine - not just a histogram. Measures true distance between Bollinger Bands and visualizes expansion, contraction, and squeeze conditions with clean color logic.</p>
+                        <ul class="features">
+                            <li>Dynamic coloring: Green (expanding), Red (contracting), Yellow (squeeze)</li>
+                            <li>Intelligent squeeze detection using rolling average, not hardcoded magic numbers</li>
+                            <li>Works on tick, minute, and range charts</li>
+                            <li>Display as histogram bars or line graph</li>
+                            <li>Keltner Channel squeeze method available</li>
+                        </ul>
+                        <a href="indicators/BollingerBandWidth.zip" class="download-btn">Download BollingerBandWidth</a>
+                        <button class="expand-btn" onclick="toggleExpand('bbwidth-details')">Read More</button>
+                        <div id="bbwidth-details" class="expanded-description">
+                            <h4>How Traders Use It</h4>
+                            <ul>
+                                <li>Identify pre-NY open compression</li>
+                                <li>Spot London breakout potential</li>
+                                <li>Confirm when market is dead vs primed</li>
+                                <li>Filter chop vs expansion</li>
+                                <li>Time entries after volatility re-awakens</li>
+                            </ul>
+                            <h4>Pairs Well With</h4>
+                            <p>Session levels, VWAP, Market Profile, and liquidity-based approaches.</p>
+                            <div class="who-for">
+                                <span>Volatility Regime Trading</span>
+                                <span>Breakout Traders</span>
+                                <span>Mean Reversion</span>
+                                <span>System Developers</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="indicator-card">
-                    <h3>PFHistoricalDownloader</h3>
-                    <p>Downloads historical bar data to CSV files for external analysis.</p>
-                    <ul class="features">
-                        <li>Export minute or tick data</li>
-                        <li>Configurable date ranges</li>
-                        <li>Automatic chunking for large requests</li>
-                        <li>Progress feedback</li>
-                    </ul>
-                    <a href="indicators/PFHistoricaldownloader.zip" class="download-btn">Download HistoricalDownloader</a>
+                <!-- PF Historical Downloader -->
+                <div class="indicator-card" id="downloader">
+                    <div class="screenshot-gallery">
+                        <img src="images/historical_downloader_01.png" alt="Historical Downloader settings" onclick="openLightbox(this.src)">
+                        <img src="images/historical_downloader_02.png" alt="Historical Downloader output" onclick="openLightbox(this.src)">
+                    </div>
+                    <div class="card-content">
+                        <h3>PFHistoricalDownloader</h3>
+                        <p class="tagline">"If your edge depends on clean historical data, this tool exists for you."</p>
+                        <p>A data pipeline component that extracts historical minute and tick data directly from NinjaTrader's data engine to clean, analysis-ready CSV files.</p>
+                        <ul class="features">
+                            <li>Downloads minute bars (1m/5m/15m) and tick data via official BarsRequest API</li>
+                            <li>Chunked, throttled requests - safely pull months or years of data</li>
+                            <li>Clean CSV output: Unix timestamps (ms), ISO-8601, OHLCV</li>
+                            <li>Respects instrument trading hours, prevents phantom bars</li>
+                            <li>Thread-safe file writing, automatic retry tolerance</li>
+                        </ul>
+                        <a href="indicators/PFHistoricaldownloader.zip" class="download-btn">Download HistoricalDownloader</a>
+                        <button class="expand-btn" onclick="toggleExpand('downloader-details')">Read More</button>
+                        <div id="downloader-details" class="expanded-description">
+                            <h4>Designed for Advanced Workflows</h4>
+                            <ul>
+                                <li>AI/ML model training</li>
+                                <li>Quant research and backtesting outside NinjaTrader</li>
+                                <li>Parquet/DuckDB/Pandas pipelines</li>
+                                <li>Archival tick databases</li>
+                                <li>External charting engines</li>
+                            </ul>
+                            <h4>Output Format</h4>
+                            <p><strong>Minutes:</strong> ts_unix_ms, ts_iso, open, high, low, close, volume<br>
+                            <strong>Ticks:</strong> ts_unix_ms, ts_iso, price, volume</p>
+                            <div class="who-for">
+                                <span>Quant Developers</span>
+                                <span>AI/ML Practitioners</span>
+                                <span>Data Engineers</span>
+                                <span>Research</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
         </section>
 
+        <!-- AddOns -->
         <section class="section">
             <h2>AddOns</h2>
             <div class="indicator-grid">
 
-                <div class="indicator-card">
-                    <h3>ChartExportAddOn <span class="addon-badge">AddOn</span></h3>
-                    <p>Exports chart images automatically for use with AI vision analysis systems.</p>
-                    <ul class="features">
-                        <li>Automatic chart screenshot export</li>
-                        <li>Configurable export intervals</li>
-                        <li>Multiple chart support</li>
-                        <li>Used by NQBot AI vision system</li>
-                    </ul>
-                    <a href="indicators/ChartExportAddOn.zip" class="download-btn">Download ChartExportAddOn</a>
+                <!-- Chart Export AddOn -->
+                <div class="indicator-card" id="chartexport">
+                    <div class="screenshot-gallery">
+                        <img src="images/web_chartaddon_01.png" alt="Chart Export configuration" onclick="openLightbox(this.src)">
+                        <img src="images/web_chartaddon_02.png" alt="Chart Export menu" onclick="openLightbox(this.src)">
+                        <img src="images/NQ_15m.png" alt="Exported 15m chart" onclick="openLightbox(this.src)">
+                        <img src="images/NQ_5m.png" alt="Exported 5m chart" onclick="openLightbox(this.src)">
+                    </div>
+                    <div class="card-content">
+                        <h3>ChartExportAddOn <span class="addon-badge">AddOn</span></h3>
+                        <p class="tagline">"Export NinjaTrader charts as PNG images for AI/ML vision model analysis."</p>
+                        <p>Automatic chart export with off-screen rendering - works even when NT8 is minimized. Designed for AI vision systems that need clean, consistent chart images.</p>
+                        <ul class="features">
+                            <li>Exports on bar close, not fixed intervals (intelligent detection)</li>
+                            <li>Multiple instruments and timeframes simultaneously</li>
+                            <li>Off-screen WPF rendering - no visible windows required</li>
+                            <li>Tick-aligned price axis respects native tick size</li>
+                            <li>JSON metadata with timestamps and bar times</li>
+                            <li>GUI configuration via Tools menu with DataGrid editor</li>
+                        </ul>
+                        <a href="indicators/ChartExportAddOn.zip" class="download-btn">Download ChartExportAddOn</a>
+                        <button class="expand-btn" onclick="toggleExpand('chartexport-details')">Read More</button>
+                        <div id="chartexport-details" class="expanded-description">
+                            <h4>Bar-Close Detection</h4>
+                            <p>The addon intelligently exports only when a new bar closes - 15-minute chart exports at :00, :15, :30, :45. This prevents redundant exports and ensures you always get complete bars.</p>
+                            <h4>Recommended Settings for AI Vision</h4>
+                            <ul>
+                                <li><strong>High detail:</strong> 1280x720 - Full analysis, larger files</li>
+                                <li><strong>Balanced:</strong> 800x600 - Good quality, faster processing</li>
+                                <li><strong>Fast/VL models:</strong> 600x400 - Quick inference</li>
+                            </ul>
+                            <h4>Output</h4>
+                            <p>Each view exports to {Instrument}_{Period}{Type}.png with a meta.json file containing cycle timestamps and bar times.</p>
+                            <div class="who-for">
+                                <span>AI/ML Vision Systems</span>
+                                <span>NQBot Integration</span>
+                                <span>Automated Analysis</span>
+                                <span>Stream Overlays</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -306,10 +582,13 @@
                 <li>Restart NinjaTrader 8, or compile manually via <strong>Tools &rarr; New NinjaScript &rarr; Compile</strong></li>
                 <li>Add indicators to charts: Right-click chart &rarr; <strong>Indicators</strong> &rarr; Look under <strong>PhillyFranksTools</strong></li>
             </ol>
+            <p style="margin-top: 15px; color: #888;">
+                <strong>For AddOns:</strong> Use <strong>Tools &rarr; Import &rarr; NinjaScript Add-on...</strong> and select the ZIP file directly.
+            </p>
         </div>
 
         <div class="disclaimer">
-            <strong>Disclaimer:</strong> These indicators are provided as-is for educational purposes. They do not constitute trading advice or signals. Trading futures involves substantial risk. Use at your own discretion.
+            <strong>Disclaimer:</strong> These indicators are provided as-is for educational purposes. They do not constitute trading advice or signals. Trading futures involves substantial risk of loss and is not suitable for all investors. Use at your own discretion. Always verify critical data against official sources.
         </div>
 
         <footer>
@@ -317,5 +596,34 @@
             <p style="margin-top: 10px;">MIT License - Free and Open Source</p>
         </footer>
     </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" src="" alt="Screenshot">
+    </div>
+
+    <script>
+        function toggleExpand(id) {
+            const el = document.getElementById(id);
+            el.classList.toggle('show');
+        }
+
+        function openLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').classList.add('show');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('show');
+        }
+
+        // Close lightbox on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+    </script>
 </body>
 </html>
