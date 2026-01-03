@@ -25,7 +25,6 @@
       color:#0b1220;
       overflow-x:hidden;
 
-      /* Happy sunny future-tech background */
       background:
         radial-gradient(1200px 700px at 20% 15%, rgba(255,255,255,.75) 0%, rgba(255,255,255,0) 60%),
         radial-gradient(900px 600px at 85% 20%, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 60%),
@@ -33,7 +32,6 @@
         linear-gradient(135deg, #7ee8ff 0%, #a6ffcb 35%, #ffe29a 70%, #ffb3d8 100%);
     }
 
-    /* subtle tech grid overlay */
     body::before{
       content:"";
       position:fixed;
@@ -91,7 +89,7 @@
       border-radius: 999px;
       border:1px solid rgba(255,255,255,.35);
       background: rgba(255,255,255,.16);
-      font-weight:700;
+      font-weight:800;
       letter-spacing:.2px;
     }
 
@@ -120,7 +118,7 @@
       background: rgba(255,255,255,.16);
       color:#0b1220;
       text-decoration:none;
-      font-weight:700;
+      font-weight:800;
       transition: transform .15s ease, background .15s ease;
       user-select:none;
     }
@@ -130,9 +128,9 @@
       opacity:.78;
       line-height:1.35;
       margin: 6px 0 12px 0;
+      font-weight:700;
     }
 
-    /* Big clickable image cards */
     .heroLink{
       display:block;
       position:relative;
@@ -148,19 +146,25 @@
       flex: 1;
       min-height: 420px;
     }
-
     .heroLink:hover{
       transform: translateY(-3px);
       box-shadow: 0 16px 40px rgba(0,0,0,.24);
     }
 
-    /* Key fix: DO NOT pad the image itself. Let it fill the card. */
+    /* IMPORTANT: if your PNG becomes truly transparent later, this will look great */
     .heroImg{
       width:100%;
       height:100%;
       object-fit: contain;
       display:block;
-      background: rgba(255,255,255,.06);
+      background: transparent;
+    }
+
+    /* Soft “panel” behind the shed so the checkerboard isn't harsh */
+    .shedStage{
+      background:
+        radial-gradient(900px 420px at 50% 55%, rgba(255,255,255,.55), rgba(255,255,255,0) 70%),
+        rgba(255,255,255,.06);
     }
 
     .overlay{
@@ -170,7 +174,7 @@
       bottom:14px;
       padding:12px 12px;
       border-radius: 14px;
-      background: rgba(255,255,255,.78);
+      background: rgba(255,255,255,.80);
       border: 1px solid rgba(0,0,0,.06);
       display:flex;
       align-items:center;
@@ -178,24 +182,13 @@
       gap:10px;
     }
 
-    .overlay strong{
-      font-size: 16px;
-      line-height:1.2;
-    }
+    .overlay strong{ font-size:16px; line-height:1.2; }
     .overlay span{
       opacity:.75;
-      font-weight:800;
+      font-weight:900;
       white-space:nowrap;
     }
 
-    .fineprint{
-      opacity:.7;
-      font-size: 13px;
-      line-height:1.35;
-      padding-top: 12px;
-    }
-
-    /* Placeholder “Live area” */
     .placeholderBox{
       margin-top: 12px;
       border-radius: 18px;
@@ -208,6 +201,14 @@
       margin: 10px 0 0 0;
       opacity:.8;
       line-height:1.35;
+      font-weight:800;
+    }
+
+    .fineprint{
+      opacity:.7;
+      font-size: 13px;
+      line-height:1.35;
+      padding-top: 12px;
       font-weight:700;
     }
 
@@ -233,7 +234,7 @@
           </div>
 
           <div class="links">
-            <a class="btn" href="https://www.youtube.com/@NQBotLIVE" target="_blank" rel="noopener">YouTube Channel ↗</a>
+            <a class="btn" href="https://www.youtube.com/channel/UCylD_vJ1etiLUykGp9Gvnbg" target="_blank" rel="noopener">YouTube Channel ↗</a>
             <a class="btn" href="downloads.html">Free Downloads →</a>
           </div>
         </div>
@@ -244,34 +245,29 @@
         </div>
 
         <!-- NQBot banner (always visible) -->
-        <a class="heroLink" href="https://www.youtube.com/@NQBotLIVE" target="_blank" rel="noopener" aria-label="Go to NQBot LIVE YouTube channel">
-          <img
-            class="heroImg"
-            src="images/nqbot-live.png"
-            alt="NQBot LIVE"
-            onerror="this.onerror=null; this.style.display='none'; this.parentElement.style.minHeight='240px';"
-          />
+        <a class="heroLink" href="https://www.youtube.com/channel/UCylD_vJ1etiLUykGp9Gvnbg" target="_blank" rel="noopener" aria-label="Go to NQBot LIVE YouTube channel">
+          <img class="heroImg" src="images/nqbot-live.png.png" alt="NQBot LIVE" />
           <div class="overlay">
             <div>
               <strong>Go to YouTube Channel</strong><br/>
-              <small style="opacity:.75;font-weight:800;">Live stream will appear here when active</small>
+              <small style="opacity:.75;font-weight:900;">Live stream will appear here when active</small>
             </div>
             <span>Open ↗</span>
           </div>
         </a>
 
-        <!-- Simple placeholder panel (no broken embed) -->
         <div class="placeholderBox">
-          <a class="btn" href="https://www.youtube.com/@NQBotLIVE/live" target="_blank" rel="noopener">
+          <a class="btn" href="https://www.youtube.com/channel/UCylD_vJ1etiLUykGp9Gvnbg/live" target="_blank" rel="noopener">
             Check if Live ↗
           </a>
-          <p>
-            No live stream right now. When you go live, this panel is where we’ll embed it.
-          </p>
+          <a class="btn" href="https://www.youtube.com/channel/UCylD_vJ1etiLUykGp9Gvnbg/shorts" target="_blank" rel="noopener">
+            Shorts ↗
+          </a>
+          <p>No live stream right now. When you go live, we’ll embed it here.</p>
         </div>
 
         <div class="fineprint">
-          If you ever want the live embed back, we’ll add it with a “Show Live Player” toggle so it never looks broken when you’re offline.
+          Tip: you can start with this “placeholder mode” forever—no broken embeds, no “unavailable” errors.
         </div>
       </section>
 
@@ -292,17 +288,12 @@
           Free, open-source NinjaTrader 8 indicators — built DIY, shared openly, improved in public.
         </div>
 
-        <a class="heroLink" href="downloads.html" aria-label="Enter Philly Frank's Indicator Shed downloads">
-          <img
-            class="heroImg"
-            src="images/indicator-shed.png"
-            alt="Philly Frank’s Indicator Shed - Enter Downloads"
-            onerror="this.onerror=null; this.style.display='none'; this.parentElement.style.minHeight='240px';"
-          />
+        <a class="heroLink shedStage" href="downloads.html" aria-label="Enter Philly Frank's Indicator Shed downloads">
+          <img class="heroImg" src="images/indicator-shed.png.png" alt="Philly Frank’s Indicator Shed - Enter Downloads" />
           <div class="overlay">
             <div>
               <strong>Enter the Indicator Shed</strong><br/>
-              <small style="opacity:.75;font-weight:800;">Free • Open Source • NT8 Tools</small>
+              <small style="opacity:.75;font-weight:900;">Free • Open Source • NT8 Tools</small>
             </div>
             <span>Download →</span>
           </div>
