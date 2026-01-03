@@ -3,38 +3,353 @@
 <head>
   <meta charset="UTF-8" />
   <title>NQBot LIVE</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <style>
-    body {
-      margin: 0;
-      background: #0b0f14;
-      color: #e5e7eb;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
+    :root{
+      --ink:#071018;
+      --card: rgba(255,255,255,.18);
+      --card2: rgba(255,255,255,.12);
+      --border: rgba(255,255,255,.25);
+      --shadow: 0 18px 45px rgba(0,0,0,.28);
+      --radius: 22px;
+      --green:#22c55e;
+      --blue:#38bdf8;
     }
-    h1 { color: #22c55e; margin-bottom: 0.5rem; }
-    p { max-width: 520px; line-height: 1.5; }
-    a { color: #38bdf8; text-decoration: none; }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:#0b1220;
+      overflow-x:hidden;
+
+      /* Happy sunny future-tech background */
+      background:
+        radial-gradient(1200px 700px at 20% 15%, rgba(255,255,255,.75) 0%, rgba(255,255,255,0) 60%),
+        radial-gradient(900px 600px at 85% 20%, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 60%),
+        radial-gradient(900px 650px at 70% 85%, rgba(255,255,255,.40) 0%, rgba(255,255,255,0) 60%),
+        linear-gradient(135deg, #7ee8ff 0%, #a6ffcb 35%, #ffe29a 70%, #ffb3d8 100%);
+    }
+
+    /* subtle tech grid overlay */
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.18;
+      background-image:
+        linear-gradient(rgba(255,255,255,.55) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.55) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(circle at 50% 25%, rgba(0,0,0,1), rgba(0,0,0,.55) 55%, rgba(0,0,0,0) 100%);
+    }
+
+    /* subtle sparkles */
+    body::after{
+      content:"";
+      position:fixed;
+      inset:-20%;
+      pointer-events:none;
+      background:
+        radial-gradient(2px 2px at 12% 22%, rgba(255,255,255,.9), transparent 60%),
+        radial-gradient(2px 2px at 28% 38%, rgba(255,255,255,.9), transparent 60%),
+        radial-gradient(2px 2px at 46% 18%, rgba(255,255,255,.9), transparent 60%),
+        radial-gradient(2px 2px at 62% 30%, rgba(255,255,255,.9), transparent 60%),
+        radial-gradient(2px 2px at 78% 46%, rgba(255,255,255,.9), transparent 60%),
+        radial-gradient(2px 2px at 88% 26%, rgba(255,255,255,.9), transparent 60%);
+      opacity:.25;
+      filter: blur(.1px);
+      transform: rotate(-6deg);
+    }
+
+    .wrap{
+      min-height:100vh;
+      display:flex;
+      align-items:stretch;
+      justify-content:center;
+      padding:22px;
+    }
+
+    .grid{
+      width:min(1300px, 100%);
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:18px;
+    }
+
+    .panel{
+      background: linear-gradient(180deg, var(--card) 0%, var(--card2) 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+    }
+
+    .topline{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      margin-bottom:12px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 12px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.35);
+      background: rgba(255,255,255,.16);
+      font-weight:700;
+      letter-spacing:.2px;
+    }
+
+    .badge .dot{
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background: var(--green);
+      box-shadow: 0 0 0 6px rgba(34,197,94,.18);
+    }
+
+    .links{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 12px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.35);
+      background: rgba(255,255,255,.16);
+      color:#0b1220;
+      text-decoration:none;
+      font-weight:700;
+      transition: transform .15s ease, background .15s ease;
+      user-select:none;
+    }
+    .btn:hover{ transform: translateY(-2px); background: rgba(255,255,255,.26); }
+
+    .sub{
+      opacity:.75;
+      line-height:1.35;
+      margin: 6px 0 12px 0;
+    }
+
+    /* YouTube area */
+    .ytCard{
+      border-radius: 18px;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.35);
+      background: rgba(255,255,255,.12);
+      box-shadow: 0 10px 30px rgba(0,0,0,.18);
+    }
+
+    .ytFrame{
+      width:100%;
+      aspect-ratio: 16 / 9;
+      border:0;
+      display:block;
+      background:#000;
+    }
+
+    .shorts{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      padding:8px 10px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.35);
+      background: rgba(255,255,255,.16);
+      text-decoration:none;
+      color:#0b1220;
+      font-weight:700;
+      font-size: 14px;
+      transition: transform .15s ease, background .15s ease;
+    }
+    .pill:hover{ transform: translateY(-2px); background: rgba(255,255,255,.26); }
+
+    /* Big clickable images */
+    .heroLink{
+      display:block;
+      position:relative;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.35);
+      background: rgba(255,255,255,.12);
+      box-shadow: 0 10px 30px rgba(0,0,0,.18);
+      overflow:hidden;
+      text-decoration:none;
+      color:inherit;
+      transition: transform .18s ease, box-shadow .18s ease;
+      margin-top: 10px;
+    }
+
+    .heroLink:hover{
+      transform: translateY(-3px);
+      box-shadow: 0 16px 40px rgba(0,0,0,.24);
+    }
+
+    .heroImg{
+      width:100%;
+      height: auto;
+      display:block;
+      padding: 14px;
+    }
+
+    .overlay{
+      position:absolute;
+      inset:auto 14px 14px 14px;
+      padding:12px 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(0,0,0,.06);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+
+    .overlay strong{
+      font-size: 16px;
+      line-height:1.2;
+    }
+    .overlay span{
+      opacity:.7;
+      font-weight:700;
+      white-space:nowrap;
+    }
+
+    .fineprint{
+      margin-top:auto;
+      opacity:.7;
+      font-size: 13px;
+      line-height:1.35;
+      padding-top: 12px;
+    }
+
+    /* Responsive: stack on mobile */
+    @media (max-width: 900px){
+      .grid{ grid-template-columns: 1fr; }
+      .links{ justify-content:flex-start; }
+    }
   </style>
 </head>
+
 <body>
-  <div>
-    <h1>🚀 NQBot LIVE</h1>
-    <p>
-      A multi-agent AI market observatory for futures markets.<br>
-      Live analysis, evolving bias, and open research.
-    </p>
-    <p>
-      <a href="https://www.youtube.com/@NQBotLIVE" target="_blank">YouTube Channel</a> &nbsp;|&nbsp;
-      <a href="downloads.html">Free NT8 Indicators</a>
-    </p>
-    <p style="opacity:0.6;">
-      Open source • No trade signals • Educational research
-    </p>
+  <div class="wrap">
+    <div class="grid">
+
+      <!-- LEFT: YouTube -->
+      <section class="panel">
+        <div class="topline">
+          <div class="badge" title="Live stream (muted by default)">
+            <span class="dot"></span>
+            <span>NQBot LIVE</span>
+          </div>
+
+          <div class="links">
+            <a class="btn" href="https://www.youtube.com/@NQBotLIVE" target="_blank" rel="noopener">
+              YouTube Channel ↗
+            </a>
+            <a class="btn" href="downloads.html">
+              Free Downloads →
+            </a>
+          </div>
+        </div>
+
+        <div class="sub">
+          A multi-agent AI market observatory for futures markets.<br/>
+          Open source • No trade signals • Educational research
+        </div>
+
+        <!-- Clickable NQBot banner (links to YouTube) -->
+        <a class="heroLink" href="https://www.youtube.com/@NQBotLIVE" target="_blank" rel="noopener" aria-label="Go to NQBot LIVE YouTube channel">
+          <img class="heroImg" src="images/nqbot-live.png" alt="NQBot LIVE" />
+          <div class="overlay">
+            <div>
+              <strong>Watch on YouTube</strong><br/>
+              <small style="opacity:.75;font-weight:700;">AI-driven market analysis &amp; insights</small>
+            </div>
+            <span>Open ↗</span>
+          </div>
+        </a>
+
+        <!-- Live stream embed (muted by default). Autoplay may be blocked by the browser. -->
+        <div class="ytCard" style="margin-top:12px;">
+          <iframe
+            class="ytFrame"
+            src="https://www.youtube.com/embed/live_stream?channel=UCylD_vJ1etiLUykGp9Gvnbg&autoplay=1&mute=1&playsinline=1&rel=0"
+            title="NQBot LIVE Stream"
+            allow="autoplay; encrypted-media; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+
+        <!-- Optional Shorts links -->
+        <div class="shorts" aria-label="Shorts links">
+          <a class="pill" href="https://www.youtube.com/@NQBotLIVE/shorts" target="_blank" rel="noopener">Shorts Hub ↗</a>
+        </div>
+
+        <div class="fineprint">
+          Tip: browsers sometimes block autoplay. If the stream doesn’t start, hit play once — it will stay muted by default.
+        </div>
+      </section>
+
+      <!-- RIGHT: Download store entrance -->
+      <section class="panel">
+        <div class="topline">
+          <div class="badge" title="Free + open source tools">
+            <span class="dot" style="background: var(--blue); box-shadow: 0 0 0 6px rgba(56,189,248,.18);"></span>
+            <span>Philly Frank’s Indicator Shed</span>
+          </div>
+
+          <div class="links">
+            <a class="btn" href="downloads.html">Enter Downloads →</a>
+          </div>
+        </div>
+
+        <div class="sub">
+          Free, open-source NinjaTrader 8 indicators — built DIY, shared openly, improved in public.
+        </div>
+
+        <!-- Big clickable shed image -->
+        <a class="heroLink" href="downloads.html" aria-label="Enter Philly Frank's Indicator Shed downloads">
+          <img class="heroImg" src="images/indicator-shed.png" alt="Philly Frank’s Indicator Shed - Enter Downloads" />
+          <div class="overlay">
+            <div>
+              <strong>Enter the Indicator Shed</strong><br/>
+              <small style="opacity:.75;font-weight:700;">Free • Open Source • NT8 Tools</small>
+            </div>
+            <span>Download →</span>
+          </div>
+        </a>
+
+        <div class="fineprint">
+          Everything here is educational tooling. Verify market hours/holidays and test indicators before live use.
+        </div>
+      </section>
+
+    </div>
   </div>
 </body>
 </html>
