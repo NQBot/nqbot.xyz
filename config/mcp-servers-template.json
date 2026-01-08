@@ -1,0 +1,51 @@
+{
+  "mcpServers": {
+    "github": {
+      "type": "stdio",
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "YOUR_GITHUB_PAT_HERE"
+      }
+    },
+    "obs": {
+      "type": "stdio",
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "obs-mcp@latest"],
+      "env": {
+        "OBS_WEBSOCKET_PASSWORD": "YOUR_OBS_WEBSOCKET_PASSWORD"
+      }
+    },
+    "youtube": {
+      "type": "stdio",
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "youtube-data-mcp-server"],
+      "env": {
+        "YOUTUBE_API_KEY": "YOUR_YOUTUBE_API_KEY"
+      }
+    },
+    "n8n": {
+      "type": "stdio",
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "n8n-mcp"],
+      "env": {
+        "N8N_API_URL": "http://localhost:5678/api/v1",
+        "N8N_API_KEY": "YOUR_N8N_API_KEY"
+      }
+    },
+    "youtube-live": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["path/to/youtube-live-mcp/dist/index.js"],
+      "env": {}
+    },
+    "obs-lite": {
+      "type": "stdio",
+      "command": "python",
+      "args": ["path/to/obs_mcp_server.py"],
+      "env": {
+        "OBS_WEBSOCKET_PASSWORD": "YOUR_OBS_WEBSOCKET_PASSWORD"
+      }
+    }
+  }
+}
