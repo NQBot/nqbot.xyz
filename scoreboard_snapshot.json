@@ -1,0 +1,322 @@
+{
+  "timestamp": "2026-02-12T18:36:59.865247+00:00",
+  "session": "US",
+  "price": 24848.5,
+  "summary": {
+    "total_algos": 22,
+    "active_algos": 16,
+    "open_trades": 16,
+    "trades_today": 0,
+    "net_pnl_pts": 0,
+    "wins": 0,
+    "losses": 0,
+    "win_rate": 0.0
+  },
+  "active_trades": [
+    {
+      "algo_id": "stochastic_obos_B",
+      "name": "Stochastic Obos B",
+      "direction": "LONG",
+      "entry_price": 25228,
+      "unrealized_pnl": -379.5,
+      "duration": "19h2m"
+    },
+    {
+      "algo_id": "vwap_mr_B",
+      "name": "Vwap Mr B",
+      "direction": "SHORT",
+      "entry_price": 25242,
+      "unrealized_pnl": 393.5,
+      "duration": "19h9m"
+    },
+    {
+      "algo_id": "macd_histogram_A",
+      "name": "Macd Histogram A",
+      "direction": "SHORT",
+      "entry_price": 25266.75,
+      "unrealized_pnl": 418.25,
+      "duration": "17h48m"
+    },
+    {
+      "algo_id": "volume_spike_B",
+      "name": "Volume Spike B",
+      "direction": "LONG",
+      "entry_price": 25280,
+      "unrealized_pnl": -431.5,
+      "duration": "17h9m"
+    },
+    {
+      "algo_id": "ema_crossover_A",
+      "name": "Ema Crossover A",
+      "direction": "SHORT",
+      "entry_price": 25260,
+      "unrealized_pnl": 411.5,
+      "duration": "17h27m"
+    },
+    {
+      "algo_id": "adx_trend_B",
+      "name": "Adx Trend B",
+      "direction": "SHORT",
+      "entry_price": 25255.75,
+      "unrealized_pnl": 407.25,
+      "duration": "17h19m"
+    },
+    {
+      "algo_id": "ichimoku_cloud_B",
+      "name": "Ichimoku Cloud B",
+      "direction": "SHORT",
+      "entry_price": 25247.25,
+      "unrealized_pnl": 398.75,
+      "duration": "17h17m"
+    },
+    {
+      "algo_id": "momentum_cont_A",
+      "name": "Momentum Cont A",
+      "direction": "LONG",
+      "entry_price": 25264.5,
+      "unrealized_pnl": -416.0,
+      "duration": "17h10m"
+    },
+    {
+      "algo_id": "rsi_divergence_C",
+      "name": "Rsi Divergence C",
+      "direction": "LONG",
+      "entry_price": 25275,
+      "unrealized_pnl": -426.5,
+      "duration": "15h51m"
+    },
+    {
+      "algo_id": "donchian_breakout_A",
+      "name": "Donchian Breakout A",
+      "direction": "SHORT",
+      "entry_price": 25355.5,
+      "unrealized_pnl": 507.0,
+      "duration": "5h42m"
+    },
+    {
+      "algo_id": "vwap_mr_C",
+      "name": "Vwap Mr C",
+      "direction": "LONG",
+      "entry_price": 25342.75,
+      "unrealized_pnl": -494.25,
+      "duration": "4h5m"
+    },
+    {
+      "algo_id": "stochastic_obos_A",
+      "name": "Stochastic Obos A",
+      "direction": "LONG",
+      "entry_price": 25342.75,
+      "unrealized_pnl": -494.25,
+      "duration": "4h4m"
+    },
+    {
+      "algo_id": "orb_C",
+      "name": "Orb C",
+      "direction": "LONG",
+      "entry_price": 25358.5,
+      "unrealized_pnl": -510.0,
+      "duration": "4h1m"
+    },
+    {
+      "algo_id": "range_fade_B",
+      "name": "Range Fade B",
+      "direction": "SHORT",
+      "entry_price": 25368.25,
+      "unrealized_pnl": 519.75,
+      "duration": "3h55m"
+    },
+    {
+      "algo_id": "donchian_breakout_C",
+      "name": "Donchian Breakout C",
+      "direction": "SHORT",
+      "entry_price": 25285.25,
+      "unrealized_pnl": 436.75,
+      "duration": "3h49m"
+    },
+    {
+      "algo_id": "ema_crossover_C",
+      "name": "Ema Crossover C",
+      "direction": "SHORT",
+      "entry_price": 25193.5,
+      "unrealized_pnl": 345.0,
+      "duration": "3h2m"
+    }
+  ],
+  "algos_by_session": {
+    "US": [
+      {
+        "algo_id": "ema_crossover_C",
+        "name": "Ema Crossover C",
+        "status": "OPEN",
+        "trades": 0,
+        "pnl": 0
+      },
+      {
+        "algo_id": "stochastic_obos_A",
+        "name": "Stochastic Obos A",
+        "status": "OPEN",
+        "trades": 0,
+        "pnl": 0
+      },
+      {
+        "algo_id": "donchian_breakout_C",
+        "name": "Donchian Breakout C",
+        "status": "OPEN",
+        "trades": 0,
+        "pnl": 0
+      },
+      {
+        "algo_id": "range_fade_B",
+        "name": "Range Fade B",
+        "status": "OPEN",
+        "trades": 0,
+        "pnl": 0
+      },
+      {
+        "algo_id": "vwap_mr_C",
+        "name": "Vwap Mr C",
+        "status": "OPEN",
+        "trades": 0,
+        "pnl": 0
+      },
+      {
+        "algo_id": "macd_histogram_A",
+        "name": "Macd Histogram A",
+        "status": "OPEN",
+        "trades": 0,
+        "pnl": 0
+      },
+      {
+        "algo_id": "initial_balance_C",
+        "name": "Initial Balance C",
+        "status": "IDLE",
+        "trades": 0,
+        "pnl": 0
+      },
+      {
+        "algo_id": "orb_C",
+        "name": "Orb C",
+        "status": "OPEN",
+        "trades": 0,
+        "pnl": 0
+      },
+      {
+        "algo_id": "pivot_point_A",
+        "name": "Pivot Point A",
+        "status": "IDLE",
+        "trades": 0,
+        "pnl": 0
+      }
+    ],
+    "Asian": [
+      {
+        "algo_id": "ema_crossover_A",
+        "name": "Ema Crossover A",
+        "status": "OPEN",
+        "trades": 0,
+        "pnl": 0
+      },
+      {
+        "algo_id": "stochastic_obos_B",
+        "name": "Stochastic Obos B",
+        "status": "OPEN",
+        "trades": 0,
+        "pnl": 0
+      },
+      {
+        "algo_id": "vwap_mr_B",
+        "name": "Vwap Mr B",
+        "status": "OPEN",
+        "trades": 0,
+        "pnl": 0
+      },
+      {
+        "algo_id": "macd_histogram_A",
+        "name": "Macd Histogram A",
+        "status": "OPEN",
+        "trades": 0,
+        "pnl": 0
+      },
+      {
+        "algo_id": "volume_spike_B",
+        "name": "Volume Spike B",
+        "status": "OPEN",
+        "trades": 0,
+        "pnl": 0
+      },
+      {
+        "algo_id": "adx_trend_B",
+        "name": "Adx Trend B",
+        "status": "OPEN",
+        "trades": 0,
+        "pnl": 0
+      },
+      {
+        "algo_id": "ichimoku_cloud_B",
+        "name": "Ichimoku Cloud B",
+        "status": "OPEN",
+        "trades": 0,
+        "pnl": 0
+      },
+      {
+        "algo_id": "momentum_cont_A",
+        "name": "Momentum Cont A",
+        "status": "OPEN",
+        "trades": 0,
+        "pnl": 0
+      }
+    ],
+    "European": [
+      {
+        "algo_id": "ema_crossover_A",
+        "name": "Ema Crossover A",
+        "status": "OPEN",
+        "trades": 0,
+        "pnl": 0
+      },
+      {
+        "algo_id": "donchian_breakout_A",
+        "name": "Donchian Breakout A",
+        "status": "OPEN",
+        "trades": 0,
+        "pnl": 0
+      },
+      {
+        "algo_id": "vwap_reclaim_B",
+        "name": "Vwap Reclaim B",
+        "status": "IDLE",
+        "trades": 0,
+        "pnl": 0
+      },
+      {
+        "algo_id": "trend_pullback_B",
+        "name": "Trend Pullback B",
+        "status": "IDLE",
+        "trades": 0,
+        "pnl": 0
+      },
+      {
+        "algo_id": "level_break_C",
+        "name": "Level Break C",
+        "status": "IDLE",
+        "trades": 0,
+        "pnl": 0
+      },
+      {
+        "algo_id": "ict_lite_B",
+        "name": "Ict Lite B",
+        "status": "IDLE",
+        "trades": 0,
+        "pnl": 0
+      },
+      {
+        "algo_id": "rsi_divergence_C",
+        "name": "Rsi Divergence C",
+        "status": "OPEN",
+        "trades": 0,
+        "pnl": 0
+      }
+    ]
+  },
+  "recent_exits": []
+}

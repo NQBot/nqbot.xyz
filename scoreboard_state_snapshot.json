@@ -1,0 +1,160 @@
+{
+  "session": "US",
+  "timestamp": "2026-02-12T15:25:47.836608+00:00",
+  "algos": [
+    {
+      "id": "ema_crossover_C",
+      "name": "EMA Cross C",
+      "session_active": true,
+      "in_trade": false,
+      "pnl": 794.84
+    },
+    {
+      "id": "ema_crossover_A",
+      "name": "EMA Cross A",
+      "session_active": false,
+      "in_trade": false,
+      "pnl": -305.16
+    },
+    {
+      "id": "stochastic_obos_A",
+      "name": "Stoch OBOS A",
+      "session_active": true,
+      "in_trade": false,
+      "pnl": 594.84
+    },
+    {
+      "id": "stochastic_obos_B",
+      "name": "Stoch OBOS B",
+      "session_active": false,
+      "in_trade": false,
+      "pnl": -425.32
+    },
+    {
+      "id": "donchian_breakout_C",
+      "name": "Donch Brk C",
+      "session_active": true,
+      "in_trade": false,
+      "pnl": -305.16
+    },
+    {
+      "id": "donchian_breakout_A",
+      "name": "Donch Brk A",
+      "session_active": false,
+      "in_trade": false,
+      "pnl": -305.16
+    },
+    {
+      "id": "range_fade_B",
+      "name": "Range Fade B",
+      "session_active": true,
+      "in_trade": false,
+      "pnl": -170.16
+    },
+    {
+      "id": "vwap_mr_C",
+      "name": "VWAP MR C",
+      "session_active": true,
+      "in_trade": false,
+      "pnl": -305.16
+    },
+    {
+      "id": "vwap_mr_B",
+      "name": "VWAP MR B",
+      "session_active": false,
+      "in_trade": false,
+      "pnl": -305.16
+    },
+    {
+      "id": "macd_histogram_A",
+      "name": "MACD Hist A",
+      "session_active": true,
+      "in_trade": false,
+      "pnl": -315.16
+    },
+    {
+      "id": "initial_balance_C",
+      "name": "Init Bal C",
+      "session_active": true,
+      "in_trade": false,
+      "pnl": 0.0
+    },
+    {
+      "id": "orb_C",
+      "name": "ORB C",
+      "session_active": true,
+      "in_trade": false,
+      "pnl": -305.16
+    },
+    {
+      "id": "pivot_point_A",
+      "name": "Pivot Fade A",
+      "session_active": true,
+      "in_trade": false,
+      "pnl": 0.0
+    },
+    {
+      "id": "volume_spike_B",
+      "name": "Vol Spike B",
+      "session_active": false,
+      "in_trade": false,
+      "pnl": -315.16
+    },
+    {
+      "id": "adx_trend_B",
+      "name": "ADX Trend B",
+      "session_active": false,
+      "in_trade": false,
+      "pnl": -250.16
+    },
+    {
+      "id": "ichimoku_cloud_B",
+      "name": "Ichimoku B",
+      "session_active": false,
+      "in_trade": false,
+      "pnl": -250.16
+    },
+    {
+      "id": "momentum_cont_A",
+      "name": "Momentum A",
+      "session_active": false,
+      "in_trade": false,
+      "pnl": -305.16
+    },
+    {
+      "id": "vwap_reclaim_B",
+      "name": "VWAP Recl B",
+      "session_active": false,
+      "in_trade": false,
+      "pnl": 0.0
+    },
+    {
+      "id": "trend_pullback_B",
+      "name": "Trend Pull B",
+      "session_active": false,
+      "in_trade": false,
+      "pnl": 0.0
+    },
+    {
+      "id": "level_break_C",
+      "name": "Level Brk C",
+      "session_active": false,
+      "in_trade": false,
+      "pnl": 0.0
+    },
+    {
+      "id": "ict_lite_B",
+      "name": "ICT Lite B",
+      "session_active": false,
+      "in_trade": false,
+      "pnl": 0.0
+    },
+    {
+      "id": "rsi_divergence_C",
+      "name": "RSI Div C",
+      "session_active": false,
+      "in_trade": false,
+      "pnl": 794.84
+    }
+  ]
+}
