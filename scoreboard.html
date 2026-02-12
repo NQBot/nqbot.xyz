@@ -391,7 +391,7 @@
 
   <div class="summary-row">
     <div class="summary-card">
-      <div class="label">Trades Today</div>
+      <div class="label">Trades (Open + Closed)</div>
       <div class="value" id="trades-today">0</div>
     </div>
     <div class="summary-card">
@@ -497,18 +497,29 @@ function updateScoreboard(data) {
 
   document.getElementById('session').textContent = data.session || '--';
   document.getElementById('price').textContent = data.price ? data.price.toFixed(2) : '--';
-  document.getElementById('trades-today').textContent = s.trades_today;
+
+  const trades = data.active_trades || [];
+  const openCount = trades.length || s.open_trades || 0;
+
+  // Compute unrealized PnL from active trades
+  let unrealizedPnl = 0;
+  for (const t of trades) {
+    unrealizedPnl += (t.unrealized_pnl || 0);
+  }
+  // Use realized + unrealized for display
+  const displayPnl = (s.net_pnl_pts || 0) + unrealizedPnl;
+
+  document.getElementById('trades-today').textContent = s.trades_today + openCount;
 
   const pnlEl = document.getElementById('net-pnl');
-  pnlEl.textContent = formatPnl(s.net_pnl_pts);
-  pnlEl.className = 'value ' + pnlColor(s.net_pnl_pts);
+  pnlEl.textContent = formatPnl(displayPnl);
+  pnlEl.className = 'value ' + pnlColor(displayPnl);
 
   document.getElementById('win-rate').textContent = s.win_rate.toFixed(1) + '%';
-  document.getElementById('open-pos').textContent = s.open_trades;
+  document.getElementById('open-pos').textContent = openCount;
 
   // Active trades
   const activeDiv = document.getElementById('active-trades');
-  const trades = data.active_trades || [];
   if (trades.length === 0) {
     activeDiv.innerHTML = '<div class="no-data">No open trades</div>';
   } else {
@@ -613,31 +624,34 @@ function switchSessionTab(sess) {
 
 function updateHealthGrid(stateData) {
   const grid = document.getElementById('health-grid');
-  if (!stateData || Object.keys(stateData).length === 0) {
+  if (!stateData) {
     grid.innerHTML = '<div class="no-data">No state data available</div>';
     return;
   }
 
-  // stateData is keyed by algo_id
-  let html = '';
-  const entries = Object.entries(stateData).sort((a, b) => a[0].localeCompare(b[0]));
+  // stateData is { session, timestamp, algos: [ {id, name, session_active, in_trade, pnl}, ... ] }
+  const algos = stateData.algos || [];
+  if (algos.length === 0) {
+    grid.innerHTML = '<div class="no-data">No state data available</div>';
+    return;
+  }
 
-  for (const [algoId, state] of entries) {
+  let html = '';
+  for (const algo of algos) {
     let dotClass = 'dot-gray';
-    if (state.in_trade) {
+    if (algo.in_trade) {
       dotClass = 'dot-green';
-    } else if (state.session_active) {
+    } else if (algo.session_active) {
       dotClass = 'dot-blue';
     }
 
-    const pnl = state.pnl || 0;
+    const pnl = algo.pnl || 0;
     const pnlCls = pnlColor(pnl);
-    const displayName = algoId.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
 
     html += `<div class="health-tile">
       <div class="tile-head">
         <div class="tile-dot ${dotClass}"></div>
-        <div class="tile-name" title="${algoId}">${displayName}</div>
+        <div class="tile-name" title="${algo.id}">${algo.name || algo.id}</div>
       </div>
       <div class="tile-pnl ${pnlCls}">${formatPnl(pnl)}</div>
     </div>`;
