@@ -561,8 +561,8 @@ function updateScoreboard(data) {
     exitsDiv.innerHTML = html;
   }
 
-  // Session tables
-  renderSessionTables(data.algos_by_session || {});
+  // Session tables — merge active trade unrealized PnL into session data
+  renderSessionTables(data.algos_by_session || {}, trades);
 
   // Timestamp
   document.getElementById('updated').textContent =
@@ -571,10 +571,16 @@ function updateScoreboard(data) {
   checkStale();
 }
 
-function renderSessionTables(sessions) {
+function renderSessionTables(sessions, activeTrades) {
   const tabsDiv = document.getElementById('session-tabs');
   const contentDiv = document.getElementById('session-content');
   const sessionOrder = ['US', 'Asian', 'European'];
+
+  // Build a lookup of unrealized PnL and direction from active trades
+  const activeMap = {};
+  for (const t of (activeTrades || [])) {
+    activeMap[t.algo_id] = { pnl: t.unrealized_pnl || 0, direction: t.direction };
+  }
 
   if (Object.keys(sessions).length === 0) {
     tabsDiv.innerHTML = '';
@@ -599,17 +605,22 @@ function renderSessionTables(sessions) {
   }
 
   let html = `<table class="session-table">
-    <tr><th>Algo</th><th>Status</th><th>Trades</th><th>PnL</th></tr>`;
+    <tr><th>Algo</th><th>Status</th><th>Direction</th><th>PnL (pts)</th></tr>`;
   for (const a of algos) {
-    const statusHtml = a.status === 'OPEN'
+    const active = activeMap[a.algo_id];
+    const isOpen = a.status === 'OPEN';
+    const statusHtml = isOpen
       ? '<span class="status-open"></span>OPEN'
       : 'Idle';
-    const pnlCls = pnlColor(a.pnl);
+    // Use unrealized PnL from active trades if open, otherwise realized
+    const pnl = (isOpen && active) ? active.pnl : (a.pnl || 0);
+    const dir = (isOpen && active) ? active.direction : '--';
+    const pnlCls = pnlColor(pnl);
     html += `<tr>
       <td><strong>${prettyName(a.name)}</strong></td>
       <td>${statusHtml}</td>
-      <td>${a.trades}</td>
-      <td class="${pnlCls}" style="font-weight:700;">${formatPnl(a.pnl)}</td>
+      <td>${dir}</td>
+      <td class="${pnlCls}" style="font-weight:700;">${formatPnl(pnl)}</td>
     </tr>`;
   }
   html += '</table>';
