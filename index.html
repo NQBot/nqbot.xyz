@@ -212,6 +212,42 @@
       font-weight:700;
     }
 
+    /* Nav */
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 24px;
+      background: rgba(255,255,255,.45);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,.35);
+    }
+    .nav-brand {
+      font-weight: 900;
+      font-size: 18px;
+      color: #0b1220;
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 6px; }
+    .nav-links a {
+      padding: 7px 14px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 13px;
+      color: #0b1220;
+      text-decoration: none;
+      transition: background .15s;
+    }
+    .nav-links a:hover { background: rgba(255,255,255,.35); }
+    .nav-links a.active {
+      background: rgba(11,18,32,.08);
+      font-weight: 800;
+    }
+
     @media (max-width: 900px){
       .grid{ grid-template-columns: 1fr; }
       .links{ justify-content:flex-start; }
@@ -222,6 +258,17 @@
 </head>
 
 <body>
+
+<nav class="site-nav">
+  <a href="/" class="nav-brand">NQBot LIVE</a>
+  <div class="nav-links">
+    <a href="scoreboard.html">Scoreboard</a>
+    <a href="algos.html">Algos</a>
+    <a href="downloads.html">Downloads</a>
+    <a href="https://www.youtube.com/channel/UCylD_vJ1etiLUykGp9Gvnbg" target="_blank">YouTube</a>
+  </div>
+</nav>
+
   <div class="wrap">
     <div class="grid">
 

@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Algo Scoreboard - NQBot LIVE</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --card: rgba(255,255,255,.18);
+      --card2: rgba(255,255,255,.12);
+      --border: rgba(255,255,255,.25);
+      --shadow: 0 18px 45px rgba(0,0,0,.28);
+      --radius: 22px;
+      --green: #22c55e;
+      --red: #ef4444;
+      --blue: #38bdf8;
+      --muted: rgba(11,18,32,.55);
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: #0b1220;
+      overflow-x: hidden;
+      background:
+        radial-gradient(1200px 700px at 20% 15%, rgba(255,255,255,.75) 0%, rgba(255,255,255,0) 60%),
+        radial-gradient(900px 600px at 85% 20%, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 60%),
+        radial-gradient(900px 650px at 70% 85%, rgba(255,255,255,.40) 0%, rgba(255,255,255,0) 60%),
+        linear-gradient(135deg, #7ee8ff 0%, #a6ffcb 35%, #ffe29a 70%, #ffb3d8 100%);
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .18;
+      background-image:
+        linear-gradient(rgba(255,255,255,.55) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.55) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(circle at 50% 25%, rgba(0,0,0,1), rgba(0,0,0,.55) 55%, rgba(0,0,0,0) 100%);
+    }
+
+    /* Nav */
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 24px;
+      background: rgba(255,255,255,.45);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,.35);
+    }
+    .nav-brand {
+      font-weight: 900;
+      font-size: 18px;
+      color: #0b1220;
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 6px; }
+    .nav-links a {
+      padding: 7px 14px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 13px;
+      color: #0b1220;
+      text-decoration: none;
+      transition: background .15s;
+    }
+    .nav-links a:hover { background: rgba(255,255,255,.35); }
+    .nav-links a.active {
+      background: rgba(11,18,32,.08);
+      font-weight: 800;
+    }
+
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 22px 22px 60px;
+    }
+
+    /* Header bar */
+    .header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.35);
+      background: rgba(255,255,255,.16);
+      font-weight: 800;
+      font-size: 13px;
+    }
+    .live-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 5px rgba(34,197,94,.18);
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 5px rgba(34,197,94,.18); }
+      50% { opacity: .6; box-shadow: 0 0 0 8px rgba(34,197,94,.08); }
+    }
+    .session-tag {
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 13px;
+      border: 1px solid rgba(34,197,94,.35);
+      background: rgba(34,197,94,.12);
+      color: #166534;
+    }
+    .price-tag {
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 14px;
+      border: 1px solid rgba(255,255,255,.35);
+      background: rgba(255,255,255,.2);
+    }
+
+    /* Offline banner */
+    .offline-banner {
+      display: none;
+      padding: 12px 18px;
+      border-radius: 14px;
+      background: rgba(239,68,68,.08);
+      border: 1px solid rgba(239,68,68,.2);
+      font-weight: 700;
+      font-size: 13px;
+      color: #991b1b;
+      margin-bottom: 18px;
+      text-align: center;
+    }
+    .offline-banner.show { display: block; }
+
+    /* Summary cards */
+    .summary-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .summary-card {
+      background: linear-gradient(180deg, var(--card) 0%, var(--card2) 100%);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 16px;
+      text-align: center;
+    }
+    .summary-card .label {
+      font-size: 12px;
+      font-weight: 700;
+      opacity: .6;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      margin-bottom: 6px;
+    }
+    .summary-card .value {
+      font-size: 28px;
+      font-weight: 900;
+    }
+    .val-green { color: #166534; }
+    .val-red { color: #991b1b; }
+
+    /* Panels */
+    .content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    .panel {
+      background: linear-gradient(180deg, var(--card) 0%, var(--card2) 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 18px;
+    }
+    .panel-full { grid-column: 1 / -1; }
+    .panel-title {
+      font-size: 14px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      margin-bottom: 12px;
+      opacity: .75;
+    }
+
+    /* Active trades */
+    .trade-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.15);
+      margin-bottom: 8px;
+    }
+    .trade-info { display: flex; align-items: center; gap: 10px; }
+    .trade-name { font-weight: 700; font-size: 14px; }
+    .trade-dir {
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 800;
+    }
+    .dir-long { background: rgba(34,197,94,.15); color: #166534; }
+    .dir-short { background: rgba(239,68,68,.15); color: #991b1b; }
+    .trade-pnl { font-size: 18px; font-weight: 900; }
+    .trade-meta { font-size: 11px; opacity: .55; margin-top: 2px; }
+
+    /* Recent exits */
+    .exit-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(0,0,0,.04);
+      font-size: 13px;
+    }
+    .exit-item:last-child { border-bottom: none; }
+    .exit-reason {
+      font-size: 11px;
+      opacity: .5;
+      text-transform: uppercase;
+    }
+
+    /* Health grid */
+    .health-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 10px;
+    }
+    .health-tile {
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.15);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .tile-head {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .tile-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .dot-green { background: var(--green); box-shadow: 0 0 0 3px rgba(34,197,94,.18); }
+    .dot-blue { background: var(--blue); box-shadow: 0 0 0 3px rgba(56,189,248,.18); }
+    .dot-gray { background: #94a3b8; }
+    .tile-name {
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .tile-pnl {
+      font-size: 14px;
+      font-weight: 900;
+      padding-left: 14px;
+    }
+
+    /* Session tabs */
+    .session-tabs {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+    .session-tab-btn {
+      padding: 7px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.25);
+      background: rgba(255,255,255,.12);
+      font-weight: 700;
+      font-size: 12px;
+      cursor: pointer;
+      transition: background .15s;
+      color: #0b1220;
+    }
+    .session-tab-btn:hover { background: rgba(255,255,255,.3); }
+    .session-tab-btn.active {
+      background: rgba(11,18,32,.08);
+      font-weight: 800;
+    }
+    .session-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .session-table th {
+      text-align: left;
+      padding: 6px 8px;
+      border-bottom: 2px solid rgba(0,0,0,.08);
+      font-weight: 800;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .3px;
+      opacity: .55;
+    }
+    .session-table td {
+      padding: 8px 8px;
+      border-bottom: 1px solid rgba(0,0,0,.04);
+    }
+    .session-table tr:last-child td { border-bottom: none; }
+    .status-open {
+      display: inline-block;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      margin-right: 4px;
+      vertical-align: middle;
+    }
+
+    .no-data {
+      text-align: center;
+      padding: 20px;
+      opacity: .45;
+      font-weight: 700;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      font-size: 11px;
+      opacity: .4;
+      margin-top: 18px;
+      font-weight: 700;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 700px) {
+      .summary-row { grid-template-columns: repeat(2, 1fr); }
+      .content { grid-template-columns: 1fr; }
+      .health-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="/" class="nav-brand">NQBot LIVE</a>
+  <div class="nav-links">
+    <a href="scoreboard.html" class="active">Scoreboard</a>
+    <a href="algos.html">Algos</a>
+    <a href="downloads.html">Downloads</a>
+    <a href="https://www.youtube.com/channel/UCylD_vJ1etiLUykGp9Gvnbg" target="_blank">YouTube</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <div class="header-bar">
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+      <div class="live-badge"><div class="live-dot"></div> ALGO SCOREBOARD</div>
+      <div class="session-tag" id="session">--</div>
+    </div>
+    <div class="price-tag" id="price">--</div>
+  </div>
+
+  <div class="offline-banner" id="offline-banner">
+    Offline — no live data available. <span id="offline-time"></span>
+  </div>
+
+  <div class="summary-row">
+    <div class="summary-card">
+      <div class="label">Trades Today</div>
+      <div class="value" id="trades-today">0</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Net PnL (pts)</div>
+      <div class="value" id="net-pnl">0.0</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Win Rate</div>
+      <div class="value" id="win-rate">0%</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Open Positions</div>
+      <div class="value" id="open-pos">0</div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- Active trades -->
+    <div class="panel">
+      <div class="panel-title">Active Trades</div>
+      <div id="active-trades"><div class="no-data">No open trades</div></div>
+    </div>
+
+    <!-- Recent exits -->
+    <div class="panel">
+      <div class="panel-title">Recent Exits</div>
+      <div id="recent-exits"><div class="no-data">No exits yet</div></div>
+    </div>
+
+    <!-- Algo Health Grid -->
+    <div class="panel panel-full">
+      <div class="panel-title">Algo Health (22 Instances)</div>
+      <div class="health-grid" id="health-grid">
+        <div class="no-data">Waiting for state data...</div>
+      </div>
+    </div>
+
+    <!-- Session tables with tabs -->
+    <div class="panel panel-full">
+      <div class="panel-title">Algos by Session</div>
+      <div class="session-tabs" id="session-tabs"></div>
+      <div id="session-content"><div class="no-data">Waiting for data...</div></div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <div id="updated">Last updated: --</div>
+    <div style="margin-top:6px;">
+      All data is from live algo execution for educational purposes only. Not trading advice.
+    </div>
+  </div>
+
+</div>
+
+<script>
+const POLL_MS = 10000;
+const STALE_MS = 5 * 60 * 1000; // 5 minutes
+const SCOREBOARD_URL = 'scoreboard_snapshot.json';
+const STATE_URL = 'scoreboard_state_snapshot.json';
+
+let lastDataTime = null;
+let activeSessionTab = 'US';
+
+function pnlColor(val) {
+  if (val > 0) return 'val-green';
+  if (val < 0) return 'val-red';
+  return '';
+}
+
+function formatPnl(val) {
+  if (val == null) return '0.0';
+  return (val > 0 ? '+' : '') + val.toFixed(1);
+}
+
+function prettyName(name) {
+  return name || '';
+}
+
+function checkStale() {
+  const banner = document.getElementById('offline-banner');
+  const timeSpan = document.getElementById('offline-time');
+  if (!lastDataTime) {
+    banner.classList.add('show');
+    timeSpan.textContent = '';
+    return;
+  }
+  const age = Date.now() - lastDataTime.getTime();
+  if (age > STALE_MS) {
+    banner.classList.add('show');
+    timeSpan.textContent = 'Last seen: ' + lastDataTime.toLocaleTimeString();
+  } else {
+    banner.classList.remove('show');
+  }
+}
+
+function updateScoreboard(data) {
+  if (!data || !data.summary) return;
+  const s = data.summary;
+
+  lastDataTime = data.timestamp ? new Date(data.timestamp) : new Date();
+
+  document.getElementById('session').textContent = data.session || '--';
+  document.getElementById('price').textContent = data.price ? data.price.toFixed(2) : '--';
+  document.getElementById('trades-today').textContent = s.trades_today;
+
+  const pnlEl = document.getElementById('net-pnl');
+  pnlEl.textContent = formatPnl(s.net_pnl_pts);
+  pnlEl.className = 'value ' + pnlColor(s.net_pnl_pts);
+
+  document.getElementById('win-rate').textContent = s.win_rate.toFixed(1) + '%';
+  document.getElementById('open-pos').textContent = s.open_trades;
+
+  // Active trades
+  const activeDiv = document.getElementById('active-trades');
+  const trades = data.active_trades || [];
+  if (trades.length === 0) {
+    activeDiv.innerHTML = '<div class="no-data">No open trades</div>';
+  } else {
+    let html = '';
+    for (const t of trades) {
+      const dirClass = t.direction === 'LONG' ? 'dir-long' : 'dir-short';
+      const pnlCls = pnlColor(t.unrealized_pnl);
+      html += `<div class="trade-item">
+        <div class="trade-info">
+          <span class="trade-dir ${dirClass}">${t.direction}</span>
+          <div>
+            <div class="trade-name">${prettyName(t.name)}</div>
+            <div class="trade-meta">Entry: ${t.entry_price.toFixed(2)} | ${t.duration}</div>
+          </div>
+        </div>
+        <div class="trade-pnl ${pnlCls}">${formatPnl(t.unrealized_pnl)}</div>
+      </div>`;
+    }
+    activeDiv.innerHTML = html;
+  }
+
+  // Recent exits
+  const exitsDiv = document.getElementById('recent-exits');
+  const exits = data.recent_exits || [];
+  if (exits.length === 0) {
+    exitsDiv.innerHTML = '<div class="no-data">No exits yet</div>';
+  } else {
+    let html = '';
+    for (const e of [...exits].reverse()) {
+      const pnlCls = pnlColor(e.pnl_pts);
+      html += `<div class="exit-item">
+        <div>
+          <strong>${prettyName(e.name || e.algo_id)}</strong>
+          <span class="exit-reason">${e.reason}</span>
+        </div>
+        <div class="${pnlCls}" style="font-weight:800;">${formatPnl(e.pnl_pts)} pts</div>
+      </div>`;
+    }
+    exitsDiv.innerHTML = html;
+  }
+
+  // Session tables
+  renderSessionTables(data.algos_by_session || {});
+
+  // Timestamp
+  document.getElementById('updated').textContent =
+    'Last updated: ' + (lastDataTime ? lastDataTime.toLocaleTimeString() : '--');
+
+  checkStale();
+}
+
+function renderSessionTables(sessions) {
+  const tabsDiv = document.getElementById('session-tabs');
+  const contentDiv = document.getElementById('session-content');
+  const sessionOrder = ['US', 'Asian', 'European'];
+
+  if (Object.keys(sessions).length === 0) {
+    tabsDiv.innerHTML = '';
+    contentDiv.innerHTML = '<div class="no-data">No session data</div>';
+    return;
+  }
+
+  // Build tabs
+  let tabHtml = '';
+  for (const sess of sessionOrder) {
+    if (!sessions[sess] || sessions[sess].length === 0) continue;
+    const cls = sess === activeSessionTab ? 'session-tab-btn active' : 'session-tab-btn';
+    tabHtml += `<button class="${cls}" onclick="switchSessionTab('${sess}')">${sess}</button>`;
+  }
+  tabsDiv.innerHTML = tabHtml;
+
+  // Build table for active tab
+  const algos = sessions[activeSessionTab];
+  if (!algos || algos.length === 0) {
+    contentDiv.innerHTML = '<div class="no-data">No algos in this session</div>';
+    return;
+  }
+
+  let html = `<table class="session-table">
+    <tr><th>Algo</th><th>Status</th><th>Trades</th><th>PnL</th></tr>`;
+  for (const a of algos) {
+    const statusHtml = a.status === 'OPEN'
+      ? '<span class="status-open"></span>OPEN'
+      : 'Idle';
+    const pnlCls = pnlColor(a.pnl);
+    html += `<tr>
+      <td><strong>${prettyName(a.name)}</strong></td>
+      <td>${statusHtml}</td>
+      <td>${a.trades}</td>
+      <td class="${pnlCls}" style="font-weight:700;">${formatPnl(a.pnl)}</td>
+    </tr>`;
+  }
+  html += '</table>';
+  contentDiv.innerHTML = html;
+}
+
+function switchSessionTab(sess) {
+  activeSessionTab = sess;
+  // Re-render will happen on next poll, but force immediate re-render from cached data
+  poll();
+}
+
+function updateHealthGrid(stateData) {
+  const grid = document.getElementById('health-grid');
+  if (!stateData || Object.keys(stateData).length === 0) {
+    grid.innerHTML = '<div class="no-data">No state data available</div>';
+    return;
+  }
+
+  // stateData is keyed by algo_id
+  let html = '';
+  const entries = Object.entries(stateData).sort((a, b) => a[0].localeCompare(b[0]));
+
+  for (const [algoId, state] of entries) {
+    let dotClass = 'dot-gray';
+    if (state.in_trade) {
+      dotClass = 'dot-green';
+    } else if (state.session_active) {
+      dotClass = 'dot-blue';
+    }
+
+    const pnl = state.pnl || 0;
+    const pnlCls = pnlColor(pnl);
+    const displayName = algoId.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+
+    html += `<div class="health-tile">
+      <div class="tile-head">
+        <div class="tile-dot ${dotClass}"></div>
+        <div class="tile-name" title="${algoId}">${displayName}</div>
+      </div>
+      <div class="tile-pnl ${pnlCls}">${formatPnl(pnl)}</div>
+    </div>`;
+  }
+
+  grid.innerHTML = html;
+}
+
+async function poll() {
+  const results = await Promise.allSettled([
+    fetch(SCOREBOARD_URL + '?t=' + Date.now()).then(r => r.ok ? r.json() : null),
+    fetch(STATE_URL + '?t=' + Date.now()).then(r => r.ok ? r.json() : null),
+  ]);
+
+  const scoreboardData = results[0].status === 'fulfilled' ? results[0].value : null;
+  const stateData = results[1].status === 'fulfilled' ? results[1].value : null;
+
+  if (scoreboardData) {
+    updateScoreboard(scoreboardData);
+  }
+
+  if (stateData) {
+    updateHealthGrid(stateData);
+  }
+
+  checkStale();
+}
+
+setInterval(poll, POLL_MS);
+poll();
+// Also check staleness periodically even without new data
+setInterval(checkStale, 30000);
+</script>
+
+</body>
+</html>

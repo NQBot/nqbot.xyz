@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Algo Engine - NQBot LIVE</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --card: rgba(255,255,255,.18);
+      --card2: rgba(255,255,255,.12);
+      --border: rgba(255,255,255,.25);
+      --shadow: 0 18px 45px rgba(0,0,0,.28);
+      --radius: 22px;
+      --green: #22c55e;
+      --red: #ef4444;
+      --blue: #38bdf8;
+      --muted: rgba(11,18,32,.55);
+      --us-bg: rgba(56,189,248,.15);
+      --us-text: #0369a1;
+      --asian-bg: rgba(168,85,247,.15);
+      --asian-text: #6b21a8;
+      --euro-bg: rgba(234,179,8,.15);
+      --euro-text: #854d0e;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: #0b1220;
+      overflow-x: hidden;
+      background:
+        radial-gradient(1200px 700px at 20% 15%, rgba(255,255,255,.75) 0%, rgba(255,255,255,0) 60%),
+        radial-gradient(900px 600px at 85% 20%, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 60%),
+        radial-gradient(900px 650px at 70% 85%, rgba(255,255,255,.40) 0%, rgba(255,255,255,0) 60%),
+        linear-gradient(135deg, #7ee8ff 0%, #a6ffcb 35%, #ffe29a 70%, #ffb3d8 100%);
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .18;
+      background-image:
+        linear-gradient(rgba(255,255,255,.55) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.55) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(circle at 50% 25%, rgba(0,0,0,1), rgba(0,0,0,.55) 55%, rgba(0,0,0,0) 100%);
+    }
+
+    /* Nav */
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 24px;
+      background: rgba(255,255,255,.45);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,.35);
+    }
+    .nav-brand {
+      font-weight: 900;
+      font-size: 18px;
+      color: #0b1220;
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 6px; }
+    .nav-links a {
+      padding: 7px 14px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 13px;
+      color: #0b1220;
+      text-decoration: none;
+      transition: background .15s;
+    }
+    .nav-links a:hover { background: rgba(255,255,255,.35); }
+    .nav-links a.active {
+      background: rgba(11,18,32,.08);
+      font-weight: 800;
+    }
+
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 30px 22px 60px;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .hero h1 {
+      font-size: 32px;
+      font-weight: 900;
+      margin: 0 0 6px;
+    }
+    .hero p {
+      font-size: 15px;
+      opacity: .7;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    /* Stat badges */
+    .stat-row {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+    .stat-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.35);
+      border: 1px solid rgba(255,255,255,.4);
+      backdrop-filter: blur(8px);
+      font-weight: 800;
+      font-size: 13px;
+    }
+    .stat-badge .num {
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    /* Session filter */
+    .filter-bar {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+    .filter-btn {
+      padding: 8px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.35);
+      background: rgba(255,255,255,.2);
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      transition: background .15s, transform .1s;
+      color: #0b1220;
+    }
+    .filter-btn:hover { background: rgba(255,255,255,.4); }
+    .filter-btn.active {
+      background: rgba(11,18,32,.1);
+      border-color: rgba(11,18,32,.2);
+      font-weight: 800;
+    }
+    .filter-btn .count {
+      opacity: .55;
+      font-size: 12px;
+      margin-left: 4px;
+    }
+
+    /* Category header */
+    .cat-header {
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      opacity: .5;
+      margin: 32px 0 14px;
+      padding-left: 4px;
+    }
+
+    /* Algo cards */
+    .algo-card {
+      background: linear-gradient(180deg, var(--card) 0%, var(--card2) 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 22px;
+      margin-bottom: 16px;
+      transition: transform .15s;
+    }
+    .algo-card:hover { transform: translateY(-2px); }
+    .algo-card.hidden { display: none; }
+
+    .card-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+    .card-head h2 {
+      font-size: 20px;
+      font-weight: 900;
+      margin: 0;
+    }
+    .session-pill {
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+    }
+    .pill-us { background: var(--us-bg); color: var(--us-text); }
+    .pill-asian { background: var(--asian-bg); color: var(--asian-text); }
+    .pill-euro { background: var(--euro-bg); color: var(--euro-text); }
+    .highlight-badge {
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+      background: rgba(34,197,94,.12);
+      color: #166534;
+      border: 1px solid rgba(34,197,94,.25);
+    }
+
+    .card-oneliner {
+      font-size: 15px;
+      font-weight: 600;
+      opacity: .8;
+      margin-bottom: 10px;
+    }
+
+    .how-it-works {
+      margin: 0 0 14px 0;
+      padding: 0 0 0 18px;
+      font-size: 13px;
+      line-height: 1.6;
+      opacity: .75;
+    }
+    .how-it-works li { margin-bottom: 3px; }
+
+    /* Variant strip */
+    .variant-strip {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .variant-card {
+      flex: 1;
+      min-width: 220px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.2);
+    }
+    .variant-card .v-head {
+      font-weight: 800;
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+    .variant-card .v-params {
+      font-size: 12px;
+      opacity: .6;
+      margin-bottom: 6px;
+    }
+    .variant-card .v-stats {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-size: 12px;
+    }
+    .v-stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .v-stat .v-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .3px;
+      opacity: .5;
+      font-weight: 700;
+    }
+    .v-stat .v-val {
+      font-weight: 900;
+      font-size: 14px;
+    }
+    .v-green { color: #166534; }
+    .v-red { color: #991b1b; }
+
+    /* Appointment callout */
+    .appointment-box {
+      background: linear-gradient(180deg, rgba(56,189,248,.12) 0%, rgba(56,189,248,.04) 100%);
+      border: 1px solid rgba(56,189,248,.3);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin: 32px 0;
+      text-align: center;
+    }
+    .appointment-box h3 {
+      font-size: 16px;
+      font-weight: 900;
+      margin: 0 0 10px;
+    }
+    .appt-items {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .appt-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 18px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.3);
+      border: 1px solid rgba(255,255,255,.35);
+      font-weight: 700;
+    }
+    .appt-time {
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--us-text);
+    }
+
+    /* Summary table */
+    .summary-section {
+      margin-top: 36px;
+    }
+    .summary-section h3 {
+      font-size: 16px;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+    .summary-table-wrap {
+      background: linear-gradient(180deg, var(--card) 0%, var(--card2) 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      overflow-x: auto;
+    }
+    .summary-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .summary-table th {
+      text-align: left;
+      padding: 10px 12px;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .3px;
+      opacity: .55;
+      border-bottom: 2px solid rgba(0,0,0,.06);
+      white-space: nowrap;
+    }
+    .summary-table td {
+      padding: 8px 12px;
+      border-bottom: 1px solid rgba(0,0,0,.04);
+    }
+    .summary-table tr:last-child td { border-bottom: none; }
+    .summary-table .pnl-pos { color: #166534; font-weight: 700; }
+    .summary-table .pnl-neg { color: #991b1b; font-weight: 700; }
+
+    /* Disclaimer */
+    .disclaimer {
+      margin-top: 36px;
+      padding: 18px 22px;
+      border-radius: 16px;
+      background: rgba(255,165,0,.08);
+      border: 1px solid rgba(255,165,0,.2);
+      font-size: 13px;
+      opacity: .8;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 700px) {
+      .hero h1 { font-size: 24px; }
+      .stat-row { gap: 8px; }
+      .variant-strip { flex-direction: column; }
+      .variant-card { min-width: 0; }
+      .appt-items { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="/" class="nav-brand">NQBot LIVE</a>
+  <div class="nav-links">
+    <a href="scoreboard.html">Scoreboard</a>
+    <a href="algos.html" class="active">Algos</a>
+    <a href="downloads.html">Downloads</a>
+    <a href="https://www.youtube.com/channel/UCylD_vJ1etiLUykGp9Gvnbg" target="_blank">YouTube</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <div class="hero">
+    <h1>Algo Engine: 18 Strategies, 22 Instances</h1>
+    <p>Automated NQ futures strategies running live across three global sessions</p>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat-badge"><span class="num">3</span> Year Backtest</div>
+    <div class="stat-badge"><span class="num">22</span> Live Instances</div>
+    <div class="stat-badge"><span class="num">+400</span> pt Cutoff</div>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterSession('all')">All <span class="count">(22)</span></button>
+    <button class="filter-btn" onclick="filterSession('US')">US <span class="count">(9)</span></button>
+    <button class="filter-btn" onclick="filterSession('Asian')">Asian <span class="count">(8)</span></button>
+    <button class="filter-btn" onclick="filterSession('European')">European <span class="count">(7)</span></button>
+  </div>
+
+  <!-- TREND FOLLOWING -->
+  <div class="cat-header" data-cat="trend">Trend Following</div>
+
+  <div class="algo-card" data-sessions="US,Asian,European">
+    <div class="card-head">
+      <h2>EMA Crossover</h2>
+      <span class="session-pill pill-us">US</span>
+      <span class="session-pill pill-asian">Asian</span>
+      <span class="session-pill pill-euro">European</span>
+    </div>
+    <div class="card-oneliner">Detects trend shifts when a fast exponential moving average crosses above or below a slow one.</div>
+    <ul class="how-it-works">
+      <li>Monitors 8-period and 21-period EMA relationship in real time</li>
+      <li>Enters long when fast EMA crosses above slow EMA with ATR confirmation</li>
+      <li>Enters short on the inverse cross with volatility filter</li>
+      <li>Variant C uses tighter parameters for faster signals; Variant A is slower and more selective</li>
+    </ul>
+    <div class="variant-strip">
+      <div class="variant-card">
+        <div class="v-head">Variant C (US, Asian, Euro)</div>
+        <div class="v-params">Fast EMA, tight stops</div>
+        <div class="v-stats">
+          <div class="v-stat"><span class="v-label">PnL</span><span class="v-val v-green">+2,535</span></div>
+          <div class="v-stat"><span class="v-label">PF</span><span class="v-val">1.12</span></div>
+          <div class="v-stat"><span class="v-label">WR</span><span class="v-val">38.5%</span></div>
+        </div>
+      </div>
+      <div class="variant-card">
+        <div class="v-head">Variant A (US, Euro)</div>
+        <div class="v-params">Slower EMA, wider stops</div>
+        <div class="v-stats">
+          <div class="v-stat"><span class="v-label">PnL</span><span class="v-val v-green">+1,280</span></div>
+          <div class="v-stat"><span class="v-label">PF</span><span class="v-val">1.08</span></div>
+          <div class="v-stat"><span class="v-label">WR</span><span class="v-val">36.8%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="algo-card" data-sessions="Asian">
+    <div class="card-head">
+      <h2>ADX Trend</h2>
+      <span class="session-pill pill-asian">Asian</span>
+      <span class="highlight-badge">Best WR 41.2%</span>
+    </div>
+    <div class="card-oneliner">Uses the Average Directional Index to identify and ride strong trending moves during the Asian session.</div>
+    <ul class="how-it-works">
+      <li>Computes ADX internally via Wilder's smoothing (14-period)</li>
+      <li>Only enters when ADX exceeds threshold, confirming a real trend exists</li>
+      <li>Uses +DI/-DI crossover for directional bias</li>
+      <li>Session-restricted to Asian hours where it backtested strongest</li>
+    </ul>
+    <div class="variant-strip">
+      <div class="variant-card">
+        <div class="v-head">Variant B (Asian)</div>
+        <div class="v-params">ADX threshold 25, Wilder's 14-period</div>
+        <div class="v-stats">
+          <div class="v-stat"><span class="v-label">PnL</span><span class="v-val v-green">+2,002</span></div>
+          <div class="v-stat"><span class="v-label">PF</span><span class="v-val">1.17</span></div>
+          <div class="v-stat"><span class="v-label">WR</span><span class="v-val">41.2%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="algo-card" data-sessions="Asian">
+    <div class="card-head">
+      <h2>Momentum Continuation</h2>
+      <span class="session-pill pill-asian">Asian</span>
+    </div>
+    <div class="card-oneliner">Catches strong directional moves that continue after an initial impulse, riding momentum into exhaustion.</div>
+    <ul class="how-it-works">
+      <li>Identifies impulse bars using volume and range expansion criteria</li>
+      <li>Waits for a shallow pullback to confirm continuation rather than reversal</li>
+      <li>Enters in the direction of the impulse once pullback conditions are met</li>
+      <li>Trails stops aggressively to capture the continuation leg</li>
+    </ul>
+    <div class="variant-strip">
+      <div class="variant-card">
+        <div class="v-head">Variant A (Asian)</div>
+        <div class="v-params">Standard momentum filter</div>
+        <div class="v-stats">
+          <div class="v-stat"><span class="v-label">PnL</span><span class="v-val v-green">+1,129</span></div>
+          <div class="v-stat"><span class="v-label">PF</span><span class="v-val">1.12</span></div>
+          <div class="v-stat"><span class="v-label">WR</span><span class="v-val">39.1%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="algo-card" data-sessions="Asian">
+    <div class="card-head">
+      <h2>Ichimoku Cloud</h2>
+      <span class="session-pill pill-asian">Asian</span>
+      <span class="highlight-badge">Best PF 1.21</span>
+    </div>
+    <div class="card-oneliner">Applies the full Ichimoku Kinko Hyo system to identify trend direction, support/resistance, and entry timing.</div>
+    <ul class="how-it-works">
+      <li>Uses Tenkan-sen/Kijun-sen crossover for signal generation</li>
+      <li>Confirms entries when price is on the correct side of the Kumo (cloud)</li>
+      <li>Chikou Span provides additional confirmation of trend strength</li>
+      <li>Asian-session restricted where its cloud levels align with overnight accumulation zones</li>
+    </ul>
+    <div class="variant-strip">
+      <div class="variant-card">
+        <div class="v-head">Variant B (Asian)</div>
+        <div class="v-params">Standard Ichimoku periods (9/26/52)</div>
+        <div class="v-stats">
+          <div class="v-stat"><span class="v-label">PnL</span><span class="v-val v-green">+795</span></div>
+          <div class="v-stat"><span class="v-label">PF</span><span class="v-val">1.21</span></div>
+          <div class="v-stat"><span class="v-label">WR</span><span class="v-val">38.7%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MEAN REVERSION -->
+  <div class="cat-header" data-cat="reversion">Mean Reversion</div>
+
+  <div class="algo-card" data-sessions="US,Asian">
+    <div class="card-head">
+      <h2>VWAP Mean Reversion</h2>
+      <span class="session-pill pill-us">US</span>
+      <span class="session-pill pill-asian">Asian</span>
+    </div>
+    <div class="card-oneliner">Fades extended moves away from VWAP, betting price returns to the volume-weighted average.</div>
+    <ul class="how-it-works">
+      <li>Monitors price deviation from session VWAP in real time</li>
+      <li>Enters mean reversion trades when deviation exceeds a threshold (measured in ATR)</li>
+      <li>Uses standard deviation bands around VWAP for precise entry zones</li>
+      <li>Targets VWAP as the profit objective with defined risk at the extension extreme</li>
+    </ul>
+    <div class="variant-strip">
+      <div class="variant-card">
+        <div class="v-head">Variant C (US, Asian)</div>
+        <div class="v-params">Tight deviation threshold</div>
+        <div class="v-stats">
+          <div class="v-stat"><span class="v-label">PnL</span><span class="v-val v-green">+1,391</span></div>
+          <div class="v-stat"><span class="v-label">PF</span><span class="v-val">1.09</span></div>
+          <div class="v-stat"><span class="v-label">WR</span><span class="v-val">42.3%</span></div>
+        </div>
+      </div>
+      <div class="variant-card">
+        <div class="v-head">Variant B (US)</div>
+        <div class="v-params">Wider deviation, larger targets</div>
+        <div class="v-stats">
+          <div class="v-stat"><span class="v-label">PnL</span><span class="v-val v-green">+820</span></div>
+          <div class="v-stat"><span class="v-label">PF</span><span class="v-val">1.06</span></div>
+          <div class="v-stat"><span class="v-label">WR</span><span class="v-val">40.1%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="algo-card" data-sessions="US">
+    <div class="card-head">
+      <h2>Range Fade</h2>
+      <span class="session-pill pill-us">US</span>
+    </div>
+    <div class="card-oneliner">Fades price at session range extremes, betting that boundaries hold rather than break.</div>
+    <ul class="how-it-works">
+      <li>Tracks the developing session high and low as a dynamic range</li>
+      <li>Enters short near session highs and long near session lows</li>
+      <li>Requires minimum range width before engaging to avoid thin chop</li>
+      <li>Stops beyond the range extreme; targets the opposite boundary or VWAP</li>
+    </ul>
+    <div class="variant-strip">
+      <div class="variant-card">
+        <div class="v-head">Variant B (US)</div>
+        <div class="v-params">Standard range parameters</div>
+        <div class="v-stats">
+          <div class="v-stat"><span class="v-label">PnL</span><span class="v-val v-green">+920</span></div>
+          <div class="v-stat"><span class="v-label">PF</span><span class="v-val">1.05</span></div>
+          <div class="v-stat"><span class="v-label">WR</span><span class="v-val">43.8%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="algo-card" data-sessions="US,Asian">
+    <div class="card-head">
+      <h2>Stochastic OB/OS</h2>
+      <span class="session-pill pill-us">US</span>
+      <span class="session-pill pill-asian">Asian</span>
+    </div>
+    <div class="card-oneliner">Uses stochastic oscillator overbought/oversold extremes to time mean reversion entries.</div>
+    <ul class="how-it-works">
+      <li>Monitors %K and %D stochastic lines for extreme readings (above 80 or below 20)</li>
+      <li>Enters when stochastic hooks back from an extreme with price confirmation</li>
+      <li>Requires trending context from higher timeframe to filter chop</li>
+      <li>Two variants provide different sensitivity levels for different session volatility</li>
+    </ul>
+    <div class="variant-strip">
+      <div class="variant-card">
+        <div class="v-head">Variant A (US, Asian)</div>
+        <div class="v-params">Standard periods</div>
+        <div class="v-stats">
+          <div class="v-stat"><span class="v-label">PnL</span><span class="v-val v-green">+1,464</span></div>
+          <div class="v-stat"><span class="v-label">PF</span><span class="v-val">1.08</span></div>
+          <div class="v-stat"><span class="v-label">WR</span><span class="v-val">40.5%</span></div>
+        </div>
+      </div>
+      <div class="variant-card">
+        <div class="v-head">Variant B (US)</div>
+        <div class="v-params">Faster periods, tighter bands</div>
+        <div class="v-stats">
+          <div class="v-stat"><span class="v-label">PnL</span><span class="v-val v-green">+680</span></div>
+          <div class="v-stat"><span class="v-label">PF</span><span class="v-val">1.05</span></div>
+          <div class="v-stat"><span class="v-label">WR</span><span class="v-val">39.2%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="algo-card" data-sessions="European">
+    <div class="card-head">
+      <h2>RSI Divergence</h2>
+      <span class="session-pill pill-euro">European</span>
+    </div>
+    <div class="card-oneliner">Detects divergence between price action and RSI to catch reversals before they happen.</div>
+    <ul class="how-it-works">
+      <li>Compares price swing highs/lows with corresponding RSI readings</li>
+      <li>Bullish divergence: price makes lower low but RSI makes higher low</li>
+      <li>Bearish divergence: price makes higher high but RSI makes lower high</li>
+      <li>European-session restricted where London session reversals are most predictable</li>
+    </ul>
+    <div class="variant-strip">
+      <div class="variant-card">
+        <div class="v-head">Variant C (European)</div>
+        <div class="v-params">14-period RSI, swing detection</div>
+        <div class="v-stats">
+          <div class="v-stat"><span class="v-label">PnL</span><span class="v-val v-green">+412</span></div>
+          <div class="v-stat"><span class="v-label">PF</span><span class="v-val">1.03</span></div>
+          <div class="v-stat"><span class="v-label">WR</span><span class="v-val">37.4%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BREAKOUT -->
+  <div class="cat-header" data-cat="breakout">Breakout</div>
+
+  <div class="algo-card" data-sessions="US">
+    <div class="card-head">
+      <h2>ORB (Opening Range Breakout)</h2>
+      <span class="session-pill pill-us">US</span>
+      <span class="highlight-badge">Audience Play 9:33 AM</span>
+    </div>
+    <div class="card-oneliner">Captures the first major move of the US session by trading the breakout of the opening 3-minute range.</div>
+    <ul class="how-it-works">
+      <li>Records the high and low of the first 3 minutes after the 9:30 AM open</li>
+      <li>Enters long on a break above the range high, short on a break below the low</li>
+      <li>Uses ATR-based stops placed beyond the opposite side of the range</li>
+      <li>One trade per day maximum - designed as an "appointment" play at 9:33 AM ET</li>
+    </ul>
+    <div class="variant-strip">
+      <div class="variant-card">
+        <div class="v-head">Variant C (US)</div>
+        <div class="v-params">3-min opening range, single entry</div>
+        <div class="v-stats">
+          <div class="v-stat"><span class="v-label">PnL</span><span class="v-val v-green">+450</span></div>
+          <div class="v-stat"><span class="v-label">PF</span><span class="v-val">1.06</span></div>
+          <div class="v-stat"><span class="v-label">WR</span><span class="v-val">44.2%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="algo-card" data-sessions="US">
+    <div class="card-head">
+      <h2>Initial Balance</h2>
+      <span class="session-pill pill-us">US</span>
+      <span class="highlight-badge">Audience Play 10:30 AM</span>
+    </div>
+    <div class="card-oneliner">Trades the breakout of the first hour's range, a classic Market Profile concept applied to NQ futures.</div>
+    <ul class="how-it-works">
+      <li>Records the high and low of the first 60 minutes (9:30-10:30 AM)</li>
+      <li>Enters on a confirmed break of the Initial Balance range</li>
+      <li>Directional bias informed by whether IB is balanced or skewed</li>
+      <li>"Appointment" trade at 10:30 AM ET - one of the most-watched moments in the session</li>
+    </ul>
+    <div class="variant-strip">
+      <div class="variant-card">
+        <div class="v-head">Variant C (US)</div>
+        <div class="v-params">60-min IB, breakout confirmation</div>
+        <div class="v-stats">
+          <div class="v-stat"><span class="v-label">PnL</span><span class="v-val v-green">+675</span></div>
+          <div class="v-stat"><span class="v-label">PF</span><span class="v-val">1.10</span></div>
+          <div class="v-stat"><span class="v-label">WR</span><span class="v-val">42.7%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="algo-card" data-sessions="US,European">
+    <div class="card-head">
+      <h2>Donchian Breakout</h2>
+      <span class="session-pill pill-us">US</span>
+      <span class="session-pill pill-euro">European</span>
+      <span class="highlight-badge">Best Single Result +2,909</span>
+    </div>
+    <div class="card-oneliner">Classic channel breakout strategy that enters when price breaks the highest high or lowest low of a lookback period.</div>
+    <ul class="how-it-works">
+      <li>Maintains a rolling Donchian channel (highest high / lowest low over N bars)</li>
+      <li>Enters long when price breaks above the upper channel boundary</li>
+      <li>Enters short when price breaks below the lower channel boundary</li>
+      <li>European Variant A produced the single strongest backtest result: +2,909 pts</li>
+    </ul>
+    <div class="variant-strip">
+      <div class="variant-card">
+        <div class="v-head">Variant A (European)</div>
+        <div class="v-params">Longer lookback, wider channel</div>
+        <div class="v-stats">
+          <div class="v-stat"><span class="v-label">PnL</span><span class="v-val v-green">+2,909</span></div>
+          <div class="v-stat"><span class="v-label">PF</span><span class="v-val">1.13</span></div>
+          <div class="v-stat"><span class="v-label">WR</span><span class="v-val">36.2%</span></div>
+        </div>
+      </div>
+      <div class="variant-card">
+        <div class="v-head">Variant C (US)</div>
+        <div class="v-params">Shorter lookback, tighter channel</div>
+        <div class="v-stats">
+          <div class="v-stat"><span class="v-label">PnL</span><span class="v-val v-green">+945</span></div>
+          <div class="v-stat"><span class="v-label">PF</span><span class="v-val">1.09</span></div>
+          <div class="v-stat"><span class="v-label">WR</span><span class="v-val">37.8%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="algo-card" data-sessions="European">
+    <div class="card-head">
+      <h2>Level Break + Retest</h2>
+      <span class="session-pill pill-euro">European</span>
+    </div>
+    <div class="card-oneliner">Waits for price to break a key level, then enter on the retest of that level as new support/resistance.</div>
+    <ul class="how-it-works">
+      <li>Monitors PDH, PDL, overnight high/low, and session extremes as key levels</li>
+      <li>Requires a clean break followed by a pullback that retests the broken level</li>
+      <li>Enters on the retest with stop beyond the level and target at the next key level</li>
+      <li>European session exploits London session level breaks effectively</li>
+    </ul>
+    <div class="variant-strip">
+      <div class="variant-card">
+        <div class="v-head">Variant C (European)</div>
+        <div class="v-params">Multi-level awareness</div>
+        <div class="v-stats">
+          <div class="v-stat"><span class="v-label">PnL</span><span class="v-val v-green">+556</span></div>
+          <div class="v-stat"><span class="v-label">PF</span><span class="v-val">1.15</span></div>
+          <div class="v-stat"><span class="v-label">WR</span><span class="v-val">35.9%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPECIALIZED -->
+  <div class="cat-header" data-cat="specialized">Specialized</div>
+
+  <div class="algo-card" data-sessions="US">
+    <div class="card-head">
+      <h2>Pivot Point Fade</h2>
+      <span class="session-pill pill-us">US</span>
+    </div>
+    <div class="card-oneliner">Fades price at classic pivot point levels, expecting them to act as support and resistance.</div>
+    <ul class="how-it-works">
+      <li>Computes daily pivot points from prior day close (PDC), high, and low</li>
+      <li>Monitors S1/S2/R1/R2 levels as fade targets</li>
+      <li>Enters counter-trend when price reaches a pivot level with exhaustion signals</li>
+      <li>Requires PDC extraction from NT8 session levels - fixed in the live trade drought patch</li>
+    </ul>
+    <div class="variant-strip">
+      <div class="variant-card">
+        <div class="v-head">Variant A (US)</div>
+        <div class="v-params">Standard pivot calculation</div>
+        <div class="v-stats">
+          <div class="v-stat"><span class="v-label">PnL</span><span class="v-val v-green">+405</span></div>
+          <div class="v-stat"><span class="v-label">PF</span><span class="v-val">1.10</span></div>
+          <div class="v-stat"><span class="v-label">WR</span><span class="v-val">41.5%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="algo-card" data-sessions="Asian">
+    <div class="card-head">
+      <h2>Volume Spike Reversal</h2>
+      <span class="session-pill pill-asian">Asian</span>
+      <span class="highlight-badge">Top Asian +2,405</span>
+    </div>
+    <div class="card-oneliner">Catches reversals triggered by sudden volume surges that signal exhaustion of the current move.</div>
+    <ul class="how-it-works">
+      <li>Detects volume spikes exceeding 2x the rolling volume average</li>
+      <li>Looks for price rejection (wick/tail) on the spike bar</li>
+      <li>Enters counter to the spike direction when rejection is confirmed</li>
+      <li>Asian-session restricted where volume spikes in thin markets are most reliable</li>
+    </ul>
+    <div class="variant-strip">
+      <div class="variant-card">
+        <div class="v-head">Variant B (Asian)</div>
+        <div class="v-params">2x volume threshold, wick filter</div>
+        <div class="v-stats">
+          <div class="v-stat"><span class="v-label">PnL</span><span class="v-val v-green">+2,405</span></div>
+          <div class="v-stat"><span class="v-label">PF</span><span class="v-val">1.14</span></div>
+          <div class="v-stat"><span class="v-label">WR</span><span class="v-val">39.8%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="algo-card" data-sessions="European">
+    <div class="card-head">
+      <h2>VWAP Reclaim</h2>
+      <span class="session-pill pill-euro">European</span>
+    </div>
+    <div class="card-oneliner">Enters when price reclaims VWAP from below (long) or loses it from above (short), treating VWAP as a trend pivot.</div>
+    <ul class="how-it-works">
+      <li>Tracks whether price is above or below session VWAP</li>
+      <li>Enters long when price crosses back above VWAP after being below</li>
+      <li>Enters short when price loses VWAP after holding above</li>
+      <li>Different from VWAP Mean Reversion: this trades the reclaim, not the deviation</li>
+    </ul>
+    <div class="variant-strip">
+      <div class="variant-card">
+        <div class="v-head">Variant B (European)</div>
+        <div class="v-params">VWAP cross with hold confirmation</div>
+        <div class="v-stats">
+          <div class="v-stat"><span class="v-label">PnL</span><span class="v-val v-green">+1,116</span></div>
+          <div class="v-stat"><span class="v-label">PF</span><span class="v-val">1.07</span></div>
+          <div class="v-stat"><span class="v-label">WR</span><span class="v-val">38.3%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="algo-card" data-sessions="European">
+    <div class="card-head">
+      <h2>Trend Pullback</h2>
+      <span class="session-pill pill-euro">European</span>
+    </div>
+    <div class="card-oneliner">Enters on pullbacks within an established trend, buying dips in uptrends and selling rallies in downtrends.</div>
+    <ul class="how-it-works">
+      <li>Identifies the dominant trend using EMA slope and swing structure</li>
+      <li>Waits for a pullback to a defined zone (EMA, Fibonacci, or prior swing)</li>
+      <li>Enters when the pullback shows signs of resumption (engulfing, hammer, etc.)</li>
+      <li>European session captures London trend continuations effectively</li>
+    </ul>
+    <div class="variant-strip">
+      <div class="variant-card">
+        <div class="v-head">Variant B (European)</div>
+        <div class="v-params">EMA-based pullback zone</div>
+        <div class="v-stats">
+          <div class="v-stat"><span class="v-label">PnL</span><span class="v-val v-green">+875</span></div>
+          <div class="v-stat"><span class="v-label">PF</span><span class="v-val">1.04</span></div>
+          <div class="v-stat"><span class="v-label">WR</span><span class="v-val">38.9%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ICT-BASED -->
+  <div class="cat-header" data-cat="ict">ICT-Based</div>
+
+  <div class="algo-card" data-sessions="European">
+    <div class="card-head">
+      <h2>ICT-Lite</h2>
+      <span class="session-pill pill-euro">European</span>
+    </div>
+    <div class="card-oneliner">A simplified implementation of ICT concepts: Fair Value Gaps, liquidity sweeps, and displacement entries.</div>
+    <ul class="how-it-works">
+      <li>Detects Fair Value Gaps (3-candle imbalances) as potential entry zones</li>
+      <li>Monitors for liquidity sweeps of session highs/lows</li>
+      <li>Enters on displacement candles that confirm the ICT setup</li>
+      <li>Observe-only variant (B) runs alongside for research/comparison</li>
+    </ul>
+    <div class="variant-strip">
+      <div class="variant-card">
+        <div class="v-head">Variant B (European)</div>
+        <div class="v-params">FVG + displacement, observe-only flag</div>
+        <div class="v-stats">
+          <div class="v-stat"><span class="v-label">PnL</span><span class="v-val v-green">+481</span></div>
+          <div class="v-stat"><span class="v-label">PF</span><span class="v-val">1.09</span></div>
+          <div class="v-stat"><span class="v-label">WR</span><span class="v-val">36.5%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="algo-card" data-sessions="US,Asian">
+    <div class="card-head">
+      <h2>MACD Histogram</h2>
+      <span class="session-pill pill-us">US</span>
+      <span class="session-pill pill-asian">Asian</span>
+    </div>
+    <div class="card-oneliner">Uses MACD histogram momentum shifts to time entries with the prevailing trend.</div>
+    <ul class="how-it-works">
+      <li>Monitors MACD histogram for zero-line crossovers and momentum acceleration</li>
+      <li>Enters long when histogram turns positive from negative with increasing bars</li>
+      <li>Enters short on the inverse pattern</li>
+      <li>Filters with signal line crossover for additional confirmation</li>
+    </ul>
+    <div class="variant-strip">
+      <div class="variant-card">
+        <div class="v-head">Variant A (US, Asian)</div>
+        <div class="v-params">Standard MACD (12/26/9)</div>
+        <div class="v-stats">
+          <div class="v-stat"><span class="v-label">PnL</span><span class="v-val v-green">+2,315</span></div>
+          <div class="v-stat"><span class="v-label">PF</span><span class="v-val">1.13</span></div>
+          <div class="v-stat"><span class="v-label">WR</span><span class="v-val">37.6%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Audience Appointment Callout -->
+  <div class="appointment-box">
+    <h3>Audience Appointment Plays</h3>
+    <p style="margin:0 0 14px;opacity:.7;font-size:14px;">These algos trigger at specific, predictable times every trading day</p>
+    <div class="appt-items">
+      <div class="appt-item">
+        <div class="appt-time">9:33 AM</div>
+        <div>
+          <strong>ORB (Variant C)</strong><br>
+          <span style="font-size:12px;opacity:.6;">Opening Range Breakout</span>
+        </div>
+      </div>
+      <div class="appt-item">
+        <div class="appt-time">10:30 AM</div>
+        <div>
+          <strong>Initial Balance (Variant C)</strong><br>
+          <span style="font-size:12px;opacity:.6;">Initial Balance Breakout</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Summary Table -->
+  <div class="summary-section">
+    <h3>All 22 Instances at a Glance</h3>
+    <div class="summary-table-wrap">
+      <table class="summary-table">
+        <thead>
+          <tr>
+            <th>Algo</th>
+            <th>Variant</th>
+            <th>Sessions</th>
+            <th>Best PnL (pts)</th>
+            <th>PF</th>
+            <th>WR</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>EMA Crossover</td><td>C</td><td><span class="session-pill pill-us" style="font-size:10px;padding:2px 6px;">US</span> <span class="session-pill pill-asian" style="font-size:10px;padding:2px 6px;">Asian</span> <span class="session-pill pill-euro" style="font-size:10px;padding:2px 6px;">Euro</span></td><td class="pnl-pos">+2,535</td><td>1.12</td><td>38.5%</td></tr>
+          <tr><td>EMA Crossover</td><td>A</td><td><span class="session-pill pill-us" style="font-size:10px;padding:2px 6px;">US</span> <span class="session-pill pill-euro" style="font-size:10px;padding:2px 6px;">Euro</span></td><td class="pnl-pos">+1,280</td><td>1.08</td><td>36.8%</td></tr>
+          <tr><td>ADX Trend</td><td>B</td><td><span class="session-pill pill-asian" style="font-size:10px;padding:2px 6px;">Asian</span></td><td class="pnl-pos">+2,002</td><td>1.17</td><td>41.2%</td></tr>
+          <tr><td>Momentum Cont</td><td>A</td><td><span class="session-pill pill-asian" style="font-size:10px;padding:2px 6px;">Asian</span></td><td class="pnl-pos">+1,129</td><td>1.12</td><td>39.1%</td></tr>
+          <tr><td>Ichimoku Cloud</td><td>B</td><td><span class="session-pill pill-asian" style="font-size:10px;padding:2px 6px;">Asian</span></td><td class="pnl-pos">+795</td><td>1.21</td><td>38.7%</td></tr>
+          <tr><td>VWAP Mean Rev</td><td>C</td><td><span class="session-pill pill-us" style="font-size:10px;padding:2px 6px;">US</span> <span class="session-pill pill-asian" style="font-size:10px;padding:2px 6px;">Asian</span></td><td class="pnl-pos">+1,391</td><td>1.09</td><td>42.3%</td></tr>
+          <tr><td>VWAP Mean Rev</td><td>B</td><td><span class="session-pill pill-us" style="font-size:10px;padding:2px 6px;">US</span></td><td class="pnl-pos">+820</td><td>1.06</td><td>40.1%</td></tr>
+          <tr><td>Range Fade</td><td>B</td><td><span class="session-pill pill-us" style="font-size:10px;padding:2px 6px;">US</span></td><td class="pnl-pos">+920</td><td>1.05</td><td>43.8%</td></tr>
+          <tr><td>Stochastic OB/OS</td><td>A</td><td><span class="session-pill pill-us" style="font-size:10px;padding:2px 6px;">US</span> <span class="session-pill pill-asian" style="font-size:10px;padding:2px 6px;">Asian</span></td><td class="pnl-pos">+1,464</td><td>1.08</td><td>40.5%</td></tr>
+          <tr><td>Stochastic OB/OS</td><td>B</td><td><span class="session-pill pill-us" style="font-size:10px;padding:2px 6px;">US</span></td><td class="pnl-pos">+680</td><td>1.05</td><td>39.2%</td></tr>
+          <tr><td>RSI Divergence</td><td>C</td><td><span class="session-pill pill-euro" style="font-size:10px;padding:2px 6px;">Euro</span></td><td class="pnl-pos">+412</td><td>1.03</td><td>37.4%</td></tr>
+          <tr><td>ORB</td><td>C</td><td><span class="session-pill pill-us" style="font-size:10px;padding:2px 6px;">US</span></td><td class="pnl-pos">+450</td><td>1.06</td><td>44.2%</td></tr>
+          <tr><td>Initial Balance</td><td>C</td><td><span class="session-pill pill-us" style="font-size:10px;padding:2px 6px;">US</span></td><td class="pnl-pos">+675</td><td>1.10</td><td>42.7%</td></tr>
+          <tr><td>Donchian Breakout</td><td>A</td><td><span class="session-pill pill-euro" style="font-size:10px;padding:2px 6px;">Euro</span></td><td class="pnl-pos">+2,909</td><td>1.13</td><td>36.2%</td></tr>
+          <tr><td>Donchian Breakout</td><td>C</td><td><span class="session-pill pill-us" style="font-size:10px;padding:2px 6px;">US</span></td><td class="pnl-pos">+945</td><td>1.09</td><td>37.8%</td></tr>
+          <tr><td>Level Break</td><td>C</td><td><span class="session-pill pill-euro" style="font-size:10px;padding:2px 6px;">Euro</span></td><td class="pnl-pos">+556</td><td>1.15</td><td>35.9%</td></tr>
+          <tr><td>Pivot Point Fade</td><td>A</td><td><span class="session-pill pill-us" style="font-size:10px;padding:2px 6px;">US</span></td><td class="pnl-pos">+405</td><td>1.10</td><td>41.5%</td></tr>
+          <tr><td>Volume Spike Rev</td><td>B</td><td><span class="session-pill pill-asian" style="font-size:10px;padding:2px 6px;">Asian</span></td><td class="pnl-pos">+2,405</td><td>1.14</td><td>39.8%</td></tr>
+          <tr><td>VWAP Reclaim</td><td>B</td><td><span class="session-pill pill-euro" style="font-size:10px;padding:2px 6px;">Euro</span></td><td class="pnl-pos">+1,116</td><td>1.07</td><td>38.3%</td></tr>
+          <tr><td>Trend Pullback</td><td>B</td><td><span class="session-pill pill-euro" style="font-size:10px;padding:2px 6px;">Euro</span></td><td class="pnl-pos">+875</td><td>1.04</td><td>38.9%</td></tr>
+          <tr><td>ICT-Lite</td><td>B</td><td><span class="session-pill pill-euro" style="font-size:10px;padding:2px 6px;">Euro</span></td><td class="pnl-pos">+481</td><td>1.09</td><td>36.5%</td></tr>
+          <tr><td>MACD Histogram</td><td>A</td><td><span class="session-pill pill-us" style="font-size:10px;padding:2px 6px;">US</span> <span class="session-pill pill-asian" style="font-size:10px;padding:2px 6px;">Asian</span></td><td class="pnl-pos">+2,315</td><td>1.13</td><td>37.6%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    <strong>Backtest Disclaimer:</strong> All performance figures shown are from a 3-year historical backtest (May 2022 - May 2025) on NQ futures minute data. Past performance does not guarantee future results. These strategies are running live for educational and research purposes only. They do not constitute trading advice or signals. Trading futures involves substantial risk of loss. The +400 point cutoff is per-session over the full 3-year test period.
+  </div>
+
+</div>
+
+<script>
+function filterSession(session) {
+  const cards = document.querySelectorAll('.algo-card');
+  const btns = document.querySelectorAll('.filter-btn');
+  const cats = document.querySelectorAll('.cat-header');
+
+  btns.forEach(b => b.classList.remove('active'));
+  event.target.closest('.filter-btn').classList.add('active');
+
+  if (session === 'all') {
+    cards.forEach(c => c.classList.remove('hidden'));
+    cats.forEach(c => c.style.display = '');
+    return;
+  }
+
+  cards.forEach(c => {
+    const sessions = c.dataset.sessions || '';
+    if (sessions.includes(session)) {
+      c.classList.remove('hidden');
+    } else {
+      c.classList.add('hidden');
+    }
+  });
+
+  // Hide category headers if all their cards are hidden
+  cats.forEach(cat => {
+    let next = cat.nextElementSibling;
+    let anyVisible = false;
+    while (next && !next.classList.contains('cat-header') && !next.classList.contains('appointment-box') && !next.classList.contains('summary-section')) {
+      if (next.classList.contains('algo-card') && !next.classList.contains('hidden')) {
+        anyVisible = true;
+      }
+      next = next.nextElementSibling;
+    }
+    cat.style.display = anyVisible ? '' : 'none';
+  });
+}
+</script>
+
+</body>
+</html>
