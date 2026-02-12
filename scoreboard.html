@@ -395,7 +395,7 @@
       <div class="value" id="trades-today">0</div>
     </div>
     <div class="summary-card">
-      <div class="label">Net PnL (pts)</div>
+      <div class="label">Daily PnL (pts)</div>
       <div class="value" id="net-pnl">0.0</div>
     </div>
     <div class="summary-card">
@@ -501,13 +501,8 @@ function updateScoreboard(data) {
   const trades = data.active_trades || [];
   const openCount = trades.length || s.open_trades || 0;
 
-  // Compute unrealized PnL from active trades
-  let unrealizedPnl = 0;
-  for (const t of trades) {
-    unrealizedPnl += (t.unrealized_pnl || 0);
-  }
-  // Use realized + unrealized for display
-  const displayPnl = (s.net_pnl_pts || 0) + unrealizedPnl;
+  // net_pnl_pts already includes both realized + unrealized (daily)
+  const displayPnl = s.net_pnl_pts || 0;
 
   document.getElementById('trades-today').textContent = s.trades_today + openCount;
 
@@ -612,8 +607,8 @@ function renderSessionTables(sessions, activeTrades) {
     const statusHtml = isOpen
       ? '<span class="status-open"></span>OPEN'
       : 'Idle';
-    // Use unrealized PnL from active trades if open, otherwise realized
-    const pnl = (isOpen && active) ? active.pnl : (a.pnl || 0);
+    // pnl is daily PnL (realized + unrealized) from tracker
+    const pnl = a.pnl || 0;
     const dir = (isOpen && active) ? active.direction : '--';
     const pnlCls = pnlColor(pnl);
     html += `<tr>
@@ -640,7 +635,7 @@ function updateHealthGrid(stateData) {
     return;
   }
 
-  // stateData is { session, timestamp, algos: [ {id, name, session_active, in_trade, pnl}, ... ] }
+  // stateData is { session, timestamp, algos: [ {id, name, session_active, in_trade, daily_pnl}, ... ] }
   const algos = stateData.algos || [];
   if (algos.length === 0) {
     grid.innerHTML = '<div class="no-data">No state data available</div>';
@@ -656,7 +651,7 @@ function updateHealthGrid(stateData) {
       dotClass = 'dot-blue';
     }
 
-    const pnl = algo.pnl || 0;
+    const pnl = algo.daily_pnl || 0;
     const pnlCls = pnlColor(pnl);
 
     html += `<div class="health-tile">
@@ -664,7 +659,7 @@ function updateHealthGrid(stateData) {
         <div class="tile-dot ${dotClass}"></div>
         <div class="tile-name" title="${algo.id}">${algo.name || algo.id}</div>
       </div>
-      <div class="tile-pnl ${pnlCls}">${formatPnl(pnl)}</div>
+      <div class="tile-pnl ${pnlCls}">${formatPnl(pnl)} pts</div>
     </div>`;
   }
 
