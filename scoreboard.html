@@ -282,6 +282,27 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
+    .tier-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 900;
+      margin-left: 6px;
+      padding: 0 6px;
+      color: #fff;
+      line-height: 1;
+    }
+    .tier-P { background: #7c3aed; color: #ffffff; } /* paper = purple */
+    .tier-E { background: #d97706; color: #111827; } /* eval = gold/orange */
+    .tier-F { background: #2563eb; color: #ffffff; } /* funded = blue */
+    /* Accept full-word variants from upstream data */
+    .tier-PAPER { background: #7c3aed; color: #ffffff; }
+    .tier-EVAL { background: #d97706; color: #111827; }
+    .tier-FUNDED { background: #2563eb; color: #ffffff; }
     .tile-pnl {
       font-size: 14px;
       font-weight: 900;
@@ -382,7 +403,10 @@
       <div class="live-badge"><div class="live-dot"></div> ALGO SCOREBOARD</div>
       <div class="session-tag" id="session">--</div>
     </div>
-    <div class="price-tag" id="price">--</div>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+      <div class="price-tag" id="tracking-since" style="font-size:12px;opacity:.7;">--</div>
+      <div class="price-tag" id="price">--</div>
+    </div>
   </div>
 
   <div class="offline-banner" id="offline-banner">
@@ -395,8 +419,8 @@
       <div class="value" id="trades-today">0</div>
     </div>
     <div class="summary-card">
-      <div class="label">Daily PnL (pts)</div>
-      <div class="value" id="net-pnl">0.0</div>
+      <div class="label">Total PnL</div>
+      <div class="value" id="net-pnl">$0.00</div>
     </div>
     <div class="summary-card">
       <div class="label">Win Rate</div>
@@ -456,6 +480,7 @@ const STATE_URL = 'scoreboard_state_snapshot.json';
 
 let lastDataTime = null;
 let activeSessionTab = 'US';
+let cachedStateData = null;
 
 function pnlColor(val) {
   if (val > 0) return 'val-green';
@@ -463,13 +488,41 @@ function pnlColor(val) {
   return '';
 }
 
-function formatPnl(val) {
+function formatDollar(val) {
+  if (val == null || val === 0) return '$0.00';
+  const abs = Math.abs(val).toFixed(2);
+  return val > 0 ? '+$' + abs : '-$' + abs;
+}
+
+function formatPnlPts(val) {
   if (val == null) return '0.0';
   return (val > 0 ? '+' : '') + val.toFixed(1);
 }
 
 function prettyName(name) {
   return name || '';
+}
+
+function normalizeTier(tier) {
+  const t = String(tier || 'P').trim().toUpperCase();
+  if (t === 'E' || t === 'EVAL') return 'E';
+  if (t === 'F' || t === 'FUNDED') return 'F';
+  return 'P';
+}
+
+function tierClass(tier) {
+  const t = normalizeTier(tier);
+  if (t === 'E') return 'tier-E';
+  if (t === 'F') return 'tier-F';
+  return 'tier-P';
+}
+
+function formatTrackingDate(dateStr) {
+  if (!dateStr) return '';
+  try {
+    const d = new Date(dateStr + 'T00:00:00');
+    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  } catch { return dateStr; }
 }
 
 function checkStale() {
@@ -501,15 +554,7 @@ function updateScoreboard(data) {
   const trades = data.active_trades || [];
   const openCount = trades.length || s.open_trades || 0;
 
-  // net_pnl_pts already includes both realized + unrealized (daily)
-  const displayPnl = s.net_pnl_pts || 0;
-
   document.getElementById('trades-today').textContent = s.trades_today + openCount;
-
-  const pnlEl = document.getElementById('net-pnl');
-  pnlEl.textContent = formatPnl(displayPnl);
-  pnlEl.className = 'value ' + pnlColor(displayPnl);
-
   document.getElementById('win-rate').textContent = s.win_rate.toFixed(1) + '%';
   document.getElementById('open-pos').textContent = openCount;
 
@@ -530,7 +575,7 @@ function updateScoreboard(data) {
             <div class="trade-meta">Entry: ${t.entry_price.toFixed(2)} | ${t.duration}</div>
           </div>
         </div>
-        <div class="trade-pnl ${pnlCls}">${formatPnl(t.unrealized_pnl)}</div>
+        <div class="trade-pnl ${pnlCls}">${formatPnlPts(t.unrealized_pnl)} pts</div>
       </div>`;
     }
     activeDiv.innerHTML = html;
@@ -550,14 +595,11 @@ function updateScoreboard(data) {
           <strong>${prettyName(e.name || e.algo_id)}</strong>
           <span class="exit-reason">${e.reason}</span>
         </div>
-        <div class="${pnlCls}" style="font-weight:800;">${formatPnl(e.pnl_pts)} pts</div>
+        <div class="${pnlCls}" style="font-weight:800;">${formatPnlPts(e.pnl_pts)} pts</div>
       </div>`;
     }
     exitsDiv.innerHTML = html;
   }
-
-  // Session tables — merge active trade unrealized PnL into session data
-  renderSessionTables(data.algos_by_session || {}, trades);
 
   // Timestamp
   document.getElementById('updated').textContent =
@@ -566,78 +608,43 @@ function updateScoreboard(data) {
   checkStale();
 }
 
-function renderSessionTables(sessions, activeTrades) {
-  const tabsDiv = document.getElementById('session-tabs');
-  const contentDiv = document.getElementById('session-content');
-  const sessionOrder = ['US', 'Asian', 'European'];
+function updateFromState(stateData) {
+  if (!stateData) return;
+  cachedStateData = stateData;
 
-  // Build a lookup of unrealized PnL and direction from active trades
-  const activeMap = {};
-  for (const t of (activeTrades || [])) {
-    activeMap[t.algo_id] = { pnl: t.unrealized_pnl || 0, direction: t.direction };
-  }
-
-  if (Object.keys(sessions).length === 0) {
-    tabsDiv.innerHTML = '';
-    contentDiv.innerHTML = '<div class="no-data">No session data</div>';
-    return;
-  }
-
-  // Build tabs
-  let tabHtml = '';
-  for (const sess of sessionOrder) {
-    if (!sessions[sess] || sessions[sess].length === 0) continue;
-    const cls = sess === activeSessionTab ? 'session-tab-btn active' : 'session-tab-btn';
-    tabHtml += `<button class="${cls}" onclick="switchSessionTab('${sess}')">${sess}</button>`;
-  }
-  tabsDiv.innerHTML = tabHtml;
-
-  // Build table for active tab
-  const algos = sessions[activeSessionTab];
-  if (!algos || algos.length === 0) {
-    contentDiv.innerHTML = '<div class="no-data">No algos in this session</div>';
-    return;
-  }
-
-  let html = `<table class="session-table">
-    <tr><th>Algo</th><th>Status</th><th>Direction</th><th>PnL (pts)</th></tr>`;
-  for (const a of algos) {
-    const active = activeMap[a.algo_id];
-    const isOpen = a.status === 'OPEN';
-    const statusHtml = isOpen
-      ? '<span class="status-open"></span>OPEN'
-      : 'Idle';
-    // pnl is daily PnL (realized + unrealized) from tracker
-    const pnl = a.pnl || 0;
-    const dir = (isOpen && active) ? active.direction : '--';
-    const pnlCls = pnlColor(pnl);
-    html += `<tr>
-      <td><strong>${prettyName(a.name)}</strong></td>
-      <td>${statusHtml}</td>
-      <td>${dir}</td>
-      <td class="${pnlCls}" style="font-weight:700;">${formatPnl(pnl)}</td>
-    </tr>`;
-  }
-  html += '</table>';
-  contentDiv.innerHTML = html;
-}
-
-function switchSessionTab(sess) {
-  activeSessionTab = sess;
-  // Re-render will happen on next poll, but force immediate re-render from cached data
-  poll();
-}
-
-function updateHealthGrid(stateData) {
-  const grid = document.getElementById('health-grid');
-  if (!stateData) {
-    grid.innerHTML = '<div class="no-data">No state data available</div>';
-    return;
-  }
-
-  // stateData is { session, timestamp, algos: [ {id, name, session_active, in_trade, daily_pnl}, ... ] }
   const algos = stateData.algos || [];
-  if (algos.length === 0) {
+
+  // Tracking since banner
+  const trackEl = document.getElementById('tracking-since');
+  if (stateData.tracking_since) {
+    trackEl.textContent = 'Tracking since: ' + formatTrackingDate(stateData.tracking_since);
+  }
+
+  // Session from state
+  if (stateData.session) {
+    document.getElementById('session').textContent = stateData.session;
+  }
+
+  // Total PnL — sum all algo pnl values (NT8 commission-accurate dollars)
+  const totalPnl = algos.reduce((sum, a) => sum + (a.pnl || 0), 0);
+  const pnlEl = document.getElementById('net-pnl');
+  pnlEl.textContent = formatDollar(totalPnl);
+  pnlEl.className = 'value ' + pnlColor(totalPnl);
+
+  // Health grid
+  updateHealthGrid(algos);
+
+  // Session tables from state data
+  renderSessionTables(algos);
+
+  if (stateData.timestamp) {
+    lastDataTime = new Date(stateData.timestamp);
+  }
+}
+
+function updateHealthGrid(algos) {
+  const grid = document.getElementById('health-grid');
+  if (!algos || algos.length === 0) {
     grid.innerHTML = '<div class="no-data">No state data available</div>';
     return;
   }
@@ -651,19 +658,83 @@ function updateHealthGrid(stateData) {
       dotClass = 'dot-blue';
     }
 
-    const pnl = algo.daily_pnl || 0;
+    const pnl = algo.pnl || 0;
     const pnlCls = pnlColor(pnl);
 
+    const tier = normalizeTier(algo.tier);
     html += `<div class="health-tile">
       <div class="tile-head">
         <div class="tile-dot ${dotClass}"></div>
-        <div class="tile-name" title="${algo.id}">${algo.name || algo.id}</div>
+        <div class="tile-name" title="${algo.id}">${algo.name || algo.id}<span class="tier-pill ${tierClass(tier)}">${tier}</span></div>
       </div>
-      <div class="tile-pnl ${pnlCls}">${formatPnl(pnl)} pts</div>
+      <div class="tile-pnl ${pnlCls}">${formatDollar(pnl)}</div>
     </div>`;
   }
 
   grid.innerHTML = html;
+}
+
+function renderSessionTables(algos) {
+  const tabsDiv = document.getElementById('session-tabs');
+  const contentDiv = document.getElementById('session-content');
+  const sessionOrder = ['US', 'Asian', 'European'];
+
+  if (!algos || algos.length === 0) {
+    tabsDiv.innerHTML = '';
+    contentDiv.innerHTML = '<div class="no-data">No session data</div>';
+    return;
+  }
+
+  // Group algos by their session field
+  const sessions = {};
+  for (const a of algos) {
+    const sess = a.session || 'Unknown';
+    // An algo can be in multiple sessions (e.g. "Asian/European" → first one used)
+    if (!sessions[sess]) sessions[sess] = [];
+    sessions[sess].push(a);
+  }
+
+  // Build tabs
+  let tabHtml = '';
+  for (const sess of sessionOrder) {
+    if (!sessions[sess] || sessions[sess].length === 0) continue;
+    const cls = sess === activeSessionTab ? 'session-tab-btn active' : 'session-tab-btn';
+    tabHtml += `<button class="${cls}" onclick="switchSessionTab('${sess}')">${sess}</button>`;
+  }
+  tabsDiv.innerHTML = tabHtml;
+
+  // Build table for active tab
+  const sessionAlgos = sessions[activeSessionTab];
+  if (!sessionAlgos || sessionAlgos.length === 0) {
+    contentDiv.innerHTML = '<div class="no-data">No algos in this session</div>';
+    return;
+  }
+
+  let html = `<table class="session-table">
+    <tr><th>Algo</th><th>Status</th><th>PnL</th></tr>`;
+  for (const a of sessionAlgos) {
+    const isOpen = a.in_trade;
+    const statusHtml = isOpen
+      ? '<span class="status-open"></span>In Trade'
+      : (a.session_active ? 'Watching' : 'Idle');
+    const pnl = a.pnl || 0;
+    const pnlCls = pnlColor(pnl);
+    const tier = normalizeTier(a.tier);
+    html += `<tr>
+      <td><strong>${prettyName(a.name)}</strong><span class="tier-pill ${tierClass(tier)}">${tier}</span></td>
+      <td>${statusHtml}</td>
+      <td class="${pnlCls}" style="font-weight:700;">${formatDollar(pnl)}</td>
+    </tr>`;
+  }
+  html += '</table>';
+  contentDiv.innerHTML = html;
+}
+
+function switchSessionTab(sess) {
+  activeSessionTab = sess;
+  if (cachedStateData) {
+    renderSessionTables(cachedStateData.algos || []);
+  }
 }
 
 async function poll() {
@@ -680,7 +751,7 @@ async function poll() {
   }
 
   if (stateData) {
-    updateHealthGrid(stateData);
+    updateFromState(stateData);
   }
 
   checkStale();
@@ -688,7 +759,6 @@ async function poll() {
 
 setInterval(poll, POLL_MS);
 poll();
-// Also check staleness periodically even without new data
 setInterval(checkStale, 30000);
 </script>
 
