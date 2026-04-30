@@ -1,0 +1,1485 @@
+{
+  "schema_version": 1,
+  "source": "scoreboard_state",
+  "timestamp": "2026-04-29T23:48:30.390853Z",
+  "generated_at": "2026-04-29T23:48:31.380376Z",
+  "trading_day": "2026-04-30",
+  "reset_time_et": "17:00",
+  "reset_at_et": "2026-04-29T17:00:00-04:00",
+  "sample_interval_sec": 60,
+  "account_value_field": "net_liquidation",
+  "accounts": [
+    {
+      "id": "ema_crossover_A",
+      "name": "EMA Cross A",
+      "session": "Asian",
+      "tier": "P",
+      "is_bot": false,
+      "session_active": true,
+      "in_trade": false,
+      "direction": "FLAT",
+      "trade_count": 0,
+      "baseline_net_liquidation": 49490.36,
+      "current_net_liquidation": 49490.36,
+      "daily_pnl": 0.0,
+      "last_seen_ts": "2026-04-29T23:48:30.390853Z",
+      "stale": false,
+      "series": [
+        {
+          "ts": "2026-04-29T23:43:34.385000Z",
+          "net_liquidation": 49490.36,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:44:37.958023Z",
+          "net_liquidation": 49490.36,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:45:29.641373Z",
+          "net_liquidation": 49490.36,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:46:29.382294Z",
+          "net_liquidation": 49490.36,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:47:30.805947Z",
+          "net_liquidation": 49490.36,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:48:30.390853Z",
+          "net_liquidation": 49490.36,
+          "daily_pnl": 0.0
+        }
+      ]
+    },
+    {
+      "id": "stochastic_obos_B",
+      "name": "Stoch OBOS B",
+      "session": "Asian",
+      "tier": "P",
+      "is_bot": false,
+      "session_active": true,
+      "in_trade": false,
+      "direction": "FLAT",
+      "trade_count": 0,
+      "baseline_net_liquidation": 49513.76,
+      "current_net_liquidation": 49513.76,
+      "daily_pnl": 0.0,
+      "last_seen_ts": "2026-04-29T23:48:30.390853Z",
+      "stale": false,
+      "series": [
+        {
+          "ts": "2026-04-29T23:43:34.385000Z",
+          "net_liquidation": 49513.76,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:44:37.958023Z",
+          "net_liquidation": 49513.76,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:45:29.641373Z",
+          "net_liquidation": 49513.76,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:46:29.382294Z",
+          "net_liquidation": 49513.76,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:47:30.805947Z",
+          "net_liquidation": 49513.76,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:48:30.390853Z",
+          "net_liquidation": 49513.76,
+          "daily_pnl": 0.0
+        }
+      ]
+    },
+    {
+      "id": "donchian_breakout_C",
+      "name": "Donch Brk C",
+      "session": "US",
+      "tier": "P",
+      "is_bot": false,
+      "session_active": false,
+      "in_trade": false,
+      "direction": "FLAT",
+      "trade_count": 0,
+      "baseline_net_liquidation": 47812.92,
+      "current_net_liquidation": 47812.92,
+      "daily_pnl": 0.0,
+      "last_seen_ts": "2026-04-29T23:48:30.390853Z",
+      "stale": false,
+      "series": [
+        {
+          "ts": "2026-04-29T23:43:34.385000Z",
+          "net_liquidation": 47812.92,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:44:37.958023Z",
+          "net_liquidation": 47812.92,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:45:29.641373Z",
+          "net_liquidation": 47812.92,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:46:29.382294Z",
+          "net_liquidation": 47812.92,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:47:30.805947Z",
+          "net_liquidation": 47812.92,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:48:30.390853Z",
+          "net_liquidation": 47812.92,
+          "daily_pnl": 0.0
+        }
+      ]
+    },
+    {
+      "id": "donchian_breakout_A",
+      "name": "Donch Brk A",
+      "session": "European",
+      "tier": "P",
+      "is_bot": false,
+      "session_active": false,
+      "in_trade": false,
+      "direction": "FLAT",
+      "trade_count": 0,
+      "baseline_net_liquidation": 48136.52,
+      "current_net_liquidation": 48136.52,
+      "daily_pnl": 0.0,
+      "last_seen_ts": "2026-04-29T23:48:30.390853Z",
+      "stale": false,
+      "series": [
+        {
+          "ts": "2026-04-29T23:43:34.385000Z",
+          "net_liquidation": 48136.52,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:44:37.958023Z",
+          "net_liquidation": 48136.52,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:45:29.641373Z",
+          "net_liquidation": 48136.52,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:46:29.382294Z",
+          "net_liquidation": 48136.52,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:47:30.805947Z",
+          "net_liquidation": 48136.52,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:48:30.390853Z",
+          "net_liquidation": 48136.52,
+          "daily_pnl": 0.0
+        }
+      ]
+    },
+    {
+      "id": "vwap_mr_B",
+      "name": "VWAP MR B",
+      "session": "Asian",
+      "tier": "P",
+      "is_bot": false,
+      "session_active": true,
+      "in_trade": false,
+      "direction": "FLAT",
+      "trade_count": 0,
+      "baseline_net_liquidation": 49977.44,
+      "current_net_liquidation": 49977.44,
+      "daily_pnl": 0.0,
+      "last_seen_ts": "2026-04-29T23:48:30.390853Z",
+      "stale": false,
+      "series": [
+        {
+          "ts": "2026-04-29T23:43:34.385000Z",
+          "net_liquidation": 49977.44,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:44:37.958023Z",
+          "net_liquidation": 49977.44,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:45:29.641373Z",
+          "net_liquidation": 49977.44,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:46:29.382294Z",
+          "net_liquidation": 49977.44,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:47:30.805947Z",
+          "net_liquidation": 49977.44,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:48:30.390853Z",
+          "net_liquidation": 49977.44,
+          "daily_pnl": 0.0
+        }
+      ]
+    },
+    {
+      "id": "macd_histogram_A",
+      "name": "MACD Hist A",
+      "session": "US",
+      "tier": "P",
+      "is_bot": false,
+      "session_active": true,
+      "in_trade": false,
+      "direction": "FLAT",
+      "trade_count": 0,
+      "baseline_net_liquidation": 53588.76,
+      "current_net_liquidation": 53588.76,
+      "daily_pnl": 0.0,
+      "last_seen_ts": "2026-04-29T23:48:30.390853Z",
+      "stale": false,
+      "series": [
+        {
+          "ts": "2026-04-29T23:43:34.385000Z",
+          "net_liquidation": 53588.76,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:44:37.958023Z",
+          "net_liquidation": 53588.76,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:45:29.641373Z",
+          "net_liquidation": 53588.76,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:46:29.382294Z",
+          "net_liquidation": 53588.76,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:47:30.805947Z",
+          "net_liquidation": 53588.76,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:48:30.390853Z",
+          "net_liquidation": 53588.76,
+          "daily_pnl": 0.0
+        }
+      ]
+    },
+    {
+      "id": "initial_balance_C",
+      "name": "Init Bal C",
+      "session": "US",
+      "tier": "P",
+      "is_bot": false,
+      "session_active": false,
+      "in_trade": false,
+      "direction": "FLAT",
+      "trade_count": 0,
+      "baseline_net_liquidation": 49694.84,
+      "current_net_liquidation": 49694.84,
+      "daily_pnl": 0.0,
+      "last_seen_ts": "2026-04-29T23:48:30.390853Z",
+      "stale": false,
+      "series": [
+        {
+          "ts": "2026-04-29T23:43:34.385000Z",
+          "net_liquidation": 49694.84,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:44:37.958023Z",
+          "net_liquidation": 49694.84,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:45:29.641373Z",
+          "net_liquidation": 49694.84,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:46:29.382294Z",
+          "net_liquidation": 49694.84,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:47:30.805947Z",
+          "net_liquidation": 49694.84,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:48:30.390853Z",
+          "net_liquidation": 49694.84,
+          "daily_pnl": 0.0
+        }
+      ]
+    },
+    {
+      "id": "orb_C",
+      "name": "ORB C",
+      "session": "US",
+      "tier": "P",
+      "is_bot": false,
+      "session_active": false,
+      "in_trade": false,
+      "direction": "FLAT",
+      "trade_count": 0,
+      "baseline_net_liquidation": 51169.2,
+      "current_net_liquidation": 51169.2,
+      "daily_pnl": 0.0,
+      "last_seen_ts": "2026-04-29T23:48:30.390853Z",
+      "stale": false,
+      "series": [
+        {
+          "ts": "2026-04-29T23:43:34.385000Z",
+          "net_liquidation": 51169.2,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:44:37.958023Z",
+          "net_liquidation": 51169.2,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:45:29.641373Z",
+          "net_liquidation": 51169.2,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:46:29.382294Z",
+          "net_liquidation": 51169.2,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:47:30.805947Z",
+          "net_liquidation": 51169.2,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:48:30.390853Z",
+          "net_liquidation": 51169.2,
+          "daily_pnl": 0.0
+        }
+      ]
+    },
+    {
+      "id": "pivot_point_A",
+      "name": "Pivot Fade A",
+      "session": "US",
+      "tier": "P",
+      "is_bot": false,
+      "session_active": false,
+      "in_trade": false,
+      "direction": "FLAT",
+      "trade_count": 0,
+      "baseline_net_liquidation": 50000.0,
+      "current_net_liquidation": 50000.0,
+      "daily_pnl": 0.0,
+      "last_seen_ts": "2026-04-29T23:48:30.390853Z",
+      "stale": false,
+      "series": [
+        {
+          "ts": "2026-04-29T23:43:34.385000Z",
+          "net_liquidation": 50000.0,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:44:37.958023Z",
+          "net_liquidation": 50000.0,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:45:29.641373Z",
+          "net_liquidation": 50000.0,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:46:29.382294Z",
+          "net_liquidation": 50000.0,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:47:30.805947Z",
+          "net_liquidation": 50000.0,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:48:30.390853Z",
+          "net_liquidation": 50000.0,
+          "daily_pnl": 0.0
+        }
+      ]
+    },
+    {
+      "id": "pdh_pdl_fade_C",
+      "name": "PDH/PDL C",
+      "session": "US",
+      "tier": "P",
+      "is_bot": false,
+      "session_active": false,
+      "in_trade": false,
+      "direction": "FLAT",
+      "trade_count": 0,
+      "baseline_net_liquidation": 50000.0,
+      "current_net_liquidation": 50000.0,
+      "daily_pnl": 0.0,
+      "last_seen_ts": "2026-04-29T23:48:30.390853Z",
+      "stale": false,
+      "series": [
+        {
+          "ts": "2026-04-29T23:43:34.385000Z",
+          "net_liquidation": 50000.0,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:44:37.958023Z",
+          "net_liquidation": 50000.0,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:45:29.641373Z",
+          "net_liquidation": 50000.0,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:46:29.382294Z",
+          "net_liquidation": 50000.0,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:47:30.805947Z",
+          "net_liquidation": 50000.0,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:48:30.390853Z",
+          "net_liquidation": 50000.0,
+          "daily_pnl": 0.0
+        }
+      ]
+    },
+    {
+      "id": "adx_trend_B",
+      "name": "ADX Trend B",
+      "session": "Asian",
+      "tier": "P",
+      "is_bot": false,
+      "session_active": true,
+      "in_trade": false,
+      "direction": "FLAT",
+      "trade_count": 0,
+      "baseline_net_liquidation": 51885.04,
+      "current_net_liquidation": 51885.04,
+      "daily_pnl": 0.0,
+      "last_seen_ts": "2026-04-29T23:48:30.390853Z",
+      "stale": false,
+      "series": [
+        {
+          "ts": "2026-04-29T23:43:34.385000Z",
+          "net_liquidation": 51885.04,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:44:37.958023Z",
+          "net_liquidation": 51885.04,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:45:29.641373Z",
+          "net_liquidation": 51885.04,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:46:29.382294Z",
+          "net_liquidation": 51885.04,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:47:30.805947Z",
+          "net_liquidation": 51885.04,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:48:30.390853Z",
+          "net_liquidation": 51885.04,
+          "daily_pnl": 0.0
+        }
+      ]
+    },
+    {
+      "id": "adx_trend_A",
+      "name": "ADX Trend A",
+      "session": "US",
+      "tier": "P",
+      "is_bot": false,
+      "session_active": false,
+      "in_trade": false,
+      "direction": "FLAT",
+      "trade_count": 0,
+      "baseline_net_liquidation": 50285.0,
+      "current_net_liquidation": 50285.0,
+      "daily_pnl": 0.0,
+      "last_seen_ts": "2026-04-29T23:48:30.390853Z",
+      "stale": false,
+      "series": [
+        {
+          "ts": "2026-04-29T23:43:34.385000Z",
+          "net_liquidation": 50285.0,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:44:37.958023Z",
+          "net_liquidation": 50285.0,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:45:29.641373Z",
+          "net_liquidation": 50285.0,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:46:29.382294Z",
+          "net_liquidation": 50285.0,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:47:30.805947Z",
+          "net_liquidation": 50285.0,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:48:30.390853Z",
+          "net_liquidation": 50285.0,
+          "daily_pnl": 0.0
+        }
+      ]
+    },
+    {
+      "id": "ichimoku_cloud_B",
+      "name": "Ichimoku B",
+      "session": "Asian",
+      "tier": "P",
+      "is_bot": false,
+      "session_active": true,
+      "in_trade": false,
+      "direction": "FLAT",
+      "trade_count": 0,
+      "baseline_net_liquidation": 49204.4,
+      "current_net_liquidation": 49204.4,
+      "daily_pnl": 0.0,
+      "last_seen_ts": "2026-04-29T23:48:30.390853Z",
+      "stale": false,
+      "series": [
+        {
+          "ts": "2026-04-29T23:43:34.385000Z",
+          "net_liquidation": 49204.4,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:44:37.958023Z",
+          "net_liquidation": 49204.4,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:45:29.641373Z",
+          "net_liquidation": 49204.4,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:46:29.382294Z",
+          "net_liquidation": 49204.4,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:47:30.805947Z",
+          "net_liquidation": 49204.4,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:48:30.390853Z",
+          "net_liquidation": 49204.4,
+          "daily_pnl": 0.0
+        }
+      ]
+    },
+    {
+      "id": "ichimoku_cloud_B_us",
+      "name": "Ichimoku B-US",
+      "session": "US",
+      "tier": "P",
+      "is_bot": false,
+      "session_active": false,
+      "in_trade": false,
+      "direction": "FLAT",
+      "trade_count": 0,
+      "baseline_net_liquidation": 51505.48,
+      "current_net_liquidation": 51505.48,
+      "daily_pnl": 0.0,
+      "last_seen_ts": "2026-04-29T23:48:30.390853Z",
+      "stale": false,
+      "series": [
+        {
+          "ts": "2026-04-29T23:43:34.385000Z",
+          "net_liquidation": 51505.48,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:44:37.958023Z",
+          "net_liquidation": 51505.48,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:45:29.641373Z",
+          "net_liquidation": 51505.48,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:46:29.382294Z",
+          "net_liquidation": 51505.48,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:47:30.805947Z",
+          "net_liquidation": 51505.48,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:48:30.390853Z",
+          "net_liquidation": 51505.48,
+          "daily_pnl": 0.0
+        }
+      ]
+    },
+    {
+      "id": "momentum_cont_A",
+      "name": "Momentum A",
+      "session": "Asian",
+      "tier": "P",
+      "is_bot": false,
+      "session_active": true,
+      "in_trade": false,
+      "direction": "FLAT",
+      "trade_count": 0,
+      "baseline_net_liquidation": 47727.92,
+      "current_net_liquidation": 47727.92,
+      "daily_pnl": 0.0,
+      "last_seen_ts": "2026-04-29T23:48:30.390853Z",
+      "stale": false,
+      "series": [
+        {
+          "ts": "2026-04-29T23:43:34.385000Z",
+          "net_liquidation": 47727.92,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:44:37.958023Z",
+          "net_liquidation": 47727.92,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:45:29.641373Z",
+          "net_liquidation": 47727.92,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:46:29.382294Z",
+          "net_liquidation": 47727.92,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:47:30.805947Z",
+          "net_liquidation": 47727.92,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:48:30.390853Z",
+          "net_liquidation": 47727.92,
+          "daily_pnl": 0.0
+        }
+      ]
+    },
+    {
+      "id": "vwap_reclaim_B",
+      "name": "VWAP Recl B",
+      "session": "European",
+      "tier": "P",
+      "is_bot": false,
+      "session_active": false,
+      "in_trade": false,
+      "direction": "FLAT",
+      "trade_count": 0,
+      "baseline_net_liquidation": 48523.4,
+      "current_net_liquidation": 48523.4,
+      "daily_pnl": 0.0,
+      "last_seen_ts": "2026-04-29T23:48:30.390853Z",
+      "stale": false,
+      "series": [
+        {
+          "ts": "2026-04-29T23:43:34.385000Z",
+          "net_liquidation": 48523.4,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:44:37.958023Z",
+          "net_liquidation": 48523.4,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:45:29.641373Z",
+          "net_liquidation": 48523.4,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:46:29.382294Z",
+          "net_liquidation": 48523.4,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:47:30.805947Z",
+          "net_liquidation": 48523.4,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:48:30.390853Z",
+          "net_liquidation": 48523.4,
+          "daily_pnl": 0.0
+        }
+      ]
+    },
+    {
+      "id": "vwap_reclaim_C",
+      "name": "VWAP Recl C",
+      "session": "US",
+      "tier": "P",
+      "is_bot": false,
+      "session_active": false,
+      "in_trade": false,
+      "direction": "FLAT",
+      "trade_count": 0,
+      "baseline_net_liquidation": 51450.0,
+      "current_net_liquidation": 51450.0,
+      "daily_pnl": 0.0,
+      "last_seen_ts": "2026-04-29T23:48:30.390853Z",
+      "stale": false,
+      "series": [
+        {
+          "ts": "2026-04-29T23:43:34.385000Z",
+          "net_liquidation": 51450.0,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:44:37.958023Z",
+          "net_liquidation": 51450.0,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:45:29.641373Z",
+          "net_liquidation": 51450.0,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:46:29.382294Z",
+          "net_liquidation": 51450.0,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:47:30.805947Z",
+          "net_liquidation": 51450.0,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:48:30.390853Z",
+          "net_liquidation": 51450.0,
+          "daily_pnl": 0.0
+        }
+      ]
+    },
+    {
+      "id": "trend_pullback_B",
+      "name": "Trend Pull B",
+      "session": "European",
+      "tier": "P",
+      "is_bot": false,
+      "session_active": false,
+      "in_trade": false,
+      "direction": "FLAT",
+      "trade_count": 0,
+      "baseline_net_liquidation": 50000.0,
+      "current_net_liquidation": 50000.0,
+      "daily_pnl": 0.0,
+      "last_seen_ts": "2026-04-29T23:48:30.390853Z",
+      "stale": false,
+      "series": [
+        {
+          "ts": "2026-04-29T23:43:34.385000Z",
+          "net_liquidation": 50000.0,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:44:37.958023Z",
+          "net_liquidation": 50000.0,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:45:29.641373Z",
+          "net_liquidation": 50000.0,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:46:29.382294Z",
+          "net_liquidation": 50000.0,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:47:30.805947Z",
+          "net_liquidation": 50000.0,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:48:30.390853Z",
+          "net_liquidation": 50000.0,
+          "daily_pnl": 0.0
+        }
+      ]
+    },
+    {
+      "id": "ict_lite_B",
+      "name": "ICT Lite B",
+      "session": "European",
+      "tier": "P",
+      "is_bot": false,
+      "session_active": false,
+      "in_trade": false,
+      "direction": "FLAT",
+      "trade_count": 0,
+      "baseline_net_liquidation": 50000.0,
+      "current_net_liquidation": 50000.0,
+      "daily_pnl": 0.0,
+      "last_seen_ts": "2026-04-29T23:48:30.390853Z",
+      "stale": false,
+      "series": [
+        {
+          "ts": "2026-04-29T23:43:34.385000Z",
+          "net_liquidation": 50000.0,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:44:37.958023Z",
+          "net_liquidation": 50000.0,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:45:29.641373Z",
+          "net_liquidation": 50000.0,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:46:29.382294Z",
+          "net_liquidation": 50000.0,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:47:30.805947Z",
+          "net_liquidation": 50000.0,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:48:30.390853Z",
+          "net_liquidation": 50000.0,
+          "daily_pnl": 0.0
+        }
+      ]
+    },
+    {
+      "id": "rsi_divergence_C",
+      "name": "RSI Div C",
+      "session": "European",
+      "tier": "P",
+      "is_bot": false,
+      "session_active": false,
+      "in_trade": false,
+      "direction": "FLAT",
+      "trade_count": 0,
+      "baseline_net_liquidation": 48349.36,
+      "current_net_liquidation": 48349.36,
+      "daily_pnl": 0.0,
+      "last_seen_ts": "2026-04-29T23:48:30.390853Z",
+      "stale": false,
+      "series": [
+        {
+          "ts": "2026-04-29T23:43:34.385000Z",
+          "net_liquidation": 48349.36,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:44:37.958023Z",
+          "net_liquidation": 48349.36,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:45:29.641373Z",
+          "net_liquidation": 48349.36,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:46:29.382294Z",
+          "net_liquidation": 48349.36,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:47:30.805947Z",
+          "net_liquidation": 48349.36,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:48:30.390853Z",
+          "net_liquidation": 48349.36,
+          "daily_pnl": 0.0
+        }
+      ]
+    },
+    {
+      "id": "ib_pullback_cont_B",
+      "name": "IB Pullback B",
+      "session": "US",
+      "tier": "P",
+      "is_bot": false,
+      "session_active": false,
+      "in_trade": false,
+      "direction": "FLAT",
+      "trade_count": 0,
+      "baseline_net_liquidation": 49695.64,
+      "current_net_liquidation": 49695.64,
+      "daily_pnl": 0.0,
+      "last_seen_ts": "2026-04-29T23:48:30.390853Z",
+      "stale": false,
+      "series": [
+        {
+          "ts": "2026-04-29T23:43:34.385000Z",
+          "net_liquidation": 49695.64,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:44:37.958023Z",
+          "net_liquidation": 49695.64,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:45:29.641373Z",
+          "net_liquidation": 49695.64,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:46:29.382294Z",
+          "net_liquidation": 49695.64,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:47:30.805947Z",
+          "net_liquidation": 49695.64,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:48:30.390853Z",
+          "net_liquidation": 49695.64,
+          "daily_pnl": 0.0
+        }
+      ]
+    },
+    {
+      "id": "vwap_trend_hold_A",
+      "name": "VWAP Trend A",
+      "session": "US",
+      "tier": "P",
+      "is_bot": false,
+      "session_active": false,
+      "in_trade": false,
+      "direction": "FLAT",
+      "trade_count": 0,
+      "baseline_net_liquidation": 49467.68,
+      "current_net_liquidation": 49467.68,
+      "daily_pnl": 0.0,
+      "last_seen_ts": "2026-04-29T23:48:30.390853Z",
+      "stale": false,
+      "series": [
+        {
+          "ts": "2026-04-29T23:43:34.385000Z",
+          "net_liquidation": 49467.68,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:44:37.958023Z",
+          "net_liquidation": 49467.68,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:45:29.641373Z",
+          "net_liquidation": 49467.68,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:46:29.382294Z",
+          "net_liquidation": 49467.68,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:47:30.805947Z",
+          "net_liquidation": 49467.68,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:48:30.390853Z",
+          "net_liquidation": 49467.68,
+          "daily_pnl": 0.0
+        }
+      ]
+    },
+    {
+      "id": "ny_pm_silver_bullet_C",
+      "name": "NY PM SB C",
+      "session": "US",
+      "tier": "P",
+      "is_bot": false,
+      "session_active": false,
+      "in_trade": false,
+      "direction": "FLAT",
+      "trade_count": 0,
+      "baseline_net_liquidation": 50191.28,
+      "current_net_liquidation": 50191.28,
+      "daily_pnl": 0.0,
+      "last_seen_ts": "2026-04-29T23:48:30.390853Z",
+      "stale": false,
+      "series": [
+        {
+          "ts": "2026-04-29T23:43:34.385000Z",
+          "net_liquidation": 50191.28,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:44:37.958023Z",
+          "net_liquidation": 50191.28,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:45:29.641373Z",
+          "net_liquidation": 50191.28,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:46:29.382294Z",
+          "net_liquidation": 50191.28,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:47:30.805947Z",
+          "net_liquidation": 50191.28,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:48:30.390853Z",
+          "net_liquidation": 50191.28,
+          "daily_pnl": 0.0
+        }
+      ]
+    },
+    {
+      "id": "gap_fill_B",
+      "name": "Gap Fill B",
+      "session": "US",
+      "tier": "P",
+      "is_bot": false,
+      "session_active": false,
+      "in_trade": false,
+      "direction": "FLAT",
+      "trade_count": 0,
+      "baseline_net_liquidation": 49685.64,
+      "current_net_liquidation": 49685.64,
+      "daily_pnl": 0.0,
+      "last_seen_ts": "2026-04-29T23:48:30.390853Z",
+      "stale": false,
+      "series": [
+        {
+          "ts": "2026-04-29T23:43:34.385000Z",
+          "net_liquidation": 49685.64,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:44:37.958023Z",
+          "net_liquidation": 49685.64,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:45:29.641373Z",
+          "net_liquidation": 49685.64,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:46:29.382294Z",
+          "net_liquidation": 49685.64,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:47:30.805947Z",
+          "net_liquidation": 49685.64,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:48:30.390853Z",
+          "net_liquidation": 49685.64,
+          "daily_pnl": 0.0
+        }
+      ]
+    },
+    {
+      "id": "OpenClaw Codex",
+      "name": "OC Codex",
+      "session": "All",
+      "tier": "P",
+      "is_bot": true,
+      "session_active": true,
+      "in_trade": false,
+      "direction": "FLAT",
+      "trade_count": 0,
+      "baseline_net_liquidation": 50756.64,
+      "current_net_liquidation": 50756.64,
+      "daily_pnl": 0.0,
+      "last_seen_ts": "2026-04-29T23:48:30.390853Z",
+      "stale": false,
+      "series": [
+        {
+          "ts": "2026-04-29T23:43:34.385000Z",
+          "net_liquidation": 50756.64,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:44:37.958023Z",
+          "net_liquidation": 50756.64,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:45:29.641373Z",
+          "net_liquidation": 50756.64,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:46:29.382294Z",
+          "net_liquidation": 50756.64,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:47:30.805947Z",
+          "net_liquidation": 50756.64,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:48:30.390853Z",
+          "net_liquidation": 50756.64,
+          "daily_pnl": 0.0
+        }
+      ]
+    },
+    {
+      "id": "OpenClaw Codex54",
+      "name": "OC Codex54",
+      "session": "All",
+      "tier": "P",
+      "is_bot": true,
+      "session_active": true,
+      "in_trade": false,
+      "direction": "FLAT",
+      "trade_count": 0,
+      "baseline_net_liquidation": 50317.8,
+      "current_net_liquidation": 50317.8,
+      "daily_pnl": 0.0,
+      "last_seen_ts": "2026-04-29T23:48:30.390853Z",
+      "stale": false,
+      "series": [
+        {
+          "ts": "2026-04-29T23:43:34.385000Z",
+          "net_liquidation": 50317.8,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:44:37.958023Z",
+          "net_liquidation": 50317.8,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:45:29.641373Z",
+          "net_liquidation": 50317.8,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:46:29.382294Z",
+          "net_liquidation": 50317.8,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:47:30.805947Z",
+          "net_liquidation": 50317.8,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:48:30.390853Z",
+          "net_liquidation": 50317.8,
+          "daily_pnl": 0.0
+        }
+      ]
+    },
+    {
+      "id": "OpenClaw Codex55",
+      "name": "OC Codex55",
+      "session": "All",
+      "tier": "P",
+      "is_bot": true,
+      "session_active": true,
+      "in_trade": false,
+      "direction": "FLAT",
+      "trade_count": 0,
+      "baseline_net_liquidation": 49580.64,
+      "current_net_liquidation": 49580.64,
+      "daily_pnl": 0.0,
+      "last_seen_ts": "2026-04-29T23:48:30.390853Z",
+      "stale": false,
+      "series": [
+        {
+          "ts": "2026-04-29T23:43:34.385000Z",
+          "net_liquidation": 49580.64,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:44:37.958023Z",
+          "net_liquidation": 49580.64,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:45:29.641373Z",
+          "net_liquidation": 49580.64,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:46:29.382294Z",
+          "net_liquidation": 49580.64,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:47:30.805947Z",
+          "net_liquidation": 49580.64,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:48:30.390853Z",
+          "net_liquidation": 49580.64,
+          "daily_pnl": 0.0
+        }
+      ]
+    },
+    {
+      "id": "OCXBB",
+      "name": "OCX BBands",
+      "session": "All",
+      "tier": "P",
+      "is_bot": true,
+      "session_active": true,
+      "in_trade": false,
+      "direction": "FLAT",
+      "trade_count": 0,
+      "baseline_net_liquidation": 49376.4,
+      "current_net_liquidation": 49376.4,
+      "daily_pnl": 0.0,
+      "last_seen_ts": "2026-04-29T23:48:30.390853Z",
+      "stale": false,
+      "series": [
+        {
+          "ts": "2026-04-29T23:43:34.385000Z",
+          "net_liquidation": 49376.4,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:44:37.958023Z",
+          "net_liquidation": 49376.4,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:45:29.641373Z",
+          "net_liquidation": 49376.4,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:46:29.382294Z",
+          "net_liquidation": 49376.4,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:47:30.805947Z",
+          "net_liquidation": 49376.4,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:48:30.390853Z",
+          "net_liquidation": 49376.4,
+          "daily_pnl": 0.0
+        }
+      ]
+    },
+    {
+      "id": "OCXBRT",
+      "name": "OCX BrkRetest",
+      "session": "All",
+      "tier": "P",
+      "is_bot": true,
+      "session_active": true,
+      "in_trade": false,
+      "direction": "FLAT",
+      "trade_count": 0,
+      "baseline_net_liquidation": 48157.76,
+      "current_net_liquidation": 48157.76,
+      "daily_pnl": 0.0,
+      "last_seen_ts": "2026-04-29T23:48:30.390853Z",
+      "stale": false,
+      "series": [
+        {
+          "ts": "2026-04-29T23:43:34.385000Z",
+          "net_liquidation": 48157.76,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:44:37.958023Z",
+          "net_liquidation": 48157.76,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:45:29.641373Z",
+          "net_liquidation": 48157.76,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:46:29.382294Z",
+          "net_liquidation": 48157.76,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:47:30.805947Z",
+          "net_liquidation": 48157.76,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:48:30.390853Z",
+          "net_liquidation": 48157.76,
+          "daily_pnl": 0.0
+        }
+      ]
+    },
+    {
+      "id": "OCXSTKB",
+      "name": "OCX StackB",
+      "session": "All",
+      "tier": "P",
+      "is_bot": true,
+      "session_active": true,
+      "in_trade": false,
+      "direction": "FLAT",
+      "trade_count": 0,
+      "baseline_net_liquidation": 49680.52,
+      "current_net_liquidation": 49680.52,
+      "daily_pnl": 0.0,
+      "last_seen_ts": "2026-04-29T23:48:30.390853Z",
+      "stale": false,
+      "series": [
+        {
+          "ts": "2026-04-29T23:43:34.385000Z",
+          "net_liquidation": 49680.52,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:44:37.958023Z",
+          "net_liquidation": 49680.52,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:45:29.641373Z",
+          "net_liquidation": 49680.52,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:46:29.382294Z",
+          "net_liquidation": 49680.52,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:47:30.805947Z",
+          "net_liquidation": 49680.52,
+          "daily_pnl": 0.0
+        },
+        {
+          "ts": "2026-04-29T23:48:30.390853Z",
+          "net_liquidation": 49680.52,
+          "daily_pnl": 0.0
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "account_count": 30,
+    "stale_account_count": 0,
+    "total_daily_pnl": 0.0,
+    "positive_accounts": 0,
+    "negative_accounts": 0,
+    "flat_accounts": 30,
+    "best_account": {
+      "id": "ema_crossover_A",
+      "name": "EMA Cross A",
+      "session": "Asian",
+      "tier": "P",
+      "is_bot": false,
+      "daily_pnl": 0.0,
+      "current_net_liquidation": 49490.36,
+      "trade_count": 0,
+      "in_trade": false,
+      "direction": "FLAT"
+    },
+    "worst_account": {
+      "id": "OCXSTKB",
+      "name": "OCX StackB",
+      "session": "All",
+      "tier": "P",
+      "is_bot": true,
+      "daily_pnl": 0.0,
+      "current_net_liquidation": 49680.52,
+      "trade_count": 0,
+      "in_trade": false,
+      "direction": "FLAT"
+    }
+  }
+}

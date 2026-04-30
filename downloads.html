@@ -332,6 +332,7 @@
       <div class="nav-links">
         <a href="scoreboard.html">Scoreboard</a>
         <a href="algos.html">Algos</a>
+        <a href="results.html">Weekly Results</a>
         <a href="downloads.html" class="active">Downloads</a>
         <a href="https://www.youtube.com/channel/UCylD_vJ1etiLUykGp9Gvnbg" target="_blank">YouTube</a>
       </div>
@@ -445,29 +446,32 @@
                     </div>
                 </div>
 
-                <!-- Asian European Session High Low -->
+                <!-- Asian European NY Session High Low -->
                 <div class="indicator-card" id="sessionhl">
                     <div class="screenshot-gallery">
-                        <img src="images/AEHL_01.png" alt="Asian European Session High Low" onclick="openLightbox(this.src)">
+                        <img src="images/AEHL_01.png" alt="Asian European NY Session High Low" onclick="openLightbox(this.src)">
                     </div>
                     <div class="card-content">
-                        <h3>AsianEuropeanSessionHighLow</h3>
-                        <p class="tagline">"If you're trading without knowing where Asia and Europe actually did business, you're trading blind."</p>
-                        <p>Precisely tracks and plots true Asian (7pm-3am ET) and European (3am-8am ET) session highs/lows using CME Globex trading-day logic, not naive calendar days.</p>
+                        <h3>AsianEuropeanNYSessionHighLow</h3>
+                        <p class="tagline">"If you're trading without knowing where Asia, Europe, and NY actually did business, you're trading blind."</p>
+                        <p>Precisely tracks and plots true Asian (7pm-3am ET), European (3am-8am ET), and New York (9:30am-4pm ET) session highs/lows using CME Globex trading-day logic, not naive calendar days.</p>
                         <ul class="features">
+                            <li>All three major sessions tracked: Asian, European, and NY</li>
                             <li>CME Globex 5:00 PM ET trading-day rollover handled correctly</li>
                             <li>Dashed lines while session develops, solid when complete</li>
                             <li>Sunday evening opens and overnight sessions handled</li>
-                            <li>Fully configurable colors, widths, styles, and labels</li>
+                            <li>Fully configurable colors, widths, styles, and labels per session</li>
                             <li>Exposes values programmatically for strategies/scanners</li>
                         </ul>
-                        <a href="indicators/AsianEuropeanSessionHighLow.zip" class="download-btn">Download SessionHighLow</a>
+                        <a href="indicators/AsianEuropeanNYSessionHighLow.zip" class="download-btn">Download SessionHighLow</a>
                         <button class="expand-btn" onclick="toggleExpand('sessionhl-details')">Read More</button>
                         <div id="sessionhl-details" class="expanded-description">
                             <h4>Why Most Session Indicators Fail</h4>
                             <p>They break at midnight, mis-handle Sundays and Globex opens, reset incorrectly on holidays, and can't be trusted during real market transitions. This one was vibe-coded during live market use and refined by actual trading needs.</p>
+                            <h4>Now With NY Session Tracking</h4>
+                            <p>The original covered Asian and European sessions. This update adds full New York session high/low tracking - giving you complete 3-session context for the entire trading day. See where each session established its range and how NY interacts with prior session levels.</p>
                             <h4>Trading Context</h4>
-                            <p>Gives you instant visual context for London fake-outs, NY open liquidity runs, prior session balance vs expansion, and mean reversion/breakout bias.</p>
+                            <p>Gives you instant visual context for London fake-outs, NY open liquidity runs, prior session balance vs expansion, and mean reversion/breakout bias across all three major sessions.</p>
                             <div class="who-for">
                                 <span>ICT/Liquidity Traders</span>
                                 <span>NY Prep from Asia/London</span>

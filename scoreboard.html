@@ -181,6 +181,161 @@
     .val-green { color: #166534; }
     .val-red { color: #991b1b; }
 
+    /* Daily account PnL */
+    .pnl-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .pnl-metric {
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.14);
+    }
+    .pnl-metric-label {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .35px;
+      opacity: .55;
+      margin-bottom: 4px;
+    }
+    .pnl-metric-value {
+      font-size: 20px;
+      font-weight: 900;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .pnl-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(280px, .9fr);
+      gap: 16px;
+      align-items: start;
+    }
+    .pnl-subhead {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+      font-size: 12px;
+      font-weight: 800;
+      opacity: .7;
+      text-transform: uppercase;
+      letter-spacing: .35px;
+    }
+    .pnl-select {
+      max-width: 220px;
+      padding: 7px 10px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,.26);
+      background: rgba(255,255,255,.16);
+      color: #0b1220;
+      font-weight: 700;
+    }
+    .pnl-chart-box {
+      min-height: 270px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.08);
+      padding: 10px;
+    }
+    .pnl-chart-svg {
+      display: block;
+      width: 100%;
+      height: 250px;
+    }
+    .pnl-bars {
+      max-height: 270px;
+      overflow: auto;
+      padding-right: 4px;
+    }
+    .pnl-bar-row {
+      display: grid;
+      grid-template-columns: minmax(96px, 130px) minmax(90px, 1fr) 82px;
+      gap: 8px;
+      align-items: center;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(0,0,0,.04);
+      font-size: 12px;
+    }
+    .pnl-bar-name {
+      font-weight: 800;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+    .pnl-bar-track {
+      position: relative;
+      height: 18px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.16);
+      overflow: hidden;
+    }
+    .pnl-bar-axis {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 1px;
+      background: rgba(11,18,32,.28);
+    }
+    .pnl-bar-fill {
+      position: absolute;
+      top: 3px;
+      bottom: 3px;
+      border-radius: 999px;
+    }
+    .pnl-bar-fill.pos {
+      left: 50%;
+      background: rgba(34,197,94,.72);
+    }
+    .pnl-bar-fill.neg {
+      right: 50%;
+      background: rgba(239,68,68,.72);
+    }
+    .pnl-bar-value {
+      text-align: right;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+    .pnl-table-wrap {
+      margin-top: 14px;
+      overflow-x: auto;
+    }
+    .pnl-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+    .pnl-table th {
+      text-align: left;
+      padding: 6px 8px;
+      border-bottom: 2px solid rgba(0,0,0,.08);
+      font-size: 10px;
+      font-weight: 900;
+      opacity: .55;
+      text-transform: uppercase;
+      letter-spacing: .3px;
+    }
+    .pnl-table td {
+      padding: 7px 8px;
+      border-bottom: 1px solid rgba(0,0,0,.04);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .pnl-day-note {
+      float: right;
+      font-size: 11px;
+      font-weight: 800;
+      opacity: .55;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
     /* Panels */
     .content {
       display: grid;
@@ -296,17 +451,24 @@
       color: #fff;
       line-height: 1;
     }
-    .tier-P { background: #7c3aed; color: #ffffff; } /* paper = purple */
+    .tier-P { background: #a855f7; color: #ffffff; } /* paper = neon purple */
     .tier-E { background: #d97706; color: #111827; } /* eval = gold/orange */
     .tier-F { background: #2563eb; color: #ffffff; } /* funded = blue */
     /* Accept full-word variants from upstream data */
-    .tier-PAPER { background: #7c3aed; color: #ffffff; }
+    .tier-PAPER { background: #a855f7; color: #ffffff; }
     .tier-EVAL { background: #d97706; color: #111827; }
     .tier-FUNDED { background: #2563eb; color: #ffffff; }
     .tile-pnl {
       font-size: 14px;
       font-weight: 900;
       padding-left: 14px;
+    }
+    .tile-netliq {
+      font-size: 11px;
+      font-weight: 700;
+      padding-left: 14px;
+      opacity: .62;
+      margin-top: 2px;
     }
 
     /* Session tabs */
@@ -379,6 +541,9 @@
 
     @media (max-width: 700px) {
       .summary-row { grid-template-columns: repeat(2, 1fr); }
+      .pnl-metrics { grid-template-columns: repeat(2, 1fr); }
+      .pnl-layout { grid-template-columns: 1fr; }
+      .pnl-bar-row { grid-template-columns: 94px 1fr 76px; }
       .content { grid-template-columns: 1fr; }
       .health-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
     }
@@ -391,6 +556,7 @@
   <div class="nav-links">
     <a href="scoreboard.html" class="active">Scoreboard</a>
     <a href="algos.html">Algos</a>
+    <a href="results.html">Weekly Results</a>
     <a href="downloads.html">Downloads</a>
     <a href="https://www.youtube.com/channel/UCylD_vJ1etiLUykGp9Gvnbg" target="_blank">YouTube</a>
   </div>
@@ -423,8 +589,8 @@
       <div class="value" id="net-pnl">$0.00</div>
     </div>
     <div class="summary-card">
-      <div class="label">Win Rate</div>
-      <div class="value" id="win-rate">0%</div>
+      <div class="label">Net Liquidation</div>
+      <div class="value" id="net-liq">$0.00</div>
     </div>
     <div class="summary-card">
       <div class="label">Open Positions</div>
@@ -433,6 +599,71 @@
   </div>
 
   <div class="content">
+
+    <!-- Daily account PnL -->
+    <div class="panel panel-full">
+      <div class="panel-title">
+        Today's Account PnL
+        <span class="pnl-day-note" id="pnl-trading-day">--</span>
+      </div>
+
+      <div class="pnl-metrics">
+        <div class="pnl-metric">
+          <div class="pnl-metric-label">Daily Total</div>
+          <div class="pnl-metric-value" id="pnl-total">$0</div>
+        </div>
+        <div class="pnl-metric">
+          <div class="pnl-metric-label">Best Account</div>
+          <div class="pnl-metric-value" id="pnl-best">--</div>
+        </div>
+        <div class="pnl-metric">
+          <div class="pnl-metric-label">Worst Account</div>
+          <div class="pnl-metric-value" id="pnl-worst">--</div>
+        </div>
+        <div class="pnl-metric">
+          <div class="pnl-metric-label">Positive / Negative</div>
+          <div class="pnl-metric-value" id="pnl-counts">0 / 0</div>
+        </div>
+      </div>
+
+      <div class="pnl-layout">
+        <div>
+          <div class="pnl-subhead">
+            <span>Intraday Curve</span>
+            <select class="pnl-select" id="pnl-account-select" onchange="switchPnlAccount(this.value)"></select>
+          </div>
+          <div class="pnl-chart-box" id="pnl-line-chart">
+            <div class="no-data">Waiting for daily PnL data...</div>
+          </div>
+        </div>
+
+        <div>
+          <div class="pnl-subhead"><span>Ranked Accounts</span></div>
+          <div class="pnl-chart-box">
+            <div class="pnl-bars" id="pnl-bar-chart">
+              <div class="no-data">Waiting for daily PnL data...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pnl-table-wrap">
+        <table class="pnl-table">
+          <thead>
+            <tr>
+              <th>Account</th>
+              <th>Daily PnL</th>
+              <th>Net Liq</th>
+              <th>Trades</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="pnl-results-body">
+            <tr><td colspan="5" class="no-data">Waiting for daily PnL data...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
 
     <!-- Active trades -->
     <div class="panel">
@@ -477,10 +708,13 @@ const POLL_MS = 10000;
 const STALE_MS = 5 * 60 * 1000; // 5 minutes
 const SCOREBOARD_URL = 'scoreboard_snapshot.json';
 const STATE_URL = 'scoreboard_state_snapshot.json';
+const DAILY_PNL_URL = 'account_daily_pnl_snapshot.json';
 
 let lastDataTime = null;
 let activeSessionTab = 'US';
 let cachedStateData = null;
+let cachedDailyPnlData = null;
+let activePnlAccountId = null;
 
 function pnlColor(val) {
   if (val > 0) return 'val-green';
@@ -494,6 +728,28 @@ function formatDollar(val) {
   return val > 0 ? '+$' + abs : '-$' + abs;
 }
 
+function formatUnsignedDollar(val) {
+  if (val == null || val === 0) return '$0.00';
+  return '$' + Math.abs(val).toFixed(2);
+}
+
+function formatSignedWholeDollar(val) {
+  if (val == null || val === 0) return '$0';
+  const sign = val > 0 ? '+$' : '-$';
+  return sign + Math.trunc(Math.abs(val)).toLocaleString('en-US');
+}
+
+function formatWholeCurrency(val) {
+  if (val == null || val === 0) return '$0';
+  return '$' + Math.trunc(Math.abs(val)).toLocaleString('en-US');
+}
+
+function formatWholeDollar(val) {
+  if (val == null || val === 0) return '0';
+  const sign = val < 0 ? '-' : '';
+  return sign + Math.trunc(Math.abs(val)).toLocaleString('en-US');
+}
+
 function formatPnlPts(val) {
   if (val == null) return '0.0';
   return (val > 0 ? '+' : '') + val.toFixed(1);
@@ -501,6 +757,15 @@ function formatPnlPts(val) {
 
 function prettyName(name) {
   return name || '';
+}
+
+function escapeHtml(value) {
+  return String(value ?? '')
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;');
 }
 
 function normalizeTier(tier) {
@@ -542,6 +807,174 @@ function checkStale() {
   }
 }
 
+function formatTradingDay(day) {
+  if (!day) return '--';
+  try {
+    const d = new Date(day + 'T12:00:00');
+    return 'Futures day: ' + d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  } catch {
+    return 'Futures day: ' + day;
+  }
+}
+
+function dailyPnlAccounts(data) {
+  return (data?.accounts || []).filter(a => !a.stale);
+}
+
+function updateDailyPnl(data) {
+  if (!data) return;
+  cachedDailyPnlData = data;
+  const accounts = dailyPnlAccounts(data);
+  const summary = data.summary || {};
+
+  document.getElementById('pnl-trading-day').textContent = formatTradingDay(data.trading_day);
+
+  const total = summary.total_daily_pnl || 0;
+  const totalEl = document.getElementById('pnl-total');
+  totalEl.textContent = formatSignedWholeDollar(total);
+  totalEl.className = 'pnl-metric-value ' + pnlColor(total);
+
+  const best = summary.best_account;
+  const worst = summary.worst_account;
+  document.getElementById('pnl-best').innerHTML = best
+    ? `${escapeHtml(best.name)} <span class="${pnlColor(best.daily_pnl)}">${formatSignedWholeDollar(best.daily_pnl)}</span>`
+    : '--';
+  document.getElementById('pnl-worst').innerHTML = worst
+    ? `${escapeHtml(worst.name)} <span class="${pnlColor(worst.daily_pnl)}">${formatSignedWholeDollar(worst.daily_pnl)}</span>`
+    : '--';
+  document.getElementById('pnl-counts').textContent =
+    `${summary.positive_accounts || 0} / ${summary.negative_accounts || 0}`;
+
+  renderPnlAccountSelect(accounts);
+  renderPnlLineChart(accounts);
+  renderPnlBars(accounts);
+  renderPnlTable(accounts);
+}
+
+function renderPnlAccountSelect(accounts) {
+  const select = document.getElementById('pnl-account-select');
+  if (!accounts.length) {
+    select.innerHTML = '';
+    activePnlAccountId = null;
+    return;
+  }
+
+  const sorted = [...accounts].sort((a, b) => Math.abs(b.daily_pnl || 0) - Math.abs(a.daily_pnl || 0));
+  if (!activePnlAccountId || !accounts.some(a => a.id === activePnlAccountId)) {
+    activePnlAccountId = sorted[0].id;
+  }
+
+  select.innerHTML = sorted.map(a => {
+    const selected = a.id === activePnlAccountId ? 'selected' : '';
+    return `<option value="${escapeHtml(a.id)}" ${selected}>${escapeHtml(a.name)}</option>`;
+  }).join('');
+}
+
+function switchPnlAccount(accountId) {
+  activePnlAccountId = accountId;
+  if (cachedDailyPnlData) {
+    renderPnlLineChart(dailyPnlAccounts(cachedDailyPnlData));
+  }
+}
+
+function renderPnlLineChart(accounts) {
+  const target = document.getElementById('pnl-line-chart');
+  const account = accounts.find(a => a.id === activePnlAccountId) || accounts[0];
+  if (!account || !account.series || account.series.length < 2) {
+    target.innerHTML = '<div class="no-data">Need at least two samples for the intraday curve</div>';
+    return;
+  }
+
+  const series = account.series
+    .filter(p => Number.isFinite(Number(p.daily_pnl)))
+    .map(p => ({ ts: p.ts, pnl: Number(p.daily_pnl) }));
+  if (series.length < 2) {
+    target.innerHTML = '<div class="no-data">Need at least two samples for the intraday curve</div>';
+    return;
+  }
+
+  const width = 720;
+  const height = 250;
+  const padL = 58;
+  const padR = 18;
+  const padT = 16;
+  const padB = 32;
+  let minPnl = Math.min(0, ...series.map(p => p.pnl));
+  let maxPnl = Math.max(0, ...series.map(p => p.pnl));
+  if (maxPnl - minPnl < 1) {
+    maxPnl += 1;
+    minPnl -= 1;
+  }
+
+  const plotW = width - padL - padR;
+  const plotH = height - padT - padB;
+  const xFor = i => padL + (series.length === 1 ? 0 : (i / (series.length - 1)) * plotW);
+  const yFor = pnl => padT + ((maxPnl - pnl) / (maxPnl - minPnl)) * plotH;
+  const points = series.map((p, i) => `${xFor(i).toFixed(1)},${yFor(p.pnl).toFixed(1)}`).join(' ');
+  const zeroY = yFor(0);
+  const stroke = (series[series.length - 1].pnl || 0) >= 0 ? '#166534' : '#991b1b';
+  const firstTime = new Date(series[0].ts).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+  const lastTime = new Date(series[series.length - 1].ts).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+
+  target.innerHTML = `<svg class="pnl-chart-svg" viewBox="0 0 ${width} ${height}" role="img" aria-label="${escapeHtml(account.name)} daily PnL curve">
+    <rect x="${padL}" y="${padT}" width="${plotW}" height="${plotH}" rx="10" fill="rgba(255,255,255,.08)" />
+    <line x1="${padL}" y1="${zeroY.toFixed(1)}" x2="${width - padR}" y2="${zeroY.toFixed(1)}" stroke="rgba(11,18,32,.35)" stroke-width="1" />
+    <polyline points="${points}" fill="none" stroke="${stroke}" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
+    <circle cx="${xFor(series.length - 1).toFixed(1)}" cy="${yFor(series[series.length - 1].pnl).toFixed(1)}" r="5" fill="${stroke}" />
+    <text x="8" y="${padT + 10}" fill="rgba(11,18,32,.65)" font-size="12" font-weight="800">${formatSignedWholeDollar(maxPnl)}</text>
+    <text x="8" y="${zeroY - 4}" fill="rgba(11,18,32,.55)" font-size="12" font-weight="800">$0</text>
+    <text x="8" y="${height - padB}" fill="rgba(11,18,32,.65)" font-size="12" font-weight="800">${formatSignedWholeDollar(minPnl)}</text>
+    <text x="${padL}" y="${height - 8}" fill="rgba(11,18,32,.55)" font-size="12" font-weight="800">${firstTime}</text>
+    <text x="${width - padR}" y="${height - 8}" text-anchor="end" fill="rgba(11,18,32,.55)" font-size="12" font-weight="800">${lastTime}</text>
+    <text x="${width - padR}" y="${padT + 18}" text-anchor="end" fill="${stroke}" font-size="15" font-weight="900">${formatSignedWholeDollar(series[series.length - 1].pnl)}</text>
+  </svg>`;
+}
+
+function renderPnlBars(accounts) {
+  const target = document.getElementById('pnl-bar-chart');
+  if (!accounts.length) {
+    target.innerHTML = '<div class="no-data">No daily PnL data</div>';
+    return;
+  }
+
+  const ranked = [...accounts].sort((a, b) => (b.daily_pnl || 0) - (a.daily_pnl || 0));
+  const maxAbs = Math.max(1, ...ranked.map(a => Math.abs(a.daily_pnl || 0)));
+  target.innerHTML = ranked.map(a => {
+    const pnl = a.daily_pnl || 0;
+    const width = Math.max(1, Math.min(50, Math.abs(pnl) / maxAbs * 50));
+    const cls = pnl >= 0 ? 'pos' : 'neg';
+    return `<div class="pnl-bar-row">
+      <div class="pnl-bar-name" title="${escapeHtml(a.name)}">${escapeHtml(a.name)}</div>
+      <div class="pnl-bar-track">
+        <div class="pnl-bar-axis"></div>
+        <div class="pnl-bar-fill ${cls}" style="width:${width.toFixed(1)}%;"></div>
+      </div>
+      <div class="pnl-bar-value ${pnlColor(pnl)}">${formatSignedWholeDollar(pnl)}</div>
+    </div>`;
+  }).join('');
+}
+
+function renderPnlTable(accounts) {
+  const body = document.getElementById('pnl-results-body');
+  if (!accounts.length) {
+    body.innerHTML = '<tr><td colspan="5" class="no-data">No daily PnL data</td></tr>';
+    return;
+  }
+
+  const ranked = [...accounts].sort((a, b) => (b.daily_pnl || 0) - (a.daily_pnl || 0));
+  body.innerHTML = ranked.map(a => {
+    const pnl = a.daily_pnl || 0;
+    const status = a.in_trade ? `${escapeHtml(a.direction || 'LIVE')}` : (a.session_active ? 'Watching' : 'Idle');
+    return `<tr>
+      <td>${escapeHtml(a.name)}</td>
+      <td class="${pnlColor(pnl)}">${formatSignedWholeDollar(pnl)}</td>
+      <td>${formatWholeCurrency(a.current_net_liquidation)}</td>
+      <td>${a.trade_count || 0}</td>
+      <td>${status}</td>
+    </tr>`;
+  }).join('');
+}
+
 function updateScoreboard(data) {
   if (!data || !data.summary) return;
   const s = data.summary;
@@ -555,7 +988,6 @@ function updateScoreboard(data) {
   const openCount = trades.length || s.open_trades || 0;
 
   document.getElementById('trades-today').textContent = s.trades_today + openCount;
-  document.getElementById('win-rate').textContent = s.win_rate.toFixed(1) + '%';
   document.getElementById('open-pos').textContent = openCount;
 
   // Active trades
@@ -631,6 +1063,11 @@ function updateFromState(stateData) {
   pnlEl.textContent = formatDollar(totalPnl);
   pnlEl.className = 'value ' + pnlColor(totalPnl);
 
+  const totalNetLiq = algos.reduce((sum, a) => sum + (a.net_liquidation || a.balance || 0), 0);
+  const netLiqEl = document.getElementById('net-liq');
+  netLiqEl.textContent = formatUnsignedDollar(totalNetLiq);
+  netLiqEl.className = 'value';
+
   // Health grid
   updateHealthGrid(algos);
 
@@ -660,6 +1097,7 @@ function updateHealthGrid(algos) {
 
     const pnl = algo.pnl || 0;
     const pnlCls = pnlColor(pnl);
+    const netLiquidation = algo.net_liquidation || algo.balance || 0;
 
     const tier = normalizeTier(algo.tier);
     html += `<div class="health-tile">
@@ -668,6 +1106,7 @@ function updateHealthGrid(algos) {
         <div class="tile-name" title="${algo.id}">${algo.name || algo.id}<span class="tier-pill ${tierClass(tier)}">${tier}</span></div>
       </div>
       <div class="tile-pnl ${pnlCls}">${formatDollar(pnl)}</div>
+      <div class="tile-netliq">Net liq ${formatWholeDollar(netLiquidation)}</div>
     </div>`;
   }
 
@@ -711,7 +1150,7 @@ function renderSessionTables(algos) {
   }
 
   let html = `<table class="session-table">
-    <tr><th>Algo</th><th>Status</th><th>PnL</th></tr>`;
+    <tr><th>Algo</th><th>Status</th><th>PnL</th><th>Net Liq</th></tr>`;
   for (const a of sessionAlgos) {
     const isOpen = a.in_trade;
     const statusHtml = isOpen
@@ -719,11 +1158,13 @@ function renderSessionTables(algos) {
       : (a.session_active ? 'Watching' : 'Idle');
     const pnl = a.pnl || 0;
     const pnlCls = pnlColor(pnl);
+    const netLiquidation = a.net_liquidation || a.balance || 0;
     const tier = normalizeTier(a.tier);
     html += `<tr>
       <td><strong>${prettyName(a.name)}</strong><span class="tier-pill ${tierClass(tier)}">${tier}</span></td>
       <td>${statusHtml}</td>
       <td class="${pnlCls}" style="font-weight:700;">${formatDollar(pnl)}</td>
+      <td style="font-weight:700;opacity:.72;">${formatWholeDollar(netLiquidation)}</td>
     </tr>`;
   }
   html += '</table>';
@@ -741,10 +1182,12 @@ async function poll() {
   const results = await Promise.allSettled([
     fetch(SCOREBOARD_URL + '?t=' + Date.now()).then(r => r.ok ? r.json() : null),
     fetch(STATE_URL + '?t=' + Date.now()).then(r => r.ok ? r.json() : null),
+    fetch(DAILY_PNL_URL + '?t=' + Date.now()).then(r => r.ok ? r.json() : null),
   ]);
 
   const scoreboardData = results[0].status === 'fulfilled' ? results[0].value : null;
   const stateData = results[1].status === 'fulfilled' ? results[1].value : null;
+  const dailyPnlData = results[2].status === 'fulfilled' ? results[2].value : null;
 
   if (scoreboardData) {
     updateScoreboard(scoreboardData);
@@ -752,6 +1195,10 @@ async function poll() {
 
   if (stateData) {
     updateFromState(stateData);
+  }
+
+  if (dailyPnlData) {
+    updateDailyPnl(dailyPnlData);
   }
 
   checkStale();
