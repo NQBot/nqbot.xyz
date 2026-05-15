@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Analysis &amp; Reviews - NQBot LIVE</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --card: rgba(255,255,255,.18);
+      --card2: rgba(255,255,255,.12);
+      --border: rgba(255,255,255,.25);
+      --shadow: 0 18px 45px rgba(0,0,0,.28);
+      --radius: 22px;
+      --green: #16a34a;
+      --red: #dc2626;
+      --blue: #38bdf8;
+      --amber: #f59e0b;
+      --muted: rgba(11,18,32,.60);
+      --ink: #0b1220;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--ink);
+      overflow-x: hidden;
+      background:
+        radial-gradient(1200px 700px at 20% 15%, rgba(255,255,255,.75) 0%, rgba(255,255,255,0) 60%),
+        radial-gradient(900px 600px at 85% 20%, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 60%),
+        radial-gradient(900px 650px at 70% 85%, rgba(255,255,255,.40) 0%, rgba(255,255,255,0) 60%),
+        linear-gradient(135deg, #7ee8ff 0%, #a6ffcb 35%, #ffe29a 70%, #ffb3d8 100%);
+    }
+    body::before {
+      content: ""; position: fixed; inset: 0; pointer-events: none; opacity: .18;
+      background-image:
+        linear-gradient(rgba(255,255,255,.55) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.55) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(circle at 50% 25%, rgba(0,0,0,1), rgba(0,0,0,.55) 55%, rgba(0,0,0,0) 100%);
+    }
+    .site-nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 24px;
+      background: rgba(255,255,255,.45);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,.35);
+    }
+    .nav-brand { font-weight: 900; font-size: 18px; color: var(--ink); text-decoration: none; }
+    .nav-links { display: flex; gap: 6px; flex-wrap: wrap; }
+    .nav-links a {
+      padding: 7px 14px; border-radius: 999px; font-weight: 700; font-size: 13px;
+      color: var(--ink); text-decoration: none; transition: background .15s;
+    }
+    .nav-links a:hover { background: rgba(255,255,255,.35); }
+    .nav-links a.active { background: rgba(11,18,32,.08); font-weight: 800; }
+
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 28px 22px 80px; }
+
+    .page-head {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); box-shadow: var(--shadow);
+      padding: 28px; margin-bottom: 22px;
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    }
+    .page-head h1 {
+      margin: 0 0 6px; font-size: 32px; font-weight: 900; letter-spacing: -.01em;
+    }
+    .page-head p {
+      margin: 0; color: var(--muted); font-size: 15px; font-weight: 600; line-height: 1.5;
+    }
+    .page-head .kicker {
+      font-size: 12px; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--muted); font-weight: 800; margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-size: 13px; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--muted); font-weight: 800; margin: 22px 4px 12px;
+    }
+
+    .review-list { display: grid; gap: 14px; }
+    .review-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); box-shadow: var(--shadow);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      padding: 22px 26px;
+      text-decoration: none; color: inherit;
+      transition: transform .15s ease, box-shadow .15s ease;
+      display: block;
+    }
+    .review-card:hover { transform: translateY(-2px); box-shadow: 0 22px 50px rgba(0,0,0,.32); }
+    .review-card .tag-row {
+      display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+    .tag {
+      display: inline-block; font-size: 10px; font-weight: 800;
+      padding: 4px 10px; border-radius: 999px;
+      letter-spacing: .06em; text-transform: uppercase;
+    }
+    .tag.review { background: rgba(220,38,38,.15); color: #991b1b; }
+    .tag.audit { background: rgba(245,158,11,.18); color: #92400e; }
+    .tag.architecture { background: rgba(56,189,248,.18); color: #075985; }
+    .tag.date { background: rgba(11,18,32,.06); color: var(--muted); }
+    .review-card h2 {
+      margin: 0 0 6px; font-size: 22px; font-weight: 900; letter-spacing: -.01em;
+    }
+    .review-card .summary {
+      margin: 0; color: var(--ink); font-size: 14px; line-height: 1.55; font-weight: 600;
+    }
+    .review-card .meta {
+      margin-top: 10px; color: var(--muted); font-size: 12px; font-weight: 700;
+      display: flex; gap: 16px; flex-wrap: wrap;
+    }
+
+    .note {
+      background: rgba(255,255,255,.30); border: 1px solid rgba(11,18,32,.08);
+      border-radius: 14px; padding: 14px 18px; font-size: 13px;
+      color: var(--ink); font-weight: 600; line-height: 1.55;
+      margin-top: 22px;
+    }
+    .note strong { color: #92400e; }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a class="nav-brand" href="/">NQBot LIVE</a>
+  <div class="nav-links">
+    <a href="scoreboard.html">Scoreboard</a>
+    <a href="algos.html">Algos</a>
+    <a href="results.html">Weekly Results</a>
+    <a href="analysis.html" class="active">Analysis</a>
+    <a href="downloads.html">Downloads</a>
+    <a href="https://www.youtube.com/channel/UCylD_vJ1etiLUykGp9Gvnbg" target="_blank">YouTube</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <header class="page-head">
+    <div class="kicker">Analysis &amp; Reviews</div>
+    <h1>Forensic reviews of the NQBot stack</h1>
+    <p>
+      Internal architecture audits, paper-trade post-mortems, and prompt/gate tuning reviews.
+      These are research artifacts — they describe what the system <em>actually</em> did, including the parts
+      that did not work. They are not advice and they are not signals.
+    </p>
+  </header>
+
+  <div class="section-title">Latest reviews</div>
+
+  <div class="review-list">
+
+    <a class="review-card" href="analysis/codex-pipeline-forensic-review-2026-05-15.html">
+      <div class="tag-row">
+        <span class="tag review">Forensic Review</span>
+        <span class="tag architecture">Architecture</span>
+        <span class="tag audit">Paper Results</span>
+        <span class="tag date">2026-05-15</span>
+      </div>
+      <h2>Codex Pipeline Forensic Review</h2>
+      <p class="summary">
+        A blunt outside review of the Codex53 / Codex54 / Codex55 main traders and the CodexF / Codex54F / Codex55F fade lanes.
+        Quantifies signal attrition across the LLM, value-entry stalker, suspicion gate, location discipline, and Vanta
+        execution-guard layers, identifies where the pipeline collapsed from ~150 signals/day to zero, and recommends a course.
+      </p>
+      <div class="meta">
+        <span>Lanes covered: Codex53, Codex54, Codex55, CodexF, Codex54F, Codex55F</span>
+        <span>Window: 2026-04-05 → 2026-05-15</span>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="note">
+    <strong>Note:</strong> All findings on this page reference paper-trading sessions only. No live capital
+    was at risk in any of the lanes analyzed. Reviews intentionally include numbers that look bad — that is the point.
+    Hiding the bad numbers would defeat the purpose of an audit.
+  </div>
+
+</div>
+
+</body>
+</html>

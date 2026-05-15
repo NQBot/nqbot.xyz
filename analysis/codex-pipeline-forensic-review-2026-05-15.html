@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Codex Pipeline Forensic Review (2026-05-15) - NQBot LIVE</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --card: rgba(255,255,255,.18);
+      --card2: rgba(255,255,255,.12);
+      --border: rgba(255,255,255,.25);
+      --shadow: 0 18px 45px rgba(0,0,0,.28);
+      --radius: 22px;
+      --green: #16a34a;
+      --red: #dc2626;
+      --blue: #38bdf8;
+      --amber: #f59e0b;
+      --muted: rgba(11,18,32,.60);
+      --ink: #0b1220;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--ink);
+      overflow-x: hidden;
+      background:
+        radial-gradient(1200px 700px at 20% 15%, rgba(255,255,255,.75) 0%, rgba(255,255,255,0) 60%),
+        radial-gradient(900px 600px at 85% 20%, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 60%),
+        radial-gradient(900px 650px at 70% 85%, rgba(255,255,255,.40) 0%, rgba(255,255,255,0) 60%),
+        linear-gradient(135deg, #7ee8ff 0%, #a6ffcb 35%, #ffe29a 70%, #ffb3d8 100%);
+    }
+    body::before {
+      content: ""; position: fixed; inset: 0; pointer-events: none; opacity: .18;
+      background-image:
+        linear-gradient(rgba(255,255,255,.55) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.55) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(circle at 50% 25%, rgba(0,0,0,1), rgba(0,0,0,.55) 55%, rgba(0,0,0,0) 100%);
+    }
+    .site-nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 24px;
+      background: rgba(255,255,255,.45);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,.35);
+    }
+    .nav-brand { font-weight: 900; font-size: 18px; color: var(--ink); text-decoration: none; }
+    .nav-links { display: flex; gap: 6px; flex-wrap: wrap; }
+    .nav-links a {
+      padding: 7px 14px; border-radius: 999px; font-weight: 700; font-size: 13px;
+      color: var(--ink); text-decoration: none; transition: background .15s;
+    }
+    .nav-links a:hover { background: rgba(255,255,255,.35); }
+    .nav-links a.active { background: rgba(11,18,32,.08); font-weight: 800; }
+
+    .wrap { max-width: 920px; margin: 0 auto; padding: 28px 22px 80px; }
+
+    .crumbs {
+      font-size: 12px; color: var(--muted); font-weight: 700; margin-bottom: 12px;
+    }
+    .crumbs a { color: var(--muted); text-decoration: none; }
+    .crumbs a:hover { color: var(--ink); }
+    .crumbs span { margin: 0 6px; opacity: .55; }
+
+    .article-head {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); box-shadow: var(--shadow);
+      padding: 28px 30px; margin-bottom: 22px;
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    }
+    .article-head .tag-row {
+      display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 14px;
+    }
+    .tag {
+      display: inline-block; font-size: 10px; font-weight: 800;
+      padding: 4px 10px; border-radius: 999px;
+      letter-spacing: .06em; text-transform: uppercase;
+    }
+    .tag.review { background: rgba(220,38,38,.15); color: #991b1b; }
+    .tag.audit { background: rgba(245,158,11,.18); color: #92400e; }
+    .tag.architecture { background: rgba(56,189,248,.18); color: #075985; }
+    .tag.date { background: rgba(11,18,32,.06); color: var(--muted); }
+    .article-head h1 {
+      margin: 0 0 8px; font-size: 30px; font-weight: 900; letter-spacing: -.01em; line-height: 1.15;
+    }
+    .article-head .lede {
+      margin: 0; color: var(--ink); font-size: 15px; line-height: 1.55; font-weight: 600;
+    }
+    .article-head .meta {
+      margin-top: 14px; color: var(--muted); font-size: 12px; font-weight: 700;
+      display: flex; gap: 18px; flex-wrap: wrap;
+    }
+
+    .panel {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); box-shadow: var(--shadow);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      padding: 22px 26px; margin-bottom: 18px;
+    }
+    .panel h2 {
+      margin: 0 0 12px; font-size: 22px; font-weight: 900; letter-spacing: -.01em;
+    }
+    .panel h3 {
+      margin: 20px 0 8px; font-size: 16px; font-weight: 800;
+    }
+    .panel p {
+      margin: 0 0 12px; line-height: 1.6; font-size: 14.5px;
+    }
+    .panel ul, .panel ol {
+      margin: 0 0 12px; padding-left: 22px; line-height: 1.6; font-size: 14.5px;
+    }
+    .panel li { margin-bottom: 6px; }
+    .panel strong { color: var(--ink); }
+    .panel code {
+      background: rgba(11,18,32,.06);
+      padding: 1px 6px; border-radius: 5px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 13px;
+    }
+    .panel pre {
+      background: rgba(11,18,32,.06);
+      border: 1px solid rgba(11,18,32,.08);
+      border-radius: 12px;
+      padding: 14px 16px;
+      overflow-x: auto;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 12.5px;
+      line-height: 1.5;
+      margin: 0 0 14px;
+    }
+
+    .blunt {
+      background: rgba(220,38,38,.08);
+      border: 1px solid rgba(220,38,38,.20);
+    }
+    .blunt h2 { color: #991b1b; }
+
+    table.data {
+      width: 100%; border-collapse: collapse; margin: 6px 0 16px;
+      font-size: 13.5px; font-variant-numeric: tabular-nums;
+    }
+    table.data th, table.data td {
+      padding: 8px 10px; text-align: left;
+      border-bottom: 1px solid rgba(11,18,32,.08);
+    }
+    table.data th {
+      font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--muted); font-weight: 800;
+      background: rgba(255,255,255,.18);
+    }
+    table.data td.num { text-align: right; font-weight: 700; }
+    table.data tr:last-child td { border-bottom: none; }
+    table.data .neg { color: var(--red); font-weight: 800; }
+    table.data .pos { color: var(--green); font-weight: 800; }
+
+    .callout {
+      background: rgba(56,189,248,.10);
+      border: 1px solid rgba(56,189,248,.25);
+      border-radius: 14px;
+      padding: 14px 18px; margin: 8px 0 16px;
+      font-size: 13.5px; line-height: 1.55;
+    }
+    .callout.warn { background: rgba(245,158,11,.10); border-color: rgba(245,158,11,.30); }
+
+    .toc {
+      background: var(--card2); border: 1px solid var(--border);
+      border-radius: 14px; padding: 14px 18px; margin-bottom: 18px;
+      font-size: 13px;
+    }
+    .toc ol { margin: 6px 0 0; padding-left: 20px; }
+    .toc a { color: var(--ink); text-decoration: none; font-weight: 700; }
+    .toc a:hover { text-decoration: underline; }
+
+    .footer {
+      margin-top: 30px; padding-top: 18px;
+      border-top: 1px solid rgba(11,18,32,.08);
+      font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1.55;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a class="nav-brand" href="/">NQBot LIVE</a>
+  <div class="nav-links">
+    <a href="../scoreboard.html">Scoreboard</a>
+    <a href="../algos.html">Algos</a>
+    <a href="../results.html">Weekly Results</a>
+    <a href="../analysis.html" class="active">Analysis</a>
+    <a href="../downloads.html">Downloads</a>
+    <a href="https://www.youtube.com/channel/UCylD_vJ1etiLUykGp9Gvnbg" target="_blank">YouTube</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <div class="crumbs">
+    <a href="../analysis.html">Analysis</a><span>&rsaquo;</span>Codex Pipeline Forensic Review
+  </div>
+
+  <header class="article-head">
+    <div class="tag-row">
+      <span class="tag review">Forensic Review</span>
+      <span class="tag architecture">Architecture</span>
+      <span class="tag audit">Paper Results</span>
+      <span class="tag date">2026-05-15</span>
+    </div>
+    <h1>Codex Pipeline Forensic Review</h1>
+    <p class="lede">
+      A blunt outside review of the Codex53 / Codex54 / Codex55 main traders and the CodexF / Codex54F / Codex55F fade
+      lanes. Verified against runtime logs, Vanta execution logs, configs, and trade-diary outputs. No code edits, no
+      service restarts &mdash; analysis only.
+    </p>
+    <div class="meta">
+      <span>Window: 2026-04-05 &rarr; 2026-05-15</span>
+      <span>Lanes: 6</span>
+      <span>Records examined: ~400k runtime + ~215k Vanta</span>
+      <span>Mode: paper</span>
+    </div>
+  </header>
+
+  <div class="toc">
+    <strong>Sections</strong>
+    <ol>
+      <li><a href="#verdict">Executive Verdict</a></li>
+      <li><a href="#evidence">Evidence</a></li>
+      <li><a href="#diagnosis">Architecture Diagnosis</a></li>
+      <li><a href="#course">Future Course</a></li>
+      <li><a href="#framework">Decision Framework</a></li>
+      <li><a href="#actions">Immediate Next Actions</a></li>
+    </ol>
+  </div>
+
+  <section class="panel blunt">
+    <h2>Blunt up front</h2>
+    <p>
+      The current Codex pipeline is not a trading agent. It is a four-layer veto stack with an LLM at the top emitting
+      mostly-FLAT opinions, a stalker that only sees pre-filtered near-price ideas, a suspicion gate that fires hard
+      vetoes any time the model defaults to <code>phase="unclear"</code>, and a Vanta layer that re-litigates everything
+      with another participation gate and a 2&ndash;3 point staleness guard. The pre-May-5 version was a money-losing
+      signal-spammer at a ~37% paper win rate. The post-May-5 version replaced it with a money-saving silence machine.
+      Neither is the &ldquo;cunning directional trader&rdquo; the design called for.
+    </p>
+  </section>
+
+  <section class="panel" id="verdict">
+    <h2>1. Executive Verdict</h2>
+    <p>
+      <strong>Functional failure against the stated goal.</strong> The pipeline is partially viable for risk control
+      and not viable for opportunity capture. It avoids the prior loss rate by simply not trading. The architecture is
+      overweight on serial vetoes, underweight on directional planning, and the diary feedback loop only knows about
+      kills &mdash; not about kills-that-should-not-have-been-kills. Continuing with this stack and merely
+      &ldquo;loosening filters&rdquo; will not fix the conceptual problem.
+    </p>
+  </section>
+
+  <section class="panel" id="evidence">
+    <h2>2. Evidence</h2>
+
+    <h3>Volume and recency</h3>
+    <table class="data">
+      <thead><tr><th>Lane</th><th class="num">Runtime lines</th><th>First event</th><th>Last event</th></tr></thead>
+      <tbody>
+        <tr><td>Codex53 trader</td><td class="num">182,329</td><td>2026-04-10</td><td>2026-05-15 11:21</td></tr>
+        <tr><td>Codex54 trader</td><td class="num">189,279</td><td>2026-04-05</td><td>2026-05-15 11:21</td></tr>
+        <tr><td>Codex55 trader</td><td class="num">26,953</td><td>2026-04-23</td><td>2026-05-15 11:21</td></tr>
+        <tr><td>Vanta Codex53</td><td class="num">122,534</td><td>&mdash;</td><td>2026-05-15</td></tr>
+        <tr><td>Vanta Codex54</td><td class="num">79,176</td><td>&mdash;</td><td>2026-05-15</td></tr>
+        <tr><td>Vanta Codex55</td><td class="num">13,839</td><td>&mdash;</td><td>2026-05-15</td></tr>
+        <tr><td>Vanta CodexF</td><td class="num">73</td><td>&mdash;</td><td>2026-05-15</td></tr>
+        <tr><td>Vanta Codex54F</td><td class="num">53</td><td>&mdash;</td><td>2026-05-15</td></tr>
+        <tr><td>Vanta Codex55F</td><td class="num">21</td><td>&mdash;</td><td>2026-05-15</td></tr>
+      </tbody>
+    </table>
+
+    <h3>LLM decision distribution (full history)</h3>
+    <table class="data">
+      <thead><tr><th>Lane</th><th class="num">Total decisions</th><th class="num">FLAT %</th><th class="num">LONG %</th><th class="num">SHORT %</th></tr></thead>
+      <tbody>
+        <tr><td>Codex53</td><td class="num">90,140</td><td class="num">90.6%</td><td class="num">5.3%</td><td class="num">4.1%</td></tr>
+        <tr><td>Codex54</td><td class="num">88,358</td><td class="num">90.6%</td><td class="num">4.9%</td><td class="num">4.5%</td></tr>
+        <tr><td>Codex55</td><td class="num">8,128</td><td class="num">89.6%</td><td class="num">4.7%</td><td class="num">5.8%</td></tr>
+      </tbody>
+    </table>
+    <p>
+      Roughly 9% of polls produce any directional opinion. The prompt biases the model toward FLAT and tells it the
+      diary lesson is that &ldquo;persuasive entries tagged moved_too_soon have been toxic.&rdquo; Recent diary memory
+      after a losing paper run makes FLAT the safer answer for the model on every poll.
+    </p>
+
+    <h3>Daily funnel &mdash; Codex53 (last week)</h3>
+<pre>day        armed  trig  susp  badloc  sigval_fail  ati_sub  fills
+2026-05-08      3     3     0      3            1        1      2
+2026-05-11     49    18     0    381          260       10     10
+2026-05-12    164    54     0    663          381       26     26
+2026-05-13    138    41    14    911          385       21     21
+2026-05-14    223     7    86   1095          398        4      4
+2026-05-15    126     2    14    463          415        0      0
+</pre>
+
+    <h3>Daily funnel &mdash; Codex54 (last week)</h3>
+<pre>day        armed  trig  susp  badloc  sigval_fail  ati_sub  fills
+2026-05-08     37    14     0    195           81       10     19
+2026-05-11     74    26     0    926          141       18     26
+2026-05-12     80    35     0    585          132       12     12
+2026-05-13     75    29     3    817          127       13     13
+2026-05-14    109     4    34    835          163        1      1
+2026-05-15     56     3    14    360          122        1      1
+</pre>
+
+    <h3>Daily funnel &mdash; Codex55 (last week)</h3>
+<pre>day        armed  trig  susp  badloc  sigval_fail  ati_sub  fills
+2026-05-11     31     3     0    138           60        2      2
+2026-05-12     48     5     0    171           69        2      2
+2026-05-13     51    11     1    229           88        4      4
+2026-05-14     35     0     4    135           47        0      0
+2026-05-15     18     0     0     79           43        0      0
+</pre>
+    <p>
+      Theses arm at 100&ndash;200/day; only 0.5&ndash;4% reach a stalker trigger. Codex55 is a smaller-volume clone of
+      Codex54 and is producing 0 fills on the last two days. CodexF (the fade for Codex53) cannot be fed from
+      Codex55 because Codex55 produces almost no qualifying suspicion-blocks.
+    </p>
+
+    <h3>Where attrition happens (Codex53 since 2026-05-08)</h3>
+    <table class="data">
+      <thead><tr><th>Filter stage</th><th class="num">Count</th><th>What kills it</th></tr></thead>
+      <tbody>
+        <tr><td>LLM FLAT</td><td class="num">15,784 / 20,626</td><td>76.5% of polls; the model declines</td></tr>
+        <tr><td>Stalker bad-location (logged each poll)</td><td class="num">3,516</td><td>Thesis alive but price not at value</td></tr>
+        <tr><td><code>signal_validation_failed</code> total</td><td class="num">1,917</td><td><code>entry_too_far</code> (1,074), <code>generic_structure_not_enough</code> (426), <code>counter_bias</code> (266), <code>remembered_resistance/support</code> (113), <code>rr_below_min</code> (38)</td></tr>
+        <tr><td><code>entry_stalk_suspicion_blocked</code></td><td class="num">114</td><td>Hard vetoes from suspicion gate</td></tr>
+        <tr><td><code>ny_no_entry_cutoff_standby</code></td><td class="num">1,312</td><td>NY cutoff 15:30&ndash;20:00 ET</td></tr>
+        <tr><td>Vanta <code>participation_gate:decision_not_allow:BLOCK</code></td><td class="num">1,053</td><td>ATLAS decision packet says don&rsquo;t trade</td></tr>
+        <tr><td>Vanta <code>codex_execution_guard_blocked</code> at &le;3 pts</td><td class="num">21</td><td>Price drifted from planned entry</td></tr>
+        <tr><td>Vanta <code>stale_source_signal</code></td><td class="num">15</td><td>Source signal older than 45s</td></tr>
+        <tr><td><strong>Reached <code>ati_order_submitted</code></strong></td><td class="num"><strong>~86</strong></td><td>&mdash;</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Concrete blocked-trade examples (Codex53, 2026-05-14 ET)</h3>
+<pre>00:06:41 SHORT 29526.75/29528.75&rarr;29517.0   risk=2  reward=9.75  RR=4.9
+         vetoes=[unclear_setup_failed_cross_exam, no_defended_trade_location]
+
+00:43:13 LONG  29578.25/29576.25&rarr;29588.75  risk=2  reward=10.5  RR=5.25
+         vetoes=[unclear_setup_failed_cross_exam, no_defended_trade_location]
+
+00:50:44 LONG  29583.5 /29581.5 &rarr;29593.0   risk=2  reward=9.5   RR=4.75
+         vetoes=[no_defended_trade_location]
+
+00:55:20 SHORT 29579.75/29581.75&rarr;29568.75  risk=2  reward=11.0  RR=5.5
+         vetoes=[unclear_neutral_middle_requires_hard_evidence,
+                 generic_middle_without_extra_confirmation,
+                 unclear_setup_failed_cross_exam,
+                 no_defended_trade_location]
+</pre>
+    <p>
+      These have &ge;4.5 RR with tight 2-pt stops at the band/value zone. They were killed not because the geometry
+      was bad but because the LLM defaulted phase to &ldquo;unclear&rdquo; and didn&rsquo;t volunteer enough free-form
+      trap-language or preferred-structure tags. The gate is taxing the <em>vocabulary</em> of the LLM, not the
+      <em>structure</em> of the setup.
+    </p>
+
+    <h3>Fade lane evidence</h3>
+    <ul>
+      <li><code>codex_fade_router.jsonl</code> since 2026-05-14 20:35 startup: <strong>2 startups, 12 fade signals published, 32 rejected.</strong></li>
+      <li>Reject reasons: 15 <code>setup_location_stale</code> (drift &gt; 3 pt by the time the router built the fade), 15 <code>non_fade_suspicion_block</code> (block was qualified but had no listed &ldquo;qualifying veto&rdquo;), 1 <code>session_fade_limit</code>, 1 <code>missing_geometry</code>.</li>
+      <li>Vanta CodexF: 6 fills total. Vanta Codex54F: 4 fills. Vanta Codex55F: <strong>0 fills</strong> (source never produced qualifying rejections).</li>
+      <li>Shadow stop-entry study: 12 studies armed, 12 entries taken, 60 ratio outcomes recorded. Functional but data-sparse.</li>
+    </ul>
+
+    <h3>Diary outcomes (full history)</h3>
+    <table class="data">
+      <thead><tr><th>Analyst</th><th class="num">Closed trades</th><th class="num">Target</th><th class="num">Stop</th><th class="num">Loss-exit</th><th class="num">Profit-exit</th><th class="num">Win rate</th></tr></thead>
+      <tbody>
+        <tr><td>OpenClaw Codex (53)</td><td class="num">465</td><td class="num">154</td><td class="num">203</td><td class="num">86</td><td class="num">21</td><td class="num neg">37.7%</td></tr>
+        <tr><td>OpenClaw Codex54</td><td class="num">355</td><td class="num">111</td><td class="num">139</td><td class="num">87</td><td class="num">17</td><td class="num neg">36.2%</td></tr>
+        <tr><td>OpenClaw Codex55</td><td class="num">18</td><td class="num">0</td><td class="num">1</td><td class="num">15</td><td class="num">2</td><td class="num neg">11.1%</td></tr>
+      </tbody>
+    </table>
+    <p>
+      Default <code>MIN_RR = 1.15</code> with an RR ladder of 1.25&ndash;2.25. With this ladder a 37% win rate is net
+      losing in any honest reckoning. The skepticism layer added in early May was a rational response to a real loss
+      record &mdash; it then went too far the other way.
+    </p>
+
+    <p>
+      The diary additionally has 487 <code>trade / published_not_executed</code> records, 336 <code>trade / blocked</code>,
+      98 <code>thesis / skipped</code>, and 26 <code>thesis / blocked</code>. <strong>None</strong> of these have
+      post-hoc R-multiple reconstruction &mdash; the diary never asks &ldquo;what would this rejected or unexecuted
+      candidate have done if taken?&rdquo;
+    </p>
+  </section>
+
+  <section class="panel" id="diagnosis">
+    <h2>3. Architecture Diagnosis</h2>
+
+    <h3>What the system actually does</h3>
+<pre>LLM call (90% FLAT)
+  &rarr; If LONG/SHORT: _validate_trade
+       reject if |entry - price| &gt; 25  (kills planned distant entries)
+       reject if RR &lt; 1.15
+       reject if counter_bias
+       reject on location_block_reason (remembered_resistance/support,
+         generic_structure_not_enough)
+  &rarr; Arm value-entry thesis (TTL 1200s)
+  &rarr; Stalker:
+       wait for trigger (lower-band rejection, middle-band pullback,
+         BB-structure boundary, band-pressure reclaim, etc.)
+       if triggered, run suspicion gate
+           hard_vetoes set if phase == "unclear" without explicit
+             cross-exam survival
+           score &ge; 4.0 of 5 pillars required AND zero hard_vetoes
+       if pass, _validate_trade again
+       if pass, per_bot_session_gate.check
+       publish signal
+  &rarr; Vanta polls signal file:
+       participation_gate decision_not_allow &rarr; skip
+       max_source_age 45s &rarr; skip if stale
+       level_confluence 15pt &rarr; skip if missing
+       codex_execution_guard 2pt deviation &rarr; skip if drifted
+       require_consecutive_same_signal = 3
+       min_seconds_between_entries = 600s
+       finally submit ATI order
+</pre>
+
+    <h3>What this system is</h3>
+    <p>
+      A defensive <strong>veto chain</strong>, not a trading agent. There are at least <strong>eight independent
+      reasons</strong> a trade can be killed (model FLAT, main-path validation, location discipline, stalker
+      bad-location, suspicion gate, session gate, participation gate, execution-guard staleness). Any one can kill
+      any candidate. Probability of all eight approving a single setup is, in practice, a few times per day on the
+      best days and zero on bad days.
+    </p>
+
+    <h3>What it should be doing</h3>
+    <p>
+      A directional planner: pick a side per market regime, build a <em>named entry zone</em> (e.g. lower band + EMA20
+      + Asian high pivot 29 580), wait there, and if price reaches it intact, execute. The LLM should do the thesis
+      and zone-naming, deterministic code should do the waiting and triggering, and a single post-mortem layer should
+      ask &ldquo;did the kill prove right?&rdquo; Today the LLM does the thesis <em>and</em> each tick gets a new
+      chance to be vetoed. The stalker is not stalking &mdash; it is reacting to whatever near-price candidate
+      <code>_validate_trade</code> lets through.
+    </p>
+
+    <h3>Specific failure modes</h3>
+    <ol>
+      <li>
+        <strong><code>_validate_trade</code> runs before thesis-arming.</strong> <code>entry_too_far &gt; 25pt</code>
+        kills the LLM&rsquo;s planned-entry intent. This contradicts the thesis-arming prompt that explicitly tells
+        the model to plan distant entries. The prompt says yes; the code says no.
+      </li>
+      <li>
+        <strong>Suspicion-gate hard_vetoes are vocabulary-sensitive.</strong> <code>unclear_setup_failed_cross_exam</code>
+        and <code>no_defended_trade_location</code> fire whenever the LLM doesn&rsquo;t explicitly volunteer
+        trap-language or preferred-structure tags. Sound geometric setups with 5+ RR get killed because the model
+        wrote <code>phase="unclear"</code>.
+      </li>
+      <li>
+        <strong>Codex execution guard at <code>codex_max_entry_deviation_points: 2.0</code></strong> is too tight for
+        the median NQ minute range. Combined with the fade router&rsquo;s 3-point <code>MAX_SETUP_DRIFT_POINTS</code>,
+        signals that pass everything else commonly fail in the 5&ndash;30s between publish and ATI.
+      </li>
+      <li>
+        <strong>Vanta <code>participation_gate</code> is the most prolific kill</strong> (1,053 + 1,202 + 410 since
+        May 8). Most of those are against standby packets, but the volume tells us upstream and downstream gates have
+        near-redundant rejection logic.
+      </li>
+      <li>
+        <strong>Codex55</strong> is functionally a clone of Codex54 with shorter history and ~30% the thesis volume.
+        It produces theses but the absolute fill ceiling is 4 trades on the best day, 0 on the worst.
+      </li>
+      <li>
+        <strong>Fade router qualification list is too narrow.</strong> The most common suspicion-block reason
+        (<code>unclear_setup_failed_cross_exam</code>) is not in <code>QUALIFYING_VETOES</code>, so the majority of
+        rejections never reach the fade lane. Codex55F has produced zero fills since startup; source-side rules
+        starve it.
+      </li>
+      <li>
+        <strong>Diary one-sidedness.</strong> Records what did happen (closed at X, blocked at Y) but never asks what
+        would have happened to blocked candidates. The prompt-memory feedback therefore only reinforces caution.
+      </li>
+    </ol>
+  </section>
+
+  <section class="panel" id="course">
+    <h2>4. Future Course</h2>
+
+    <h3>Recommended path</h3>
+    <p>
+      <strong>Hybrid LLM planner + deterministic execution watcher with mandatory shadow accounting.</strong>
+    </p>
+    <ul>
+      <li>LLM&rsquo;s job once per 5&ndash;15 minutes: declare a directional playbook with a primary and secondary
+        entry zone (price ranges, not single points), planned invalidation level, and target. No per-tick re-vetoing.</li>
+      <li>Deterministic watcher&rsquo;s job continuously: monitor price vs the playbook&rsquo;s named zones, trigger
+        when price reaches a zone with the qualifier the LLM specified (e.g. &ldquo;tap and 3-pt bounce off lower band
+        with VWAP held&rdquo;), submit. No second LLM call required for trigger.</li>
+      <li>Single post-mortem layer: every blocked or rejected candidate is replayed against the next N bars to
+        compute the R-multiple it would have realized. That number, not exhortative text, feeds prompt-memory.</li>
+    </ul>
+
+    <h3>Keep</h3>
+    <ul>
+      <li>LM Studio + Qwen text-only architecture.</li>
+      <li>Vanta as the execution agent (ATI bracket guard, fill detection, time-flatten). Do not rebuild this.</li>
+      <li>Diary schema for closed trades &mdash; the schema is good; the analysis surface is what&rsquo;s lacking.</li>
+      <li>Per-bot session gate concept (RR ladder by trade ordinal).</li>
+      <li>Cross-market context, red-folder news context, kill switches.</li>
+      <li>Fade shadow stop-entry study &mdash; the one piece of &ldquo;what would have happened?&rdquo; replay you
+        already have. Generalize it to all gates.</li>
+    </ul>
+
+    <h3>Remove or sharply curtail</h3>
+    <ul>
+      <li><strong>Suspicion gate</strong> in its current many-hard-vetoes-from-LLM-vocabulary form. Replace with a
+        small set of structural vetoes that fire only on objective conditions.</li>
+      <li><strong><code>_validate_trade</code> running before thesis-arming.</strong> Move validation to the moment
+        the stalker triggers, not the moment the LLM emits.</li>
+      <li><strong><code>codex_max_entry_deviation_points: 2.0</code></strong> as a hard reject. Replace with a
+        slippage adjustment or widen to 5&ndash;8 pts.</li>
+      <li>Overlapping <code>require_consecutive_same_signal: 3</code> (Vanta) plus
+        <code>REQUIRE_CONSECUTIVE_POLLS: 1</code> (trader) plus <code>min_seconds_between_entries: 600s</code> &mdash;
+        pick one.</li>
+      <li>The diary memory string telling the model &ldquo;your aggressive entries were toxic.&rdquo; Replace with
+        actual R-multiple statistics per regime.</li>
+    </ul>
+
+    <h3>Rebuild</h3>
+    <ul>
+      <li><strong>Decision logging.</strong> Tag every kill with <code>was_correct_kill = bool</code> populated by
+        the replay layer.</li>
+      <li><strong>Codex55 lane.</strong> Either fold into Codex54 with a config flag, or give it a meaningfully
+        different prompt. As a clone it is paying compute for almost nothing.</li>
+      <li><strong>Fade lane qualification.</strong> Broaden <code>QUALIFYING_VETOES</code> to match the
+        actually-most-common vetoes, or run fade routers in shadow-only until source quality improves.</li>
+    </ul>
+  </section>
+
+  <section class="panel" id="framework">
+    <h2>5. Decision Framework</h2>
+    <p>A new architecture is justified only if <strong>all</strong> of these are true:</p>
+    <ol>
+      <li>Pre-deployment replay against the last 30 trading days produces a win rate &ge; 50% at the RR ladder used,
+        on &ge; 200 simulated trades.</li>
+      <li>The system can produce 5&ndash;15 executable signals per active session on average days (currently &lt; 5
+        in best week, 0 in worst).</li>
+      <li>Median time from &ldquo;thesis armed&rdquo; to &ldquo;first eligible trigger&rdquo; is &le; 8 minutes.</li>
+      <li>Independent veto layers per candidate &le; 3 (currently 8).</li>
+      <li>Every &ldquo;skip&rdquo; event carries enough geometry to be replayed; a nightly job actually replays
+        them.</li>
+      <li>Codex execution guard staleness rejection &lt; 10% of submitted signals.</li>
+      <li>Fade lane has independent qualification logic that does not depend on a specific veto vocabulary in the
+        source pipeline.</li>
+    </ol>
+    <p>If any of (1)&ndash;(4) cannot be met in design, the next version is the wrong next version.</p>
+  </section>
+
+  <section class="panel" id="actions">
+    <h2>6. Immediate Next Actions (analysis-only)</h2>
+    <ol>
+      <li>Replay <code>published_not_executed</code> and <code>blocked</code> candidates against bar history for
+        2026-05-01 &rarr; 2026-05-15. Compute realized R-multiple per candidate.</li>
+      <li>Cross-tabulate each suspicion-gate hard_veto reason against subsequent 30-min directional move.</li>
+      <li>Inventory every <code>entry_stalk_rejected_bad_location</code> while a thesis is armed: how often did price
+        reach the planned entry within TTL but fail the stalker&rsquo;s extra bounce/boundary requirements?</li>
+      <li>Audit Codex55 vs Codex54 prompts and configs side-by-side. If identical, Codex55 is paying compute for
+        nothing.</li>
+      <li>Audit Vanta <code>participation_gate</code> decisions. Determine how many BLOCKs were against real entry
+        signals vs standby packets.</li>
+      <li>Move CodexF / Codex54F / Codex55F to shadow-only until source quality is restored. Keep the fade router
+        gathering data; stop burning Vanta sessions on a 0&ndash;6-fill-per-lane signal base.</li>
+      <li>Stop the &ldquo;diary-as-warning&rdquo; prompt injection in the next prompt revision. Replace with a
+        structured R-multiple summary per regime.</li>
+      <li>Pause Codex55 live polling until the prompt audit determines it is doing anything Codex54 isn&rsquo;t.</li>
+      <li>Build a single read-only dashboard over the existing JSONL showing per lane per hour: theses armed,
+        triggers, vetoes by reason, Vanta submits, fills, R-multiple. Without this, every future tuning decision is
+        guesswork.</li>
+      <li>Decide before further work which path you want. The evidence supports <em>hybrid LLM planner +
+        deterministic execution watcher</em> with the suspicion gate downgraded to structural-only.</li>
+    </ol>
+  </section>
+
+  <section class="panel">
+    <h2>Net assessment</h2>
+    <p>
+      The system is currently optimizing for &ldquo;avoid the last loss type&rdquo; rather than &ldquo;execute the
+      next good idea.&rdquo; A 90% FLAT rate from a model whose prompt-memory tells it &ldquo;your aggressive entries
+      were toxic&rdquo; combined with eight independent vetoes is not a trading agent. Fix the asymmetry &mdash;
+      measure what the gates kill, not just that they fired &mdash; before any more code changes.
+    </p>
+  </section>
+
+  <div class="footer">
+    Findings reference paper-trading sessions only. No live capital was at risk in any of the lanes analyzed. Specific
+    bot names, win rates, and architectural details are published deliberately as part of the NQBot open-research
+    posture &mdash; redacting them would defeat the purpose of an audit.
+  </div>
+
+</div>
+
+</body>
+</html>
