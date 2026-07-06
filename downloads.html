@@ -156,6 +156,17 @@
             font-size: 0.8rem;
             margin-left: 10px;
         }
+        .soon-badge {
+            display: inline-block;
+            background: #5a4a1a;
+            color: #ffd966;
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            margin-left: 10px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
         .expand-btn {
             background: none;
             border: 1px solid #444;
@@ -331,6 +342,7 @@
       <a href="/" class="nav-brand">NQBot LIVE</a>
       <div class="nav-links">
         <a href="scoreboard.html">Scoreboard</a>
+        <a href="eval-arena.html">Eval Arena</a>
         <a href="algos.html">Algos</a>
         <a href="results.html">Weekly Results</a>
         <a href="analysis.html">Analysis</a>
@@ -346,6 +358,36 @@
             <p class="subtitle">Open-source trading tools by PhillyFrank</p>
             <span class="license-badge">MIT License - Free Forever</span>
         </header>
+
+        <!-- Strategies -->
+        <section class="section" id="strategies">
+            <h2>Strategies</h2>
+            <div class="indicator-grid">
+
+                <!-- Strategy Downloads - Coming Soon -->
+                <div class="indicator-card" id="strategy-downloads">
+                    <div class="screenshot-gallery">
+                        <img src="images/strategies-download-under-construction.webp" alt="Strategies Download - Under Construction" onclick="openLightbox(this.src)">
+                    </div>
+                    <div class="card-content">
+                        <h3>NT8 Strategy Downloads <span class="soon-badge">Coming Soon</span></h3>
+                        <p class="tagline">"The same strategies competing in the Eval Arena - headed to the Shed."</p>
+                        <p>The trading strategies you see battling through simulated $50K evaluations on the live
+                           broadcast are built as native NinjaTrader 8 strategy files. We're preparing them for
+                           free download right here - once the first strategies finish their arena runs, this
+                           section opens up.</p>
+                        <ul class="features">
+                            <li>Native NinjaScript strategy files - no external dependencies</li>
+                            <li>The exact logic competing on the Eval Arena scoreboard</li>
+                            <li>Session-aware: Asian, European, and US variants</li>
+                            <li>Free and open source, like everything else in the Shed</li>
+                        </ul>
+                        <a href="eval-arena.html" class="download-btn">Watch Them Compete in the Eval Arena</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
 
         <!-- Session & Time Tools -->
         <section class="section">

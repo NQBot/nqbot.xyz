@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Eval Arena - NQBot LIVE</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --card: rgba(255,255,255,.18);
+      --card2: rgba(255,255,255,.12);
+      --border: rgba(255,255,255,.25);
+      --shadow: 0 18px 45px rgba(0,0,0,.28);
+      --radius: 22px;
+      --green: #16a34a;
+      --green-soft: rgba(22,163,74,.10);
+      --red: #dc2626;
+      --red-soft: rgba(220,38,38,.06);
+      --blue: #38bdf8;
+      --amber: #f59e0b;
+      --amber-soft: rgba(245,158,11,.12);
+      --muted: rgba(11,18,32,.60);
+      --ink: #0b1220;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--ink);
+      overflow-x: hidden;
+      background:
+        radial-gradient(1200px 700px at 20% 15%, rgba(255,255,255,.75) 0%, rgba(255,255,255,0) 60%),
+        radial-gradient(900px 600px at 85% 20%, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 60%),
+        radial-gradient(900px 650px at 70% 85%, rgba(255,255,255,.40) 0%, rgba(255,255,255,0) 60%),
+        linear-gradient(135deg, #7ee8ff 0%, #a6ffcb 35%, #ffe29a 70%, #ffb3d8 100%);
+    }
+    body::before {
+      content: ""; position: fixed; inset: 0; pointer-events: none; opacity: .18;
+      background-image:
+        linear-gradient(rgba(255,255,255,.55) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.55) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(circle at 50% 25%, rgba(0,0,0,1), rgba(0,0,0,.55) 55%, rgba(0,0,0,0) 100%);
+    }
+
+    /* Nav (matches site) */
+    .site-nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 24px;
+      background: rgba(255,255,255,.45);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,.35);
+    }
+    .nav-brand { font-weight: 900; font-size: 18px; color: var(--ink); text-decoration: none; }
+    .nav-links { display: flex; gap: 6px; flex-wrap: wrap; }
+    .nav-links a {
+      padding: 7px 14px; border-radius: 999px; font-weight: 700; font-size: 13px;
+      color: var(--ink); text-decoration: none; transition: background .15s;
+    }
+    .nav-links a:hover { background: rgba(255,255,255,.35); }
+    .nav-links a.active { background: rgba(11,18,32,.08); font-weight: 800; }
+
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 22px 22px 80px; }
+
+    /* HERO */
+    .hero {
+      display: grid; grid-template-columns: 1.4fr 1fr; gap: 18px;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); box-shadow: var(--shadow);
+      padding: 26px 28px;
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      margin-bottom: 14px;
+    }
+    .hero-kicker {
+      margin: 0 0 4px; font-size: 14px; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase; color: var(--muted);
+    }
+    .hero h1 { margin: 0 0 10px; font-size: 40px; font-weight: 900; letter-spacing: -.02em; }
+    .hero-sub { margin: 0; font-size: 15px; color: var(--muted); font-weight: 600; max-width: 560px; }
+    .hero-stats { display: flex; gap: 22px; margin-top: 18px; flex-wrap: wrap; }
+    .hero-stat .label {
+      font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--muted); font-weight: 700;
+    }
+    .hero-stat .value {
+      font-size: 26px; font-weight: 800; font-variant-numeric: tabular-nums; margin-top: 2px;
+    }
+    .hero-stat .value.pos { color: var(--green); }
+    .hero-stat .value.neg { color: var(--red); }
+    .hero-right {
+      background: var(--card2); border-radius: 16px; border: 1px solid var(--border);
+      padding: 16px 18px; display: flex; flex-direction: column; gap: 10px; justify-content: center;
+    }
+    .rule-line { display: flex; gap: 10px; align-items: baseline; font-size: 13px; }
+    .rule-line .rule-label {
+      flex: 0 0 130px; font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--muted); font-weight: 700;
+    }
+    .rule-line .rule-value { font-weight: 800; font-variant-numeric: tabular-nums; }
+
+    /* Explainer */
+    .explain {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); box-shadow: var(--shadow);
+      padding: 22px 26px; margin-bottom: 14px;
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    }
+    .explain h2 { margin: 0 0 10px; font-size: 20px; font-weight: 900; }
+    .explain p { margin: 0 0 12px; font-size: 14px; line-height: 1.65; color: rgba(11,18,32,.78); }
+    .explain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 14px; }
+    .explain-card {
+      background: var(--card2); border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px;
+    }
+    .explain-card h3 { margin: 0 0 6px; font-size: 13px; font-weight: 800; }
+    .explain-card p { margin: 0; font-size: 12.5px; color: var(--muted); line-height: 1.55; }
+
+    /* Strategies CTA */
+    .cta {
+      display: grid; grid-template-columns: 220px 1fr; gap: 20px; align-items: center;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); box-shadow: var(--shadow);
+      padding: 18px 22px; margin-bottom: 14px;
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    }
+    .cta img { width: 100%; border-radius: 12px; border: 1px solid var(--border); display: block; }
+    .cta h2 { margin: 0 0 6px; font-size: 18px; font-weight: 900; }
+    .cta p { margin: 0 0 12px; font-size: 13.5px; color: rgba(11,18,32,.75); line-height: 1.6; }
+    .cta-btn {
+      display: inline-block; background: var(--ink); color: #fff; text-decoration: none;
+      font-weight: 800; font-size: 13px; padding: 10px 20px; border-radius: 999px;
+      transition: transform .15s, box-shadow .15s;
+    }
+    .cta-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(11,18,32,.25); }
+    .soon-badge {
+      display: inline-block; background: var(--amber-soft); color: #92600a;
+      border: 1px solid rgba(245,158,11,.35);
+      font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase;
+      padding: 3px 10px; border-radius: 999px; margin-left: 8px; vertical-align: middle;
+    }
+
+    /* Table */
+    .board {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); box-shadow: var(--shadow);
+      padding: 18px 22px 22px;
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    }
+    .board-head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+    .board-head h2 { margin: 0; font-size: 20px; font-weight: 900; }
+    .freshness { font-size: 12px; color: var(--muted); font-weight: 600; }
+    .table-scroll { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    thead th {
+      text-align: left; font-size: 10.5px; letter-spacing: .09em; text-transform: uppercase;
+      color: var(--muted); font-weight: 800; padding: 8px 10px;
+      border-bottom: 1px solid rgba(11,18,32,.14);
+      white-space: nowrap;
+    }
+    thead th.num, td.num { text-align: right; font-variant-numeric: tabular-nums; }
+    tbody td { padding: 8px 10px; border-bottom: 1px solid rgba(11,18,32,.07); white-space: nowrap; }
+    tbody tr:hover { background: rgba(255,255,255,.28); }
+    .strat { font-weight: 800; }
+    .acct { color: var(--muted); font-size: 12px; }
+    .attempt-chip {
+      display: inline-block; background: rgba(11,18,32,.06); border-radius: 999px;
+      font-size: 11px; font-weight: 700; padding: 2px 9px;
+    }
+    .status { font-weight: 800; font-size: 12px; letter-spacing: .03em; }
+    .st-green { color: var(--green); }
+    .st-yellow { color: #b45309; }
+    .st-red { color: var(--red); }
+    .st-grey { color: var(--muted); }
+    .st-white { color: var(--ink); }
+    .pf-pass { color: var(--green); font-weight: 800; }
+    .pf-fail { color: var(--red); font-weight: 800; }
+    .pct-bar {
+      display: inline-block; width: 56px; height: 6px; border-radius: 999px;
+      background: rgba(11,18,32,.10); vertical-align: middle; margin-left: 8px; overflow: hidden;
+    }
+    .pct-fill { display: block; height: 100%; border-radius: 999px; background: var(--green); }
+    .neg-money { color: var(--red); }
+    .pos-money { color: var(--green); }
+
+    .note {
+      margin-top: 16px; background: rgba(11,18,32,.04); border: 1px solid rgba(11,18,32,.08);
+      border-radius: 12px; padding: 12px 16px; font-size: 12px; color: var(--muted); line-height: 1.6;
+    }
+
+    .fatal {
+      padding: 30px; text-align: center; color: var(--muted); font-weight: 600; font-size: 14px;
+    }
+
+    footer { text-align: center; margin-top: 34px; font-size: 12px; color: var(--muted); }
+    footer a { color: var(--ink); }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .explain-grid { grid-template-columns: 1fr; }
+      .cta { grid-template-columns: 1fr; }
+      .cta img { max-width: 320px; }
+      .hero h1 { font-size: 30px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="site-nav">
+    <a href="/" class="nav-brand">NQBot LIVE</a>
+    <div class="nav-links">
+      <a href="scoreboard.html">Scoreboard</a>
+      <a href="eval-arena.html" class="active">Eval Arena</a>
+      <a href="algos.html">Algos</a>
+      <a href="results.html">Weekly Results</a>
+      <a href="analysis.html">Analysis</a>
+      <a href="downloads.html">Downloads</a>
+      <a href="https://www.youtube.com/channel/UCylD_vJ1etiLUykGp9Gvnbg" target="_blank">YouTube</a>
+    </div>
+  </nav>
+
+  <div class="wrap">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-left">
+        <p class="hero-kicker">Simulated Prop-Firm Gauntlet</p>
+        <h1>Eval Arena</h1>
+        <p class="hero-sub">Every algo on the broadcast gets its own simulated $50,000 evaluation account
+          and has to earn its way out — pass the profit target without blowing the drawdown, or reset and try again.</p>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="label">Strategies</div>
+            <div class="value" id="stat-accounts">--</div>
+          </div>
+          <div class="hero-stat">
+            <div class="label">Passes</div>
+            <div class="value pos" id="stat-passes">--</div>
+          </div>
+          <div class="hero-stat">
+            <div class="label">Fails</div>
+            <div class="value neg" id="stat-fails">--</div>
+          </div>
+          <div class="hero-stat">
+            <div class="label">Pass Rate</div>
+            <div class="value" id="stat-passrate">--</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="rule-line"><span class="rule-label">Account Size</span><span class="rule-value" id="rule-size">$50,000 (simulated)</span></div>
+        <div class="rule-line"><span class="rule-label">Pass Target</span><span class="rule-value" id="rule-target">$53,000</span></div>
+        <div class="rule-line"><span class="rule-label">Drawdown</span><span class="rule-value">Trailing liquidation line</span></div>
+        <div class="rule-line"><span class="rule-label">Daily Halt</span><span class="rule-value">Down day stops the strategy until tomorrow</span></div>
+        <div class="rule-line"><span class="rule-label">On Pass / Fail</span><span class="rule-value">Attempt is logged, account resets</span></div>
+      </div>
+    </section>
+
+    <!-- EXPLAINER -->
+    <section class="explain">
+      <h2>What is the Eval Arena?</h2>
+      <p>
+        Prop-firm evaluations are how real traders earn funded accounts: grow a $50,000 account by a set profit
+        target without ever letting the balance fall below a liquidation line that trails your best equity.
+        The Eval Arena runs that exact gauntlet — but the contestants are our trading algorithms, and the money
+        is entirely simulated. Each strategy from the live broadcast is assigned its own arena account and
+        trades it 23 hours a day, 5 days a week, under the same rules a human would face.
+      </p>
+      <p>
+        No cherry-picking, no do-overs: outcomes are scored by deterministic replay of the actual NQ price tape,
+        so every strategy is judged against the same market. When a strategy passes, it goes on the record and
+        starts a fresh attempt. When it blows the drawdown, that goes on the record too. Over time the arena
+        tells us — and you — which strategies could actually survive a funded-account evaluation, and which
+        just look good on a backtest.
+      </p>
+      <div class="explain-grid">
+        <div class="explain-card">
+          <h3>Shadow Balance</h3>
+          <p>The strategy's current simulated account balance on this attempt. It starts at $50,000 and every
+             simulated fill, win or lose, moves it — exactly like a real eval account statement.</p>
+        </div>
+        <div class="explain-card">
+          <h3>To Target</h3>
+          <p>Dollars remaining between the shadow balance and the $53,000 pass line. When this hits zero,
+             the strategy officially passes the attempt.</p>
+        </div>
+        <div class="explain-card">
+          <h3>Pass / Fail Record</h3>
+          <p>Completed attempts only. A pass means the target was reached; a fail means the trailing
+             liquidation line was hit. In-progress attempts don't count until they finish.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- STRATEGIES CTA -->
+    <section class="cta">
+      <img src="images/strategies-download-under-construction.webp" alt="Strategies Download - Under Construction">
+      <div>
+        <h2>Run These Strategies Yourself <span class="soon-badge">Coming Soon</span></h2>
+        <p>
+          The strategies competing in the arena are built as native NinjaTrader 8 strategy files, and we're
+          getting them ready for free download in Philly Frank's Indicator Shed — the same place you'll find
+          our free NT8 indicators and add-ons. Downloads open once the first strategies finish their arena runs.
+        </p>
+        <a class="cta-btn" href="downloads.html#strategies">Visit the Indicator Shed</a>
+      </div>
+    </section>
+
+    <!-- SCOREBOARD -->
+    <section class="board">
+      <div class="board-head">
+        <h2>Arena Scoreboard</h2>
+        <span class="freshness" id="freshness">Loading snapshot...</span>
+      </div>
+      <div class="table-scroll">
+        <table id="arena-table">
+          <thead>
+            <tr>
+              <th>Strategy</th>
+              <th>Status</th>
+              <th class="num">Attempt</th>
+              <th class="num">Shadow Balance</th>
+              <th class="num">To Target</th>
+              <th class="num">Record (P-F)</th>
+              <th class="num">Pass %</th>
+            </tr>
+          </thead>
+          <tbody id="arena-body">
+            <tr><td colspan="7" class="fatal">Loading...</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note">
+        <strong>Status legend:</strong> IN SESSION strategies are inside their assigned trading window;
+        OUT OF SESSION strategies are waiting for their window to open; HALTED strategies hit the daily
+        loss brake and sit out until the next trading day.
+        <br><br>
+        <strong>Disclaimer:</strong> The Eval Arena is a fully simulated exercise for educational and
+        entertainment purposes. All accounts, balances, and outcomes are simulated — no real money is traded
+        and no real evaluation firm is involved. Nothing on this page is trading or investment advice.
+        Trading futures involves substantial risk of loss.
+      </div>
+    </section>
+
+    <footer>
+      <p>NQBot LIVE | <a href="index.html">Home</a> | <a href="downloads.html">Indicator Shed</a></p>
+    </footer>
+  </div>
+
+  <script>
+    const fmtMoney = (v) => {
+      if (v === null || v === undefined || isNaN(v)) return '--';
+      const sign = v < 0 ? '-' : '';
+      return sign + '$' + Math.abs(v).toLocaleString('en-US', { maximumFractionDigits: 0 });
+    };
+
+    const statusClass = (color) => ({
+      green: 'st-green', yellow: 'st-yellow', red: 'st-red', grey: 'st-grey', white: 'st-white'
+    }[color] || 'st-white');
+
+    const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[c]));
+
+    async function loadJSON(url) {
+      const r = await fetch(url, { cache: 'no-store' });
+      if (!r.ok) throw new Error(url + ' -> HTTP ' + r.status);
+      return r.json();
+    }
+
+    function renderFatal(msg) {
+      document.getElementById('arena-body').innerHTML =
+        '<tr><td colspan="7" class="fatal">' + esc(msg) + '</td></tr>';
+      document.getElementById('freshness').textContent = 'Snapshot unavailable';
+    }
+
+    function freshnessText(updatedIso) {
+      if (!updatedIso) return 'Snapshot time unknown';
+      const then = new Date(updatedIso);
+      if (isNaN(then)) return 'Snapshot time unknown';
+      const mins = Math.max(0, Math.round((Date.now() - then.getTime()) / 60000));
+      if (mins < 2) return 'Updated moments ago';
+      if (mins < 90) return 'Updated ' + mins + ' min ago';
+      const hrs = Math.round(mins / 60);
+      if (hrs < 36) return 'Updated ' + hrs + ' hr ago';
+      return 'Updated ' + then.toLocaleString();
+    }
+
+    function render(data) {
+      const rows = Array.isArray(data.rows) ? data.rows : [];
+      const winLevel = Number(data.win_level) || 53000;
+
+      let passes = 0, fails = 0;
+      for (const r of rows) {
+        passes += Number(r.official_passes ?? r.passes ?? 0) || 0;
+        fails += Number(r.official_fails ?? r.fails ?? 0) || 0;
+      }
+      const attempts = passes + fails;
+      document.getElementById('stat-accounts').textContent = rows.length;
+      document.getElementById('stat-passes').textContent = passes;
+      document.getElementById('stat-fails').textContent = fails;
+      document.getElementById('stat-passrate').textContent =
+        attempts > 0 ? Math.round((passes / attempts) * 100) + '%' : '--';
+      document.getElementById('rule-target').textContent = fmtMoney(winLevel);
+      if (data.account_size) {
+        document.getElementById('rule-size').textContent = '$' + esc(data.account_size) + ' (simulated)';
+      }
+      document.getElementById('freshness').textContent = freshnessText(data.updated);
+
+      const body = document.getElementById('arena-body');
+      if (!rows.length) {
+        renderFatal('No arena data in the current snapshot.');
+        return;
+      }
+
+      // Sort: most proven records first, then closest to target
+      const sorted = [...rows].sort((a, b) => {
+        const ap = Number(a.official_passes ?? 0), bp = Number(b.official_passes ?? 0);
+        if (bp !== ap) return bp - ap;
+        const at = Number(a.to_target ?? Infinity), bt = Number(b.to_target ?? Infinity);
+        return at - bt;
+      });
+
+      body.innerHTML = sorted.map(r => {
+        const p = Number(r.official_passes ?? 0) || 0;
+        const f = Number(r.official_fails ?? 0) || 0;
+        const att = p + f;
+        const pct = att > 0 ? Math.round((p / att) * 100) : null;
+        const bal = Number(r.shadow_balance);
+        const toT = Number(r.to_target);
+        const statusLabel = (r.display_status || r.status || '--').replace(/_/g, ' ');
+        return `<tr>
+          <td><span class="strat">${esc(r.strategy)}</span><br><span class="acct">${esc(r.account)}</span></td>
+          <td><span class="status ${statusClass(r.display_color)}">${esc(statusLabel)}</span></td>
+          <td class="num"><span class="attempt-chip">#${esc(r.attempt ?? '--')}</span></td>
+          <td class="num ${isNaN(bal) ? '' : (bal >= 50000 ? 'pos-money' : 'neg-money')}">${fmtMoney(bal)}</td>
+          <td class="num">${fmtMoney(toT)}</td>
+          <td class="num"><span class="pf-pass">${p}</span> - <span class="pf-fail">${f}</span></td>
+          <td class="num">${pct === null ? '<span class="acct">--</span>'
+            : pct + '%<span class="pct-bar"><span class="pct-fill" style="width:' + pct + '%"></span></span>'}</td>
+        </tr>`;
+      }).join('');
+    }
+
+    (async () => {
+      try {
+        const data = await loadJSON('eval_arena_snapshot.json');
+        render(data);
+      } catch (e) {
+        if (location.protocol === 'file:') {
+          renderFatal('This page reads JSON snapshots over fetch(), which browsers block on file:// URLs. ' +
+            'Serve the folder over HTTP to preview locally.');
+        } else {
+          renderFatal('Could not load the arena snapshot: ' + e.message);
+        }
+      }
+    })();
+  </script>
+</body>
+</html>
