@@ -114,6 +114,28 @@
     }
     .explain-card h3 { margin: 0 0 6px; font-size: 13px; font-weight: 800; }
     .explain-card p { margin: 0; font-size: 12.5px; color: var(--muted); line-height: 1.55; }
+    .color-legend {
+      display: flex; flex-wrap: wrap; gap: 8px 10px; align-items: center;
+      background: var(--card2); border: 1px solid var(--border); border-radius: 14px;
+      padding: 12px 16px; margin-top: 12px;
+    }
+    .color-legend .legend-title {
+      flex: 1 1 100%; font-size: 13px; font-weight: 800; margin-bottom: 2px;
+    }
+    .legend-chip {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(255,255,255,.35); border: 1px solid rgba(11,18,32,.10);
+      border-radius: 999px; padding: 5px 12px; font-size: 12px; font-weight: 700;
+    }
+    .legend-dot {
+      width: 11px; height: 11px; border-radius: 50%; display: inline-block;
+      border: 1px solid rgba(11,18,32,.25);
+    }
+    .dot-green { background: var(--green); }
+    .dot-red { background: var(--red); }
+    .dot-yellow { background: var(--amber); }
+    .dot-white { background: #ffffff; }
+    .dot-grey { background: #94a3b8; }
 
     /* Strategies CTA */
     .cta {
@@ -208,10 +230,7 @@
   <nav class="site-nav">
     <a href="/" class="nav-brand">NQBot LIVE</a>
     <div class="nav-links">
-      <a href="scoreboard.html">Scoreboard</a>
       <a href="eval-arena.html" class="active">Eval Arena</a>
-      <a href="algos.html">Algos</a>
-      <a href="results.html">Weekly Results</a>
       <a href="analysis.html">Analysis</a>
       <a href="downloads.html">Downloads</a>
       <a href="https://www.youtube.com/channel/UCylD_vJ1etiLUykGp9Gvnbg" target="_blank">YouTube</a>
@@ -239,10 +258,6 @@
           <div class="hero-stat">
             <div class="label">Fails</div>
             <div class="value neg" id="stat-fails">--</div>
-          </div>
-          <div class="hero-stat">
-            <div class="label">Pass Rate</div>
-            <div class="value" id="stat-passrate">--</div>
           </div>
         </div>
       </div>
@@ -289,6 +304,14 @@
              liquidation line was hit. In-progress attempts don't count until they finish.</p>
         </div>
       </div>
+      <div class="color-legend">
+        <span class="legend-title">Reading the colors — same code as the Chart Director scoreboard on the live channel:</span>
+        <span class="legend-chip"><span class="legend-dot dot-green"></span>Green = Pass</span>
+        <span class="legend-chip"><span class="legend-dot dot-red"></span>Red = Fail</span>
+        <span class="legend-chip"><span class="legend-dot dot-yellow"></span>Yellow = Halted</span>
+        <span class="legend-chip"><span class="legend-dot dot-white"></span>White = Active</span>
+        <span class="legend-chip"><span class="legend-dot dot-grey"></span>Grey = Inactive</span>
+      </div>
     </section>
 
     <!-- STRATEGIES CTA -->
@@ -330,9 +353,12 @@
         </table>
       </div>
       <div class="note">
-        <strong>Status legend:</strong> IN SESSION strategies are inside their assigned trading window;
-        OUT OF SESSION strategies are waiting for their window to open; HALTED strategies hit the daily
-        loss brake and sit out until the next trading day.
+        <strong>Status colors</strong> follow the Chart Director scoreboard on the live channel:
+        <span class="st-green" style="font-weight:800;">green = pass</span>,
+        <span class="st-red" style="font-weight:800;">red = fail</span>,
+        <span class="st-yellow" style="font-weight:800;">yellow = halted</span> (daily loss brake — sidelined until the next trading day),
+        <strong>white = active</strong> (inside its trading window), and
+        <span class="st-grey" style="font-weight:800;">grey = inactive</span> (waiting for its session window to open).
         <br><br>
         <strong>Disclaimer:</strong> The Eval Arena is a fully simulated exercise for educational and
         entertainment purposes. All accounts, balances, and outcomes are simulated — no real money is traded
@@ -394,12 +420,9 @@
         passes += Number(r.official_passes ?? r.passes ?? 0) || 0;
         fails += Number(r.official_fails ?? r.fails ?? 0) || 0;
       }
-      const attempts = passes + fails;
       document.getElementById('stat-accounts').textContent = rows.length;
       document.getElementById('stat-passes').textContent = passes;
       document.getElementById('stat-fails').textContent = fails;
-      document.getElementById('stat-passrate').textContent =
-        attempts > 0 ? Math.round((passes / attempts) * 100) + '%' : '--';
       document.getElementById('rule-target').textContent = fmtMoney(winLevel);
       if (data.account_size) {
         document.getElementById('rule-size').textContent = '$' + esc(data.account_size) + ' (simulated)';
