@@ -1,6 +1,6 @@
 {
   "session": "Asian",
-  "timestamp": "2026-07-08T22:41:37.001832+00:00",
+  "timestamp": "2026-07-08T22:43:39.598444+00:00",
   "trading_day": "2026-07-09",
   "reset_start_utc": "2026-07-08T21:00:00+00:00",
   "tracking_since": "2026-02-15",
@@ -1091,12 +1091,12 @@
   "pnl_stale": false,
   "pnl_unavailable_reason": null,
   "pnl_health": {
-    "timestamp": "2026-07-08T22:41:37.001832+00:00",
+    "timestamp": "2026-07-08T22:43:39.598444+00:00",
     "endpoint": "http://127.0.0.1:8765",
     "available": true,
     "reason": null,
-    "server_timestamp": "2026-07-08T22:41:36.9840502Z",
-    "last_success_at": "2026-07-08T22:41:37.001832+00:00",
+    "server_timestamp": "2026-07-08T22:43:39.5600516Z",
+    "last_success_at": "2026-07-08T22:43:39.598444+00:00",
     "scoreboard_state_age_seconds": 0.0,
     "account_count": 35,
     "errors": [],
