@@ -1,6 +1,6 @@
 {
   "session": "Gap",
-  "timestamp": "2026-07-08T20:52:31.020609+00:00",
+  "timestamp": "2026-07-08T20:54:35.112428+00:00",
   "trading_day": "2026-07-08",
   "reset_start_utc": "2026-07-07T21:00:00+00:00",
   "tracking_since": "2026-02-15",
@@ -1090,12 +1090,12 @@
   "pnl_stale": false,
   "pnl_unavailable_reason": null,
   "pnl_health": {
-    "timestamp": "2026-07-08T20:52:31.020609+00:00",
+    "timestamp": "2026-07-08T20:54:35.112428+00:00",
     "endpoint": "http://127.0.0.1:8765",
     "available": true,
     "reason": null,
-    "server_timestamp": "2026-07-08T20:52:30.8061650Z",
-    "last_success_at": "2026-07-08T20:52:31.020609+00:00",
+    "server_timestamp": "2026-07-08T20:54:34.9494799Z",
+    "last_success_at": "2026-07-08T20:54:35.112428+00:00",
     "scoreboard_state_age_seconds": 0.0,
     "account_count": 35,
     "errors": [],
