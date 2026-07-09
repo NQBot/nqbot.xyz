@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-07-09T01:57:11.847067+00:00",
+  "timestamp": "2026-07-09T01:59:16.684210+00:00",
   "session": "Asian",
   "price": 0,
   "summary": {
@@ -7,8 +7,8 @@
     "active_algos": 1,
     "open_trades": 1,
     "trades_today": 29,
-    "net_pnl": 3682.0,
-    "net_pnl_pts": 3682.0,
+    "net_pnl": 3812.0,
+    "net_pnl_pts": 3812.0,
     "wins": 0,
     "losses": 0,
     "win_rate": 0.0,
@@ -30,7 +30,7 @@
       "trade_id": null,
       "signal_id": null,
       "entry_price_source": null,
-      "unrealized_pnl": 2158.32,
+      "unrealized_pnl": 2288.32,
       "duration": ""
     }
   ],
@@ -148,10 +148,10 @@
         "official_pass_pct": 0.0,
         "quarantined_outcomes": 1,
         "trades": 7,
-        "pnl": 2158.32,
-        "pnl_display": "+2158.32",
-        "balance": 51235.88,
-        "balance_display": "51,236",
+        "pnl": 2288.32,
+        "pnl_display": "+2288.32",
+        "balance": 51375.88,
+        "balance_display": "51,376",
         "pnl_source_present": true,
         "pnl_source_status": "ok",
         "is_bot": false
