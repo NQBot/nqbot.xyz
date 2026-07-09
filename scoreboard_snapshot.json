@@ -1,14 +1,14 @@
 {
-  "timestamp": "2026-07-09T02:23:59.141358+00:00",
+  "timestamp": "2026-07-09T02:26:04.954614+00:00",
   "session": "Asian",
   "price": 0,
   "summary": {
     "total_algos": 25,
-    "active_algos": 1,
-    "open_trades": 1,
+    "active_algos": 0,
+    "open_trades": 0,
     "trades_today": 32,
-    "net_pnl": 3075.84,
-    "net_pnl_pts": 3075.84,
+    "net_pnl": 2446.48,
+    "net_pnl_pts": 2446.48,
     "wins": 0,
     "losses": 0,
     "win_rate": 0.0,
@@ -17,23 +17,7 @@
     "max_drawdown": 0.0,
     "max_drawdown_time": null
   },
-  "active_trades": [
-    {
-      "algo_id": "donchian_breakout_B_asian",
-      "name": "Donch B-AS",
-      "direction": "LONG",
-      "entry_price": 0,
-      "fill_price": null,
-      "requested_entry": null,
-      "stop_price": null,
-      "target_price": null,
-      "trade_id": null,
-      "signal_id": null,
-      "entry_price_source": null,
-      "unrealized_pnl": 1552.16,
-      "duration": ""
-    }
-  ],
+  "active_trades": [],
   "algos_by_session": {
     "Asian": [
       {
@@ -135,7 +119,7 @@
       {
         "algo_id": "donchian_breakout_B_asian",
         "name": "Donch B-AS",
-        "status": "OPEN",
+        "status": "IDLE",
         "apex_status": "in_progress",
         "display_status": "TRADING",
         "display_color": "white",
@@ -148,10 +132,10 @@
         "official_pass_pct": 0.0,
         "quarantined_outcomes": 1,
         "trades": 10,
-        "pnl": 1552.16,
-        "pnl_display": "+1552.16",
-        "balance": 50649.72,
-        "balance_display": "50,650",
+        "pnl": 922.8,
+        "pnl_display": "+922.80",
+        "balance": 50000.36,
+        "balance_display": "50,000",
         "pnl_source_present": true,
         "pnl_source_status": "ok",
         "is_bot": false
