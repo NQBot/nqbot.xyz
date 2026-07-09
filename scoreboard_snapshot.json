@@ -1,14 +1,14 @@
 {
-  "timestamp": "2026-07-09T01:03:40.216753+00:00",
+  "timestamp": "2026-07-09T01:05:44.329379+00:00",
   "session": "Asian",
   "price": 0,
   "summary": {
     "total_algos": 25,
-    "active_algos": 1,
-    "open_trades": 1,
-    "trades_today": 22,
-    "net_pnl": 2240.28,
-    "net_pnl_pts": 2240.28,
+    "active_algos": 2,
+    "open_trades": 2,
+    "trades_today": 23,
+    "net_pnl": 2335.92,
+    "net_pnl_pts": 2335.92,
     "wins": 0,
     "losses": 0,
     "win_rate": 0.0,
@@ -18,6 +18,21 @@
     "max_drawdown_time": null
   },
   "active_trades": [
+    {
+      "algo_id": "stochastic_obos_B",
+      "name": "Stoch OBOS B",
+      "direction": "LONG",
+      "entry_price": 0,
+      "fill_price": null,
+      "requested_entry": null,
+      "stop_price": null,
+      "target_price": null,
+      "trade_id": null,
+      "signal_id": null,
+      "entry_price_source": null,
+      "unrealized_pnl": 2532.28,
+      "duration": ""
+    },
     {
       "algo_id": "donchian_breakout_B_asian",
       "name": "Donch B-AS",
@@ -30,7 +45,7 @@
       "trade_id": null,
       "signal_id": null,
       "entry_price_source": null,
-      "unrealized_pnl": 1070.76,
+      "unrealized_pnl": 1150.76,
       "duration": ""
     }
   ],
@@ -39,7 +54,7 @@
       {
         "algo_id": "stochastic_obos_B",
         "name": "Stoch OBOS B",
-        "status": "IDLE",
+        "status": "OPEN",
         "apex_status": "in_progress",
         "display_status": "TRADING",
         "display_color": "white",
@@ -51,11 +66,11 @@
         "official_attempts": 2,
         "official_pass_pct": 0.0,
         "quarantined_outcomes": 1,
-        "trades": 13,
-        "pnl": 2516.64,
-        "pnl_display": "+2516.64",
-        "balance": 51530.48,
-        "balance_display": "51,530",
+        "trades": 14,
+        "pnl": 2532.28,
+        "pnl_display": "+2532.28",
+        "balance": 51546.12,
+        "balance_display": "51,546",
         "pnl_source_present": true,
         "pnl_source_status": "ok",
         "is_bot": false
@@ -148,10 +163,10 @@
         "official_pass_pct": 0.0,
         "quarantined_outcomes": 1,
         "trades": 5,
-        "pnl": 1070.76,
-        "pnl_display": "+1070.76",
-        "balance": 50108.32,
-        "balance_display": "50,108",
+        "pnl": 1150.76,
+        "pnl_display": "+1150.76",
+        "balance": 50228.32,
+        "balance_display": "50,228",
         "pnl_source_present": true,
         "pnl_source_status": "ok",
         "is_bot": false
