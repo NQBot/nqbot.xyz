@@ -1,14 +1,14 @@
 {
-  "timestamp": "2026-07-09T02:32:16.088655+00:00",
+  "timestamp": "2026-07-09T02:34:21.935412+00:00",
   "session": "Asian",
   "price": 0,
   "summary": {
     "total_algos": 25,
-    "active_algos": 1,
-    "open_trades": 1,
+    "active_algos": 0,
+    "open_trades": 0,
     "trades_today": 33,
-    "net_pnl": 2344.3,
-    "net_pnl_pts": 2344.3,
+    "net_pnl": 2202.12,
+    "net_pnl_pts": 2202.12,
     "wins": 0,
     "losses": 0,
     "win_rate": 0.0,
@@ -17,23 +17,7 @@
     "max_drawdown": 0.0,
     "max_drawdown_time": null
   },
-  "active_trades": [
-    {
-      "algo_id": "OpenClaw Codex55s",
-      "name": "OC Codex55s",
-      "direction": "LONG",
-      "entry_price": 29535.75,
-      "fill_price": 29535.75,
-      "requested_entry": null,
-      "stop_price": 29530.0,
-      "target_price": 29558.75,
-      "trade_id": "0bf0010e",
-      "signal_id": null,
-      "entry_price_source": "ai_ati_fill_trigger_vanta55s.json",
-      "unrealized_pnl": 283.46,
-      "duration": ""
-    }
-  ],
+  "active_trades": [],
   "algos_by_session": {
     "Asian": [
       {
@@ -717,7 +701,7 @@
       {
         "algo_id": "OpenClaw Codex55s",
         "name": "OC Codex55s",
-        "status": "OPEN",
+        "status": "IDLE",
         "apex_status": "in_progress",
         "display_status": "TRADING",
         "display_color": "white",
@@ -730,10 +714,10 @@
         "official_pass_pct": null,
         "quarantined_outcomes": null,
         "trades": 2,
-        "pnl": 283.46,
-        "pnl_display": "+283.46",
-        "balance": 45413.42,
-        "balance_display": "45,413",
+        "pnl": 141.28,
+        "pnl_display": "+141.28",
+        "balance": 45251.24,
+        "balance_display": "45,251",
         "pnl_source_present": true,
         "pnl_source_status": "ok",
         "is_bot": true
