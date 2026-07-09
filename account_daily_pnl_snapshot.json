@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "source": "scoreboard_state",
-  "timestamp": "2026-07-09T06:19:47.507309Z",
-  "generated_at": "2026-07-09T06:19:48.409363Z",
-  "source_timestamp": "2026-07-09T06:19:47.507309Z",
-  "source_age_seconds": 0.902,
+  "timestamp": "2026-07-09T06:21:47.064446Z",
+  "generated_at": "2026-07-09T06:21:49.152702Z",
+  "source_timestamp": "2026-07-09T06:21:47.064446Z",
+  "source_age_seconds": 2.088,
   "source_stale": false,
   "trading_day": "2026-07-09",
   "reset_time_et": "17:00",
@@ -31,7 +31,7 @@
       "unrealized_pnl": 0.0,
       "pnl_source_present": true,
       "pnl_source_status": "ok",
-      "last_seen_ts": "2026-07-09T06:19:47.507309Z",
+      "last_seen_ts": "2026-07-09T06:21:47.064446Z",
       "stale": false,
       "series": [
         {
@@ -3904,6 +3904,20 @@
           "daily_pnl": 4014.2,
           "realized_pnl": 4014.2,
           "daily_realized_pnl": 4014.2
+        },
+        {
+          "ts": "2026-07-09T06:20:48.375898Z",
+          "net_liquidation": 53028.04,
+          "daily_pnl": 4014.2,
+          "realized_pnl": 4014.2,
+          "daily_realized_pnl": 4014.2
+        },
+        {
+          "ts": "2026-07-09T06:21:47.064446Z",
+          "net_liquidation": 53028.04,
+          "daily_pnl": 4014.2,
+          "realized_pnl": 4014.2,
+          "daily_realized_pnl": 4014.2
         }
       ],
       "pnl_source_hash": "90a33eeacaa21bfe"
@@ -3927,7 +3941,7 @@
       "unrealized_pnl": 0.0,
       "pnl_source_present": true,
       "pnl_source_status": "ok",
-      "last_seen_ts": "2026-07-09T06:19:47.507309Z",
+      "last_seen_ts": "2026-07-09T06:21:47.064446Z",
       "stale": false,
       "series": [
         {
@@ -7800,6 +7814,20 @@
           "daily_pnl": 0.0,
           "realized_pnl": 0.0,
           "daily_realized_pnl": 0.0
+        },
+        {
+          "ts": "2026-07-09T06:20:48.375898Z",
+          "net_liquidation": 48268.88,
+          "daily_pnl": 0.0,
+          "realized_pnl": 0.0,
+          "daily_realized_pnl": 0.0
+        },
+        {
+          "ts": "2026-07-09T06:21:47.064446Z",
+          "net_liquidation": 48268.88,
+          "daily_pnl": 0.0,
+          "realized_pnl": 0.0,
+          "daily_realized_pnl": 0.0
         }
       ],
       "pnl_source_hash": "5881819f99f7c261"
@@ -7823,7 +7851,7 @@
       "unrealized_pnl": 0.0,
       "pnl_source_present": true,
       "pnl_source_status": "ok",
-      "last_seen_ts": "2026-07-09T06:19:47.507309Z",
+      "last_seen_ts": "2026-07-09T06:21:47.064446Z",
       "stale": false,
       "series": [
         {
@@ -11696,6 +11724,20 @@
           "daily_pnl": 0.0,
           "realized_pnl": 0.0,
           "daily_realized_pnl": 0.0
+        },
+        {
+          "ts": "2026-07-09T06:20:48.375898Z",
+          "net_liquidation": 48454.2,
+          "daily_pnl": 0.0,
+          "realized_pnl": 0.0,
+          "daily_realized_pnl": 0.0
+        },
+        {
+          "ts": "2026-07-09T06:21:47.064446Z",
+          "net_liquidation": 48454.2,
+          "daily_pnl": 0.0,
+          "realized_pnl": 0.0,
+          "daily_realized_pnl": 0.0
         }
       ],
       "pnl_source_hash": "9fcac5d03650dfcb"
@@ -11719,7 +11761,7 @@
       "unrealized_pnl": 0.0,
       "pnl_source_present": true,
       "pnl_source_status": "ok",
-      "last_seen_ts": "2026-07-09T06:19:47.507309Z",
+      "last_seen_ts": "2026-07-09T06:21:47.064446Z",
       "stale": false,
       "series": [
         {
@@ -15592,6 +15634,20 @@
           "daily_pnl": -515.32,
           "realized_pnl": -515.32,
           "daily_realized_pnl": -515.32
+        },
+        {
+          "ts": "2026-07-09T06:20:48.375898Z",
+          "net_liquidation": 49888.08,
+          "daily_pnl": -515.32,
+          "realized_pnl": -515.32,
+          "daily_realized_pnl": -515.32
+        },
+        {
+          "ts": "2026-07-09T06:21:47.064446Z",
+          "net_liquidation": 49888.08,
+          "daily_pnl": -515.32,
+          "realized_pnl": -515.32,
+          "daily_realized_pnl": -515.32
         }
       ],
       "pnl_source_hash": "4b99de594bbdaba0"
@@ -15615,7 +15671,7 @@
       "unrealized_pnl": 0.0,
       "pnl_source_present": true,
       "pnl_source_status": "ok",
-      "last_seen_ts": "2026-07-09T06:19:47.507309Z",
+      "last_seen_ts": "2026-07-09T06:21:47.064446Z",
       "stale": false,
       "series": [
         {
@@ -19488,6 +19544,20 @@
           "daily_pnl": -925.64,
           "realized_pnl": -925.64,
           "daily_realized_pnl": -925.64
+        },
+        {
+          "ts": "2026-07-09T06:20:48.375898Z",
+          "net_liquidation": 49074.36,
+          "daily_pnl": -925.64,
+          "realized_pnl": -925.64,
+          "daily_realized_pnl": -925.64
+        },
+        {
+          "ts": "2026-07-09T06:21:47.064446Z",
+          "net_liquidation": 49074.36,
+          "daily_pnl": -925.64,
+          "realized_pnl": -925.64,
+          "daily_realized_pnl": -925.64
         }
       ],
       "pnl_source_hash": "8e1bd8c8a1477bf5"
@@ -19511,7 +19581,7 @@
       "unrealized_pnl": 0.0,
       "pnl_source_present": true,
       "pnl_source_status": "ok",
-      "last_seen_ts": "2026-07-09T06:19:47.507309Z",
+      "last_seen_ts": "2026-07-09T06:21:47.064446Z",
       "stale": false,
       "series": [
         {
@@ -23384,6 +23454,20 @@
           "daily_pnl": 0.0,
           "realized_pnl": 0.0,
           "daily_realized_pnl": 0.0
+        },
+        {
+          "ts": "2026-07-09T06:20:48.375898Z",
+          "net_liquidation": 50000.0,
+          "daily_pnl": 0.0,
+          "realized_pnl": 0.0,
+          "daily_realized_pnl": 0.0
+        },
+        {
+          "ts": "2026-07-09T06:21:47.064446Z",
+          "net_liquidation": 50000.0,
+          "daily_pnl": 0.0,
+          "realized_pnl": 0.0,
+          "daily_realized_pnl": 0.0
         }
       ],
       "pnl_source_hash": "73668237d7e6310c"
@@ -23407,7 +23491,7 @@
       "unrealized_pnl": 0.0,
       "pnl_source_present": true,
       "pnl_source_status": "ok",
-      "last_seen_ts": "2026-07-09T06:19:47.507309Z",
+      "last_seen_ts": "2026-07-09T06:21:47.064446Z",
       "stale": false,
       "series": [
         {
@@ -27280,6 +27364,20 @@
           "daily_pnl": -453.72,
           "realized_pnl": -453.72,
           "daily_realized_pnl": -453.72
+        },
+        {
+          "ts": "2026-07-09T06:20:48.375898Z",
+          "net_liquidation": 47907.0,
+          "daily_pnl": -453.72,
+          "realized_pnl": -453.72,
+          "daily_realized_pnl": -453.72
+        },
+        {
+          "ts": "2026-07-09T06:21:47.064446Z",
+          "net_liquidation": 47907.0,
+          "daily_pnl": -453.72,
+          "realized_pnl": -453.72,
+          "daily_realized_pnl": -453.72
         }
       ],
       "pnl_source_hash": "ebf7570506ffcfe8"
@@ -27303,7 +27401,7 @@
       "unrealized_pnl": 0.0,
       "pnl_source_present": true,
       "pnl_source_status": "ok",
-      "last_seen_ts": "2026-07-09T06:19:47.507309Z",
+      "last_seen_ts": "2026-07-09T06:21:47.064446Z",
       "stale": false,
       "series": [
         {
@@ -31176,6 +31274,20 @@
           "daily_pnl": 0.0,
           "realized_pnl": 0.0,
           "daily_realized_pnl": 0.0
+        },
+        {
+          "ts": "2026-07-09T06:20:48.375898Z",
+          "net_liquidation": 50000.0,
+          "daily_pnl": 0.0,
+          "realized_pnl": 0.0,
+          "daily_realized_pnl": 0.0
+        },
+        {
+          "ts": "2026-07-09T06:21:47.064446Z",
+          "net_liquidation": 50000.0,
+          "daily_pnl": 0.0,
+          "realized_pnl": 0.0,
+          "daily_realized_pnl": 0.0
         }
       ],
       "pnl_source_hash": "4e6d5c8074991dc5"
@@ -31199,7 +31311,7 @@
       "unrealized_pnl": 0.0,
       "pnl_source_present": true,
       "pnl_source_status": "ok",
-      "last_seen_ts": "2026-07-09T06:19:47.507309Z",
+      "last_seen_ts": "2026-07-09T06:21:47.064446Z",
       "stale": false,
       "series": [
         {
@@ -35072,6 +35184,20 @@
           "daily_pnl": -1170.64,
           "realized_pnl": -1170.64,
           "daily_realized_pnl": -1170.64
+        },
+        {
+          "ts": "2026-07-09T06:20:48.375898Z",
+          "net_liquidation": 48829.36,
+          "daily_pnl": -1170.64,
+          "realized_pnl": -1170.64,
+          "daily_realized_pnl": -1170.64
+        },
+        {
+          "ts": "2026-07-09T06:21:47.064446Z",
+          "net_liquidation": 48829.36,
+          "daily_pnl": -1170.64,
+          "realized_pnl": -1170.64,
+          "daily_realized_pnl": -1170.64
         }
       ],
       "pnl_source_hash": "2984a40ef61b86ce"
@@ -35095,7 +35221,7 @@
       "unrealized_pnl": 0.0,
       "pnl_source_present": true,
       "pnl_source_status": "ok",
-      "last_seen_ts": "2026-07-09T06:19:47.507309Z",
+      "last_seen_ts": "2026-07-09T06:21:47.064446Z",
       "stale": false,
       "series": [
         {
@@ -38968,6 +39094,20 @@
           "daily_pnl": 0.0,
           "realized_pnl": 0.0,
           "daily_realized_pnl": 0.0
+        },
+        {
+          "ts": "2026-07-09T06:20:48.375898Z",
+          "net_liquidation": 52379.36,
+          "daily_pnl": 0.0,
+          "realized_pnl": 0.0,
+          "daily_realized_pnl": 0.0
+        },
+        {
+          "ts": "2026-07-09T06:21:47.064446Z",
+          "net_liquidation": 52379.36,
+          "daily_pnl": 0.0,
+          "realized_pnl": 0.0,
+          "daily_realized_pnl": 0.0
         }
       ],
       "pnl_source_hash": "35b7e248c507b9ed"
@@ -38991,7 +39131,7 @@
       "unrealized_pnl": 0.0,
       "pnl_source_present": true,
       "pnl_source_status": "ok",
-      "last_seen_ts": "2026-07-09T06:19:47.507309Z",
+      "last_seen_ts": "2026-07-09T06:21:47.064446Z",
       "stale": false,
       "series": [
         {
@@ -42864,6 +43004,20 @@
           "daily_pnl": 0.0,
           "realized_pnl": 0.0,
           "daily_realized_pnl": 0.0
+        },
+        {
+          "ts": "2026-07-09T06:20:48.375898Z",
+          "net_liquidation": 49366.28,
+          "daily_pnl": 0.0,
+          "realized_pnl": 0.0,
+          "daily_realized_pnl": 0.0
+        },
+        {
+          "ts": "2026-07-09T06:21:47.064446Z",
+          "net_liquidation": 49366.28,
+          "daily_pnl": 0.0,
+          "realized_pnl": 0.0,
+          "daily_realized_pnl": 0.0
         }
       ],
       "pnl_source_hash": "40fd1c566504ffc3"
@@ -42887,7 +43041,7 @@
       "unrealized_pnl": 0.0,
       "pnl_source_present": true,
       "pnl_source_status": "ok",
-      "last_seen_ts": "2026-07-09T06:19:47.507309Z",
+      "last_seen_ts": "2026-07-09T06:21:47.064446Z",
       "stale": false,
       "series": [
         {
@@ -46760,6 +46914,20 @@
           "daily_pnl": 0.0,
           "realized_pnl": 0.0,
           "daily_realized_pnl": 0.0
+        },
+        {
+          "ts": "2026-07-09T06:20:48.375898Z",
+          "net_liquidation": 51978.2,
+          "daily_pnl": 0.0,
+          "realized_pnl": 0.0,
+          "daily_realized_pnl": 0.0
+        },
+        {
+          "ts": "2026-07-09T06:21:47.064446Z",
+          "net_liquidation": 51978.2,
+          "daily_pnl": 0.0,
+          "realized_pnl": 0.0,
+          "daily_realized_pnl": 0.0
         }
       ],
       "pnl_source_hash": "92b464083b4dabe5"
@@ -46783,7 +46951,7 @@
       "unrealized_pnl": 0.0,
       "pnl_source_present": true,
       "pnl_source_status": "ok",
-      "last_seen_ts": "2026-07-09T06:19:47.507309Z",
+      "last_seen_ts": "2026-07-09T06:21:47.064446Z",
       "stale": false,
       "series": [
         {
@@ -50656,6 +50824,20 @@
           "daily_pnl": 0.0,
           "realized_pnl": 0.0,
           "daily_realized_pnl": 0.0
+        },
+        {
+          "ts": "2026-07-09T06:20:48.375898Z",
+          "net_liquidation": 49007.56,
+          "daily_pnl": 0.0,
+          "realized_pnl": 0.0,
+          "daily_realized_pnl": 0.0
+        },
+        {
+          "ts": "2026-07-09T06:21:47.064446Z",
+          "net_liquidation": 49007.56,
+          "daily_pnl": 0.0,
+          "realized_pnl": 0.0,
+          "daily_realized_pnl": 0.0
         }
       ],
       "pnl_source_hash": "92dde46f599d2d8f"
@@ -50679,7 +50861,7 @@
       "unrealized_pnl": 0.0,
       "pnl_source_present": true,
       "pnl_source_status": "ok",
-      "last_seen_ts": "2026-07-09T06:19:47.507309Z",
+      "last_seen_ts": "2026-07-09T06:21:47.064446Z",
       "stale": false,
       "series": [
         {
@@ -54552,6 +54734,20 @@
           "daily_pnl": 0.0,
           "realized_pnl": 0.0,
           "daily_realized_pnl": 0.0
+        },
+        {
+          "ts": "2026-07-09T06:20:48.375898Z",
+          "net_liquidation": 48831.4,
+          "daily_pnl": 0.0,
+          "realized_pnl": 0.0,
+          "daily_realized_pnl": 0.0
+        },
+        {
+          "ts": "2026-07-09T06:21:47.064446Z",
+          "net_liquidation": 48831.4,
+          "daily_pnl": 0.0,
+          "realized_pnl": 0.0,
+          "daily_realized_pnl": 0.0
         }
       ],
       "pnl_source_hash": "38c19060b529db75"
@@ -54575,7 +54771,7 @@
       "unrealized_pnl": 0.0,
       "pnl_source_present": true,
       "pnl_source_status": "ok",
-      "last_seen_ts": "2026-07-09T06:19:47.507309Z",
+      "last_seen_ts": "2026-07-09T06:21:47.064446Z",
       "stale": false,
       "series": [
         {
@@ -58448,6 +58644,20 @@
           "daily_pnl": -930.68,
           "realized_pnl": -930.68,
           "daily_realized_pnl": -930.68
+        },
+        {
+          "ts": "2026-07-09T06:20:48.375898Z",
+          "net_liquidation": 48146.88,
+          "daily_pnl": -930.68,
+          "realized_pnl": -930.68,
+          "daily_realized_pnl": -930.68
+        },
+        {
+          "ts": "2026-07-09T06:21:47.064446Z",
+          "net_liquidation": 48146.88,
+          "daily_pnl": -930.68,
+          "realized_pnl": -930.68,
+          "daily_realized_pnl": -930.68
         }
       ],
       "pnl_source_hash": "192c0a2a0a5d3d86"
@@ -58471,7 +58681,7 @@
       "unrealized_pnl": 0.0,
       "pnl_source_present": true,
       "pnl_source_status": "ok",
-      "last_seen_ts": "2026-07-09T06:19:47.507309Z",
+      "last_seen_ts": "2026-07-09T06:21:47.064446Z",
       "stale": false,
       "series": [
         {
@@ -62344,6 +62554,20 @@
           "daily_pnl": 0.0,
           "realized_pnl": 0.0,
           "daily_realized_pnl": 0.0
+        },
+        {
+          "ts": "2026-07-09T06:20:48.375898Z",
+          "net_liquidation": 50000.0,
+          "daily_pnl": 0.0,
+          "realized_pnl": 0.0,
+          "daily_realized_pnl": 0.0
+        },
+        {
+          "ts": "2026-07-09T06:21:47.064446Z",
+          "net_liquidation": 50000.0,
+          "daily_pnl": 0.0,
+          "realized_pnl": 0.0,
+          "daily_realized_pnl": 0.0
         }
       ],
       "pnl_source_hash": "7cac3c2ace8e30ff"
@@ -62367,7 +62591,7 @@
       "unrealized_pnl": 0.0,
       "pnl_source_present": true,
       "pnl_source_status": "ok",
-      "last_seen_ts": "2026-07-09T06:19:47.507309Z",
+      "last_seen_ts": "2026-07-09T06:21:47.064446Z",
       "stale": false,
       "series": [
         {
@@ -66240,6 +66464,20 @@
           "daily_pnl": -1022.44,
           "realized_pnl": -1022.44,
           "daily_realized_pnl": -1022.44
+        },
+        {
+          "ts": "2026-07-09T06:20:48.375898Z",
+          "net_liquidation": 48977.56,
+          "daily_pnl": -1022.44,
+          "realized_pnl": -1022.44,
+          "daily_realized_pnl": -1022.44
+        },
+        {
+          "ts": "2026-07-09T06:21:47.064446Z",
+          "net_liquidation": 48977.56,
+          "daily_pnl": -1022.44,
+          "realized_pnl": -1022.44,
+          "daily_realized_pnl": -1022.44
         }
       ],
       "pnl_source_hash": "f6c27a799727eedb"
@@ -66263,7 +66501,7 @@
       "unrealized_pnl": 0.0,
       "pnl_source_present": true,
       "pnl_source_status": "ok",
-      "last_seen_ts": "2026-07-09T06:19:47.507309Z",
+      "last_seen_ts": "2026-07-09T06:21:47.064446Z",
       "stale": false,
       "series": [
         {
@@ -70136,6 +70374,20 @@
           "daily_pnl": 636.28,
           "realized_pnl": 636.28,
           "daily_realized_pnl": 636.28
+        },
+        {
+          "ts": "2026-07-09T06:20:48.375898Z",
+          "net_liquidation": 53018.84,
+          "daily_pnl": 636.28,
+          "realized_pnl": 636.28,
+          "daily_realized_pnl": 636.28
+        },
+        {
+          "ts": "2026-07-09T06:21:47.064446Z",
+          "net_liquidation": 53018.84,
+          "daily_pnl": 636.28,
+          "realized_pnl": 636.28,
+          "daily_realized_pnl": 636.28
         }
       ],
       "pnl_source_hash": "d13e209a5cfd9b93"
@@ -70159,7 +70411,7 @@
       "unrealized_pnl": 0.0,
       "pnl_source_present": true,
       "pnl_source_status": "ok",
-      "last_seen_ts": "2026-07-09T06:19:47.507309Z",
+      "last_seen_ts": "2026-07-09T06:21:47.064446Z",
       "stale": false,
       "series": [
         {
@@ -74032,6 +74284,20 @@
           "daily_pnl": -623.72,
           "realized_pnl": -623.72,
           "daily_realized_pnl": -623.72
+        },
+        {
+          "ts": "2026-07-09T06:20:48.375898Z",
+          "net_liquidation": 48148.84,
+          "daily_pnl": -623.72,
+          "realized_pnl": -623.72,
+          "daily_realized_pnl": -623.72
+        },
+        {
+          "ts": "2026-07-09T06:21:47.064446Z",
+          "net_liquidation": 48148.84,
+          "daily_pnl": -623.72,
+          "realized_pnl": -623.72,
+          "daily_realized_pnl": -623.72
         }
       ],
       "pnl_source_hash": "ac6c29295452a332"
@@ -74055,7 +74321,7 @@
       "unrealized_pnl": 0.0,
       "pnl_source_present": true,
       "pnl_source_status": "ok",
-      "last_seen_ts": "2026-07-09T06:19:47.507309Z",
+      "last_seen_ts": "2026-07-09T06:21:47.064446Z",
       "stale": false,
       "series": [
         {
@@ -77928,6 +78194,20 @@
           "daily_pnl": 0.0,
           "realized_pnl": 0.0,
           "daily_realized_pnl": 0.0
+        },
+        {
+          "ts": "2026-07-09T06:20:48.375898Z",
+          "net_liquidation": 49963.84,
+          "daily_pnl": 0.0,
+          "realized_pnl": 0.0,
+          "daily_realized_pnl": 0.0
+        },
+        {
+          "ts": "2026-07-09T06:21:47.064446Z",
+          "net_liquidation": 49963.84,
+          "daily_pnl": 0.0,
+          "realized_pnl": 0.0,
+          "daily_realized_pnl": 0.0
         }
       ],
       "pnl_source_hash": "a2636118989dd8dd"
@@ -77951,7 +78231,7 @@
       "unrealized_pnl": 0.0,
       "pnl_source_present": true,
       "pnl_source_status": "ok",
-      "last_seen_ts": "2026-07-09T06:19:47.507309Z",
+      "last_seen_ts": "2026-07-09T06:21:47.064446Z",
       "stale": false,
       "series": [
         {
@@ -81824,6 +82104,20 @@
           "daily_pnl": 0.0,
           "realized_pnl": 0.0,
           "daily_realized_pnl": 0.0
+        },
+        {
+          "ts": "2026-07-09T06:20:48.375898Z",
+          "net_liquidation": 50572.56,
+          "daily_pnl": 0.0,
+          "realized_pnl": 0.0,
+          "daily_realized_pnl": 0.0
+        },
+        {
+          "ts": "2026-07-09T06:21:47.064446Z",
+          "net_liquidation": 50572.56,
+          "daily_pnl": 0.0,
+          "realized_pnl": 0.0,
+          "daily_realized_pnl": 0.0
         }
       ],
       "pnl_source_hash": "7067f1fd97fa8a3f"
@@ -81847,7 +82141,7 @@
       "unrealized_pnl": 0.0,
       "pnl_source_present": true,
       "pnl_source_status": "ok",
-      "last_seen_ts": "2026-07-09T06:19:47.507309Z",
+      "last_seen_ts": "2026-07-09T06:21:47.064446Z",
       "stale": false,
       "series": [
         {
@@ -85716,6 +86010,20 @@
         },
         {
           "ts": "2026-07-09T06:19:47.507309Z",
+          "net_liquidation": 50000.0,
+          "daily_pnl": 0.0,
+          "realized_pnl": 0.0,
+          "daily_realized_pnl": 0.0
+        },
+        {
+          "ts": "2026-07-09T06:20:48.375898Z",
+          "net_liquidation": 50000.0,
+          "daily_pnl": 0.0,
+          "realized_pnl": 0.0,
+          "daily_realized_pnl": 0.0
+        },
+        {
+          "ts": "2026-07-09T06:21:47.064446Z",
           "net_liquidation": 50000.0,
           "daily_pnl": 0.0,
           "realized_pnl": 0.0,
@@ -85743,7 +86051,7 @@
       "unrealized_pnl": 0.0,
       "pnl_source_present": true,
       "pnl_source_status": "ok",
-      "last_seen_ts": "2026-07-09T06:19:47.507309Z",
+      "last_seen_ts": "2026-07-09T06:21:47.064446Z",
       "stale": false,
       "series": [
         {
@@ -89616,6 +89924,20 @@
           "daily_pnl": 0.0,
           "realized_pnl": 0.0,
           "daily_realized_pnl": 0.0
+        },
+        {
+          "ts": "2026-07-09T06:20:48.375898Z",
+          "net_liquidation": 50000.0,
+          "daily_pnl": 0.0,
+          "realized_pnl": 0.0,
+          "daily_realized_pnl": 0.0
+        },
+        {
+          "ts": "2026-07-09T06:21:47.064446Z",
+          "net_liquidation": 50000.0,
+          "daily_pnl": 0.0,
+          "realized_pnl": 0.0,
+          "daily_realized_pnl": 0.0
         }
       ],
       "pnl_source_hash": "cf4e2744e3d62340"
@@ -89639,7 +89961,7 @@
       "unrealized_pnl": 0.0,
       "pnl_source_present": true,
       "pnl_source_status": "ok",
-      "last_seen_ts": "2026-07-09T06:19:47.507309Z",
+      "last_seen_ts": "2026-07-09T06:21:47.064446Z",
       "stale": false,
       "series": [
         {
@@ -93512,6 +93834,20 @@
           "daily_pnl": 0.0,
           "realized_pnl": 0.0,
           "daily_realized_pnl": 0.0
+        },
+        {
+          "ts": "2026-07-09T06:20:48.375898Z",
+          "net_liquidation": 49426.52,
+          "daily_pnl": 0.0,
+          "realized_pnl": 0.0,
+          "daily_realized_pnl": 0.0
+        },
+        {
+          "ts": "2026-07-09T06:21:47.064446Z",
+          "net_liquidation": 49426.52,
+          "daily_pnl": 0.0,
+          "realized_pnl": 0.0,
+          "daily_realized_pnl": 0.0
         }
       ],
       "pnl_source_hash": "cac7157f34ec96d8"
@@ -93535,7 +93871,7 @@
       "unrealized_pnl": 0.0,
       "pnl_source_present": true,
       "pnl_source_status": "ok",
-      "last_seen_ts": "2026-07-09T06:19:47.507309Z",
+      "last_seen_ts": "2026-07-09T06:21:47.064446Z",
       "stale": false,
       "series": [
         {
@@ -97408,6 +97744,20 @@
           "daily_pnl": -1077.44,
           "realized_pnl": -1077.44,
           "daily_realized_pnl": -1077.44
+        },
+        {
+          "ts": "2026-07-09T06:20:48.375898Z",
+          "net_liquidation": 48398.04,
+          "daily_pnl": -1077.44,
+          "realized_pnl": -1077.44,
+          "daily_realized_pnl": -1077.44
+        },
+        {
+          "ts": "2026-07-09T06:21:47.064446Z",
+          "net_liquidation": 48398.04,
+          "daily_pnl": -1077.44,
+          "realized_pnl": -1077.44,
+          "daily_realized_pnl": -1077.44
         }
       ],
       "pnl_source_hash": "ac7f3c63b295a687"
@@ -97431,7 +97781,7 @@
       "unrealized_pnl": 0.0,
       "pnl_source_present": true,
       "pnl_source_status": "ok",
-      "last_seen_ts": "2026-07-09T06:19:47.507309Z",
+      "last_seen_ts": "2026-07-09T06:21:47.064446Z",
       "stale": false,
       "series": [
         {
@@ -101304,6 +101654,20 @@
           "daily_pnl": -419.36,
           "realized_pnl": -419.36,
           "daily_realized_pnl": -419.36
+        },
+        {
+          "ts": "2026-07-09T06:20:48.375898Z",
+          "net_liquidation": 51201.52,
+          "daily_pnl": -419.36,
+          "realized_pnl": -419.36,
+          "daily_realized_pnl": -419.36
+        },
+        {
+          "ts": "2026-07-09T06:21:47.064446Z",
+          "net_liquidation": 51201.52,
+          "daily_pnl": -419.36,
+          "realized_pnl": -419.36,
+          "daily_realized_pnl": -419.36
         }
       ],
       "pnl_source_hash": "f696efc6d6e05aed"
@@ -101327,7 +101691,7 @@
       "unrealized_pnl": 0.0,
       "pnl_source_present": true,
       "pnl_source_status": "ok",
-      "last_seen_ts": "2026-07-09T06:19:47.507309Z",
+      "last_seen_ts": "2026-07-09T06:21:47.064446Z",
       "stale": false,
       "series": [
         {
@@ -105200,6 +105564,20 @@
           "daily_pnl": -178.08,
           "realized_pnl": -178.08,
           "daily_realized_pnl": -178.08
+        },
+        {
+          "ts": "2026-07-09T06:20:48.375898Z",
+          "net_liquidation": 40811.56,
+          "daily_pnl": -178.08,
+          "realized_pnl": -178.08,
+          "daily_realized_pnl": -178.08
+        },
+        {
+          "ts": "2026-07-09T06:21:47.064446Z",
+          "net_liquidation": 40811.56,
+          "daily_pnl": -178.08,
+          "realized_pnl": -178.08,
+          "daily_realized_pnl": -178.08
         }
       ],
       "pnl_source_hash": "2f7c898105cb4cec"
@@ -105223,7 +105601,7 @@
       "unrealized_pnl": 0.0,
       "pnl_source_present": true,
       "pnl_source_status": "ok",
-      "last_seen_ts": "2026-07-09T06:19:47.507309Z",
+      "last_seen_ts": "2026-07-09T06:21:47.064446Z",
       "stale": false,
       "series": [
         {
@@ -109096,6 +109474,20 @@
           "daily_pnl": 0.0,
           "realized_pnl": 0.0,
           "daily_realized_pnl": 0.0
+        },
+        {
+          "ts": "2026-07-09T06:20:48.375898Z",
+          "net_liquidation": 50427.16,
+          "daily_pnl": 0.0,
+          "realized_pnl": 0.0,
+          "daily_realized_pnl": 0.0
+        },
+        {
+          "ts": "2026-07-09T06:21:47.064446Z",
+          "net_liquidation": 50427.16,
+          "daily_pnl": 0.0,
+          "realized_pnl": 0.0,
+          "daily_realized_pnl": 0.0
         }
       ],
       "pnl_source_hash": "a8125699c9505d49"
@@ -109111,15 +109503,15 @@
       "direction": "LONG",
       "trade_count": 5,
       "baseline_net_liquidation": 45109.96,
-      "current_net_liquidation": 45165.34,
-      "daily_pnl": 55.38,
+      "current_net_liquidation": 45075.34,
+      "daily_pnl": -34.62,
       "current_realized_pnl": -24.62,
       "baseline_realized_pnl": 0.0,
       "daily_realized_pnl": -24.62,
-      "unrealized_pnl": 85.0,
+      "unrealized_pnl": -10.0,
       "pnl_source_present": true,
       "pnl_source_status": "ok",
-      "last_seen_ts": "2026-07-09T06:19:47.507309Z",
+      "last_seen_ts": "2026-07-09T06:21:47.064446Z",
       "stale": false,
       "series": [
         {
@@ -112992,6 +113384,20 @@
           "daily_pnl": 55.38,
           "realized_pnl": -24.62,
           "daily_realized_pnl": -24.62
+        },
+        {
+          "ts": "2026-07-09T06:20:48.375898Z",
+          "net_liquidation": 44960.34,
+          "daily_pnl": -149.62,
+          "realized_pnl": -24.62,
+          "daily_realized_pnl": -24.62
+        },
+        {
+          "ts": "2026-07-09T06:21:47.064446Z",
+          "net_liquidation": 45075.34,
+          "daily_pnl": -34.62,
+          "realized_pnl": -24.62,
+          "daily_realized_pnl": -24.62
         }
       ],
       "pnl_source_hash": "fd7820af26baf66e"
@@ -113000,10 +113406,10 @@
   "summary": {
     "account_count": 29,
     "stale_account_count": 0,
-    "total_daily_pnl": -2611.18,
+    "total_daily_pnl": -2701.18,
     "total_daily_realized_pnl": -2691.18,
-    "positive_accounts": 3,
-    "negative_accounts": 10,
+    "positive_accounts": 2,
+    "negative_accounts": 11,
     "flat_accounts": 16,
     "best_account": {
       "id": "stochastic_obos_B",
