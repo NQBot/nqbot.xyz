@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-07-09T05:35:44.911540+00:00",
+  "timestamp": "2026-07-09T05:47:40.687370+00:00",
   "session": "Asian",
   "price": 0,
   "summary": {
@@ -7,8 +7,8 @@
     "active_algos": 1,
     "open_trades": 1,
     "trades_today": 49,
-    "net_pnl": 111.26,
-    "net_pnl_pts": 111.26,
+    "net_pnl": -203.74,
+    "net_pnl_pts": -203.74,
     "wins": 0,
     "losses": 0,
     "win_rate": 0.0,
@@ -30,7 +30,7 @@
       "trade_id": "636119ed",
       "signal_id": null,
       "entry_price_source": "ai_ati_fill_trigger_vanta55.json",
-      "unrealized_pnl": 633.46,
+      "unrealized_pnl": 318.46,
       "duration": ""
     }
   ],
@@ -682,10 +682,10 @@
         "official_pass_pct": null,
         "quarantined_outcomes": null,
         "trades": 2,
-        "pnl": 633.46,
-        "pnl_display": "+633.46",
-        "balance": 41623.1,
-        "balance_display": "41,623",
+        "pnl": 318.46,
+        "pnl_display": "+318.46",
+        "balance": 41308.1,
+        "balance_display": "41,308",
         "pnl_source_present": true,
         "pnl_source_status": "ok",
         "is_bot": true
