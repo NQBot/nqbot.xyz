@@ -1,14 +1,14 @@
 {
-  "timestamp": "2026-07-09T04:25:10.164243+00:00",
+  "timestamp": "2026-07-09T04:35:49.897601+00:00",
   "session": "Asian",
   "price": 0,
   "summary": {
     "total_algos": 25,
     "active_algos": 1,
     "open_trades": 1,
-    "trades_today": 45,
-    "net_pnl": 2114.6,
-    "net_pnl_pts": 2114.6,
+    "trades_today": 46,
+    "net_pnl": 215.88,
+    "net_pnl_pts": 215.88,
     "wins": 0,
     "losses": 0,
     "win_rate": 0.0,
@@ -21,7 +21,7 @@
     {
       "algo_id": "donchian_breakout_B_asian",
       "name": "Donch B-AS",
-      "direction": "SHORT",
+      "direction": "LONG",
       "entry_price": 0,
       "fill_price": null,
       "requested_entry": null,
@@ -30,7 +30,7 @@
       "trade_id": null,
       "signal_id": null,
       "entry_price_source": null,
-      "unrealized_pnl": 1706.12,
+      "unrealized_pnl": -192.6,
       "duration": ""
     }
   ],
@@ -147,11 +147,11 @@
         "official_attempts": 1,
         "official_pass_pct": 0.0,
         "quarantined_outcomes": 1,
-        "trades": 17,
-        "pnl": 1706.12,
-        "pnl_display": "+1706.12",
-        "balance": 50773.68,
-        "balance_display": "50,774",
+        "trades": 18,
+        "pnl": -192.6,
+        "pnl_display": "-192.60",
+        "balance": 48884.96,
+        "balance_display": "48,885",
         "pnl_source_present": true,
         "pnl_source_status": "ok",
         "is_bot": false
