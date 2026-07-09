@@ -1,14 +1,14 @@
 {
-  "timestamp": "2026-07-09T00:30:46.229407+00:00",
+  "timestamp": "2026-07-09T00:32:48.501349+00:00",
   "session": "Asian",
   "price": 0,
   "summary": {
     "total_algos": 25,
-    "active_algos": 1,
-    "open_trades": 1,
-    "trades_today": 8,
-    "net_pnl": 1518.16,
-    "net_pnl_pts": 1518.16,
+    "active_algos": 0,
+    "open_trades": 0,
+    "trades_today": 10,
+    "net_pnl": 710.56,
+    "net_pnl_pts": 710.56,
     "wins": 0,
     "losses": 0,
     "win_rate": 0.0,
@@ -17,23 +17,7 @@
     "max_drawdown": 0.0,
     "max_drawdown_time": null
   },
-  "active_trades": [
-    {
-      "algo_id": "ichimoku_cloud_B",
-      "name": "Ichimoku B",
-      "direction": "LONG",
-      "entry_price": 0,
-      "fill_price": null,
-      "requested_entry": null,
-      "stop_price": null,
-      "target_price": null,
-      "trade_id": null,
-      "signal_id": null,
-      "entry_price_source": null,
-      "unrealized_pnl": 324.84,
-      "duration": ""
-    }
-  ],
+  "active_trades": [],
   "algos_by_session": {
     "Asian": [
       {
@@ -51,11 +35,11 @@
         "official_attempts": 2,
         "official_pass_pct": 0.0,
         "quarantined_outcomes": 1,
-        "trades": 4,
-        "pnl": 260.12,
-        "pnl_display": "+260.12",
-        "balance": 49273.96,
-        "balance_display": "49,274",
+        "trades": 5,
+        "pnl": 1051.4,
+        "pnl_display": "+1051.40",
+        "balance": 50065.24,
+        "balance_display": "50,065",
         "pnl_source_present": true,
         "pnl_source_status": "ok",
         "is_bot": false
@@ -87,7 +71,7 @@
       {
         "algo_id": "ichimoku_cloud_B",
         "name": "Ichimoku B",
-        "status": "OPEN",
+        "status": "IDLE",
         "apex_status": "in_progress",
         "display_status": "TRADING",
         "display_color": "white",
@@ -100,10 +84,10 @@
         "official_pass_pct": 66.7,
         "quarantined_outcomes": 2,
         "trades": 1,
-        "pnl": 324.84,
-        "pnl_display": "+324.84",
-        "balance": 50324.84,
-        "balance_display": "50,325",
+        "pnl": -660.32,
+        "pnl_display": "-660.32",
+        "balance": 49339.68,
+        "balance_display": "49,340",
         "pnl_source_present": true,
         "pnl_source_status": "ok",
         "is_bot": false
@@ -147,11 +131,11 @@
         "official_attempts": 1,
         "official_pass_pct": 0.0,
         "quarantined_outcomes": 1,
-        "trades": 2,
-        "pnl": 547.56,
-        "pnl_display": "+547.56",
-        "balance": 49625.12,
-        "balance_display": "49,625",
+        "trades": 3,
+        "pnl": -66.16,
+        "pnl_display": "-66.16",
+        "balance": 49011.4,
+        "balance_display": "49,011",
         "pnl_source_present": true,
         "pnl_source_status": "ok",
         "is_bot": false
