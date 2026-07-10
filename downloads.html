@@ -665,6 +665,43 @@
                     </div>
                 </div>
 
+                <!-- Strategy Manager AddOn -->
+                <div class="indicator-card" id="strategymanager">
+                    <div class="card-content">
+                        <h3>StrategyManagerAddOn <span class="addon-badge">AddOn</span></h3>
+                        <p class="tagline">"Enable or disable every strategy on the Strategies tab with one click."</p>
+                        <p>Running 20-40 strategies means every restart, recompile, or session break turns into minutes of checkbox clicking. This addon adds <strong>Enable All Strategies</strong> and <strong>Disable All Strategies</strong> to the Control Center Tools menu - one click, done.</p>
+                        <ul class="features">
+                            <li>Drives NT8's real internal enable/disable pipeline - strategies genuinely start and stop, not just checkbox visuals</li>
+                            <li>Engine-state aware: skips strategies already in the target state</li>
+                            <li>Skips rows whose account is disconnected (reported, not failed)</li>
+                            <li>Summary popup plus per-strategy log lines in NinjaScript Output</li>
+                            <li>Built-in fallback path for future NinjaTrader builds</li>
+                            <li>Single .cs file, MIT licensed, no external dependencies</li>
+                        </ul>
+                        <a href="indicators/StrategyManagerAddOn.zip" class="download-btn">Download StrategyManagerAddOn</a>
+                        <button class="expand-btn" onclick="toggleExpand('strategymanager-details')">Read More</button>
+                        <div id="strategymanager-details" class="expanded-description">
+                            <h4>Why the obvious approaches don't work</h4>
+                            <p>The Strategies tab checkbox is bound to a WPF routed command - setting the row's IsEnabled property or raising a click event only toggles the checkmark while the strategy stays dead. This addon calls the same internal grid pipeline the checkbox handler calls (verified against NinjaTrader 8.1.5.2), so the full start/stop chain runs: historical load, transition to realtime, everything.</p>
+                            <h4>Safety notes</h4>
+                            <ul>
+                                <li><strong>Enable All really starts every configured strategy</strong> - same as checking each box by hand. Know what is on your Strategies tab before clicking.</li>
+                                <li>Strategies already running are left untouched, so a second click is harmless.</li>
+                                <li>If NinjaTrader changes its internals in a future update, the addon automatically falls back to Select All + the grid's own Enable/Disable commands.</li>
+                            </ul>
+                            <h4>Usage</h4>
+                            <p>After import and compile, open <strong>Control Center &gt; Tools</strong>. The two entries appear at the bottom of the menu. Progress and any skipped strategies are logged to the NinjaScript Output window (tab 1).</p>
+                            <div class="who-for">
+                                <span>Multi-Strategy Operators</span>
+                                <span>Prop-Firm Eval Runners</span>
+                                <span>Algo Farms</span>
+                                <span>NT8 Power Users</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
 
