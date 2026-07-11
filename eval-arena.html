@@ -236,7 +236,7 @@
       <a href="eval-arena.html" class="active">Eval Arena</a>
       <a href="analysis.html">Analysis</a>
       <a href="downloads.html">Downloads</a>
-      <a href="https://www.youtube.com/channel/UCylD_vJ1etiLUykGp9Gvnbg" target="_blank">YouTube</a>
+      <a href="https://www.youtube.com/channel/UCylD_vJ1etiLUykGp9Gvnbg" target="_blank" rel="noopener noreferrer">YouTube</a>
     </div>
   </nav>
 
@@ -375,111 +375,7 @@
     </footer>
   </div>
 
-  <script>
-    const fmtMoney = (v) => {
-      if (v === null || v === undefined || isNaN(v)) return '--';
-      const sign = v < 0 ? '-' : '';
-      return sign + '$' + Math.abs(v).toLocaleString('en-US', { maximumFractionDigits: 0 });
-    };
-
-    const statusClass = (color) => ({
-      green: 'st-green', yellow: 'st-yellow', red: 'st-red', grey: 'st-grey', white: 'st-white'
-    }[color] || 'st-white');
-
-    const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({
-      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
-    }[c]));
-
-    async function loadJSON(url) {
-      const r = await fetch(url, { cache: 'no-store' });
-      if (!r.ok) throw new Error(url + ' -> HTTP ' + r.status);
-      return r.json();
-    }
-
-    function renderFatal(msg) {
-      document.getElementById('arena-body').innerHTML =
-        '<tr><td colspan="7" class="fatal">' + esc(msg) + '</td></tr>';
-      document.getElementById('freshness').textContent = 'Snapshot unavailable';
-    }
-
-    function freshnessText(updatedIso) {
-      if (!updatedIso) return 'Snapshot time unknown';
-      const then = new Date(updatedIso);
-      if (isNaN(then)) return 'Snapshot time unknown';
-      const mins = Math.max(0, Math.round((Date.now() - then.getTime()) / 60000));
-      if (mins < 2) return 'Updated moments ago';
-      if (mins < 90) return 'Updated ' + mins + ' min ago';
-      const hrs = Math.round(mins / 60);
-      if (hrs < 36) return 'Updated ' + hrs + ' hr ago';
-      return 'Updated ' + then.toLocaleString();
-    }
-
-    function render(data) {
-      const rows = Array.isArray(data.rows) ? data.rows : [];
-      const winLevel = Number(data.win_level) || 53000;
-
-      let passes = 0, fails = 0;
-      for (const r of rows) {
-        passes += Number(r.official_passes ?? r.passes ?? 0) || 0;
-        fails += Number(r.official_fails ?? r.fails ?? 0) || 0;
-      }
-      document.getElementById('stat-accounts').textContent = rows.length;
-      document.getElementById('stat-passes').textContent = passes;
-      document.getElementById('stat-fails').textContent = fails;
-      document.getElementById('rule-target').textContent = fmtMoney(winLevel);
-      if (data.account_size) {
-        document.getElementById('rule-size').textContent = '$' + esc(data.account_size) + ' (simulated)';
-      }
-      document.getElementById('freshness').textContent = freshnessText(data.updated);
-
-      const body = document.getElementById('arena-body');
-      if (!rows.length) {
-        renderFatal('No arena data in the current snapshot.');
-        return;
-      }
-
-      // Sort: most proven records first, then closest to target
-      const sorted = [...rows].sort((a, b) => {
-        const ap = Number(a.official_passes ?? 0), bp = Number(b.official_passes ?? 0);
-        if (bp !== ap) return bp - ap;
-        const at = Number(a.to_target ?? Infinity), bt = Number(b.to_target ?? Infinity);
-        return at - bt;
-      });
-
-      body.innerHTML = sorted.map(r => {
-        const p = Number(r.official_passes ?? 0) || 0;
-        const f = Number(r.official_fails ?? 0) || 0;
-        const att = p + f;
-        const pct = att > 0 ? Math.round((p / att) * 100) : null;
-        const bal = Number(r.shadow_balance);
-        const toT = Number(r.to_target);
-        const statusLabel = (r.display_status || r.status || '--').replace(/_/g, ' ');
-        return `<tr>
-          <td><span class="strat">${esc(r.strategy)}</span><br><span class="acct">${esc(r.account)}</span></td>
-          <td><span class="status ${statusClass(r.display_color)}">${esc(statusLabel)}</span></td>
-          <td class="num"><span class="attempt-chip">#${esc(r.attempt ?? '--')}</span></td>
-          <td class="num ${isNaN(bal) ? '' : (bal >= 50000 ? 'pos-money' : 'neg-money')}">${fmtMoney(bal)}</td>
-          <td class="num">${fmtMoney(toT)}</td>
-          <td class="num"><span class="pf-pass">${p}</span> - <span class="pf-fail">${f}</span></td>
-          <td class="num">${pct === null ? '<span class="acct">--</span>'
-            : pct + '%<span class="pct-bar"><span class="pct-fill" style="width:' + pct + '%"></span></span>'}</td>
-        </tr>`;
-      }).join('');
-    }
-
-    (async () => {
-      try {
-        const data = await loadJSON('eval_arena_snapshot.json');
-        render(data);
-      } catch (e) {
-        if (location.protocol === 'file:') {
-          renderFatal('This page reads JSON snapshots over fetch(), which browsers block on file:// URLs. ' +
-            'Serve the folder over HTTP to preview locally.');
-        } else {
-          renderFatal('Could not load the arena snapshot: ' + e.message);
-        }
-      }
-    })();
-  </script>
+  <script src="public-results-security.js" defer></script>
+  <script src="eval-arena-client.js" defer></script>
 </body>
 </html>

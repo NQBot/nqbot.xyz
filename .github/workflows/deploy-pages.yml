@@ -1,0 +1,121 @@
+name: Deploy trusted Pages site
+
+on:
+  push:
+    branches:
+      - main
+  # The local publisher updates at 4:18 PM ET. A single bounded 21:25 UTC run
+  # is always after it (4:25 PM EST / 5:25 PM EDT) without granting the
+  # publisher workflow permissions.
+  schedule:
+    - cron: "25 21 * * 1-5"
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: github-pages-production
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    env:
+      PYTHONDONTWRITEBYTECODE: "1"
+    steps:
+      # actions/checkout v4.2.2, pinned to an immutable commit.
+      - name: Check out trusted site code from main
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: main
+          path: site
+          persist-credentials: false
+
+      # The data branch cannot supply this workflow or executable site code.
+      - name: Check out public data from snapshots
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: snapshots
+          path: snapshot-data
+          persist-credentials: false
+
+      # actions/setup-node v4.4.0, pinned to an immutable commit.
+      - name: Select the client-test runtime
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: "20"
+
+      - name: Assemble code and exact snapshot allowlist
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf public
+          mkdir public
+          rsync -a \
+            --exclude='.git/' \
+            --exclude='.gitignore' \
+            --exclude='.github/' \
+            --exclude='tests/' \
+            --exclude='scripts/' \
+            --exclude='scoreboard_snapshot.json' \
+            --exclude='scoreboard_state_snapshot.json' \
+            --exclude='account_daily_pnl_snapshot.json' \
+            --exclude='account_pnl_history_snapshot.json' \
+            --exclude='eval_arena_snapshot.json' \
+            site/ public/
+          python3 site/scripts/copy_public_snapshots.py \
+            --source "$GITHUB_WORKSPACE/snapshot-data" \
+            --destination "$GITHUB_WORKSPACE/public"
+
+      - name: Run Python security tests
+        run: python3 -m unittest discover -s site/tests -p 'test_*.py'
+
+      - name: Check every top-level client script
+        shell: bash
+        run: |
+          set -euo pipefail
+          found=0
+          for script in site/*.js; do
+            [ -f "$script" ] || continue
+            found=1
+            node --check "$script"
+          done
+          [ "$found" -eq 1 ]
+
+      - name: Run dependency-free client security tests
+        run: node --test site/tests/*.test.js
+
+      - name: Verify download checksum manifest
+        run: python3 site/scripts/generate_checksums.py --root public --check
+
+      - name: Validate assembled public site
+        run: python3 site/scripts/validate_public_site.py --root public
+
+      # actions/upload-pages-artifact v3.0.1, pinned to an immutable commit.
+      - name: Upload validated Pages artifact
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa
+        with:
+          path: public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      # actions/configure-pages v5.0.0, pinned to an immutable commit.
+      - name: Configure Pages
+        uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b
+
+      # actions/deploy-pages v4.0.5, pinned to an immutable commit.
+      - name: Deploy the validated artifact
+        id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e

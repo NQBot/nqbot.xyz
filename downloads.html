@@ -116,6 +116,10 @@
             transform: scale(1.02);
             border-color: #00d4ff;
         }
+        .screenshot-gallery img:focus-visible {
+            outline: 3px solid #00d4ff;
+            outline-offset: 3px;
+        }
         .features {
             list-style: none;
             margin-bottom: 20px;
@@ -292,6 +296,14 @@
             color: #fff;
             font-size: 2rem;
             cursor: pointer;
+            background: transparent;
+            border: 0;
+            padding: 4px 10px;
+            line-height: 1;
+        }
+        .lightbox-close:focus-visible {
+            outline: 3px solid #00d4ff;
+            outline-offset: 3px;
         }
         /* Nav - dark variant */
         .site-nav {
@@ -347,7 +359,7 @@
         <a href="eval-arena.html">Eval Arena</a>
         <a href="analysis.html">Analysis</a>
         <a href="downloads.html" class="active">Downloads</a>
-        <a href="https://www.youtube.com/channel/UCylD_vJ1etiLUykGp9Gvnbg" target="_blank">YouTube</a>
+        <a href="https://www.youtube.com/channel/UCylD_vJ1etiLUykGp9Gvnbg" target="_blank" rel="noopener noreferrer">YouTube</a>
       </div>
     </nav>
 
@@ -367,7 +379,7 @@
                 <!-- Strategy Downloads - Coming Soon -->
                 <div class="indicator-card" id="strategy-downloads">
                     <div class="screenshot-gallery">
-                        <img src="images/strategies-download-under-construction.webp" alt="Strategies Download - Under Construction" onclick="openLightbox(this.src)">
+                        <img src="images/strategies-download-under-construction.webp" alt="Strategies Download - Under Construction" data-lightbox role="button" tabindex="0" aria-haspopup="dialog" aria-controls="lightbox">
                     </div>
                     <div class="card-content">
                         <h3>NT8 Strategy Downloads <span class="soon-badge">Coming Soon</span></h3>
@@ -397,8 +409,8 @@
                 <!-- World Clock -->
                 <div class="indicator-card" id="worldclock">
                     <div class="screenshot-gallery">
-                        <img src="images/worldclock_03.png" alt="WorldClock showing global markets" onclick="openLightbox(this.src)">
-                        <img src="images/worldclock_05.png" alt="WorldClock session status" onclick="openLightbox(this.src)">
+                        <img src="images/worldclock_03.png" alt="WorldClock showing global markets" data-lightbox role="button" tabindex="0" aria-haspopup="dialog" aria-controls="lightbox">
+                        <img src="images/worldclock_05.png" alt="WorldClock session status" data-lightbox role="button" tabindex="0" aria-haspopup="dialog" aria-controls="lightbox">
                     </div>
                     <div class="card-content">
                         <h3>WorldClock</h3>
@@ -412,8 +424,8 @@
                             <li>DST boundary handling for US and international markets</li>
                         </ul>
                         <a href="indicators/worldclock.zip" class="download-btn">Download WorldClock</a>
-                        <button class="expand-btn" onclick="toggleExpand('worldclock-details')">Read More</button>
-                        <div id="worldclock-details" class="expanded-description">
+                        <button type="button" class="expand-btn" data-expand-target="worldclock-details" aria-controls="worldclock-details" aria-expanded="false">Read More</button>
+                        <div id="worldclock-details" class="expanded-description" aria-hidden="true">
                             <h4>Markets Covered</h4>
                             <p>CME Globex, NYSE/Nasdaq, Toronto (TSX), London (LSE), Frankfurt (Xetra), Paris (Euronext), Zurich (SIX), Tokyo (JPX), Hong Kong (HKEX), Singapore (SGX), Shanghai (SSE), Mumbai (NSE), Sydney (ASX), Wellington (NZX), Dubai (DFM), Riyadh (Tadawul), Johannesburg (JSE), Sao Paulo (B3)</p>
                             <h4>Why It's Different</h4>
@@ -431,7 +443,7 @@
                 <!-- Local Clock -->
                 <div class="indicator-card" id="localclock">
                     <div class="screenshot-gallery">
-                        <img src="images/local_clock_01.png" alt="LocalClock on chart" onclick="openLightbox(this.src)">
+                        <img src="images/local_clock_01.png" alt="LocalClock on chart" data-lightbox role="button" tabindex="0" aria-haspopup="dialog" aria-controls="lightbox">
                     </div>
                     <div class="card-content">
                         <h3>LocalClock</h3>
@@ -445,8 +457,8 @@
                             <li>DirectX rendering - no flicker, no lag</li>
                         </ul>
                         <a href="indicators/localclock.zip" class="download-btn">Download LocalClock</a>
-                        <button class="expand-btn" onclick="toggleExpand('localclock-details')">Read More</button>
-                        <div id="localclock-details" class="expanded-description">
+                        <button type="button" class="expand-btn" data-expand-target="localclock-details" aria-controls="localclock-details" aria-expanded="false">Read More</button>
+                        <div id="localclock-details" class="expanded-description" aria-hidden="true">
                             <h4>Full Customization</h4>
                             <p>Font family and size, text color, optional background box with opacity control, date display toggle. It can be subtle or impossible to miss - your choice.</p>
                             <h4>Why This Exists</h4>
@@ -492,7 +504,7 @@
                 <!-- Asian European NY Session High Low -->
                 <div class="indicator-card" id="sessionhl">
                     <div class="screenshot-gallery">
-                        <img src="images/AEHL_01.png" alt="Asian European NY Session High Low" onclick="openLightbox(this.src)">
+                        <img src="images/AEHL_01.png" alt="Asian European NY Session High Low" data-lightbox role="button" tabindex="0" aria-haspopup="dialog" aria-controls="lightbox">
                     </div>
                     <div class="card-content">
                         <h3>AsianEuropeanNYSessionHighLow</h3>
@@ -507,8 +519,8 @@
                             <li>Exposes values programmatically for strategies/scanners</li>
                         </ul>
                         <a href="indicators/AsianEuropeanNYSessionHighLow.zip" class="download-btn">Download SessionHighLow</a>
-                        <button class="expand-btn" onclick="toggleExpand('sessionhl-details')">Read More</button>
-                        <div id="sessionhl-details" class="expanded-description">
+                        <button type="button" class="expand-btn" data-expand-target="sessionhl-details" aria-controls="sessionhl-details" aria-expanded="false">Read More</button>
+                        <div id="sessionhl-details" class="expanded-description" aria-hidden="true">
                             <h4>Why Most Session Indicators Fail</h4>
                             <p>They break at midnight, mis-handle Sundays and Globex opens, reset incorrectly on holidays, and can't be trusted during real market transitions. This one was vibe-coded during live market use and refined by actual trading needs.</p>
                             <h4>Now With NY Session Tracking</h4>
@@ -536,7 +548,7 @@
                 <!-- Bollinger Band Width -->
                 <div class="indicator-card" id="bbwidth">
                     <div class="screenshot-gallery">
-                        <img src="images/bollinger_01.png" alt="Bollinger Band Width squeeze detection" onclick="openLightbox(this.src)">
+                        <img src="images/bollinger_01.png" alt="Bollinger Band Width squeeze detection" data-lightbox role="button" tabindex="0" aria-haspopup="dialog" aria-controls="lightbox">
                     </div>
                     <div class="card-content">
                         <h3>BollingerBandWidth</h3>
@@ -550,8 +562,8 @@
                             <li>Keltner Channel squeeze method available</li>
                         </ul>
                         <a href="indicators/BollingerBandWidth.zip" class="download-btn">Download BollingerBandWidth</a>
-                        <button class="expand-btn" onclick="toggleExpand('bbwidth-details')">Read More</button>
-                        <div id="bbwidth-details" class="expanded-description">
+                        <button type="button" class="expand-btn" data-expand-target="bbwidth-details" aria-controls="bbwidth-details" aria-expanded="false">Read More</button>
+                        <div id="bbwidth-details" class="expanded-description" aria-hidden="true">
                             <h4>How Traders Use It</h4>
                             <ul>
                                 <li>Identify pre-NY open compression</li>
@@ -575,8 +587,8 @@
                 <!-- PF Historical Downloader -->
                 <div class="indicator-card" id="downloader">
                     <div class="screenshot-gallery">
-                        <img src="images/historical_downloader_01.png" alt="Historical Downloader settings" onclick="openLightbox(this.src)">
-                        <img src="images/historical_downloader_02.png" alt="Historical Downloader output" onclick="openLightbox(this.src)">
+                        <img src="images/historical_downloader_01.png" alt="Historical Downloader settings" data-lightbox role="button" tabindex="0" aria-haspopup="dialog" aria-controls="lightbox">
+                        <img src="images/historical_downloader_02.png" alt="Historical Downloader output" data-lightbox role="button" tabindex="0" aria-haspopup="dialog" aria-controls="lightbox">
                     </div>
                     <div class="card-content">
                         <h3>PFHistoricalDownloader</h3>
@@ -590,8 +602,8 @@
                             <li>Thread-safe file writing, automatic retry tolerance</li>
                         </ul>
                         <a href="indicators/PFHistoricaldownloader.zip" class="download-btn">Download HistoricalDownloader</a>
-                        <button class="expand-btn" onclick="toggleExpand('downloader-details')">Read More</button>
-                        <div id="downloader-details" class="expanded-description">
+                        <button type="button" class="expand-btn" data-expand-target="downloader-details" aria-controls="downloader-details" aria-expanded="false">Read More</button>
+                        <div id="downloader-details" class="expanded-description" aria-hidden="true">
                             <h4>Designed for Advanced Workflows</h4>
                             <ul>
                                 <li>AI/ML model training</li>
@@ -624,10 +636,10 @@
                 <!-- Chart Export AddOn -->
                 <div class="indicator-card" id="chartexport">
                     <div class="screenshot-gallery">
-                        <img src="images/web_chartaddon_01.png" alt="Chart Export configuration" onclick="openLightbox(this.src)">
-                        <img src="images/web_chartaddon_02.png" alt="Chart Export menu" onclick="openLightbox(this.src)">
-                        <img src="images/NQ_15m.png" alt="Exported 15m chart" onclick="openLightbox(this.src)">
-                        <img src="images/NQ_5m.png" alt="Exported 5m chart" onclick="openLightbox(this.src)">
+                        <img src="images/web_chartaddon_01.png" alt="Chart Export configuration" data-lightbox role="button" tabindex="0" aria-haspopup="dialog" aria-controls="lightbox">
+                        <img src="images/web_chartaddon_02.png" alt="Chart Export menu" data-lightbox role="button" tabindex="0" aria-haspopup="dialog" aria-controls="lightbox">
+                        <img src="images/NQ_15m.png" alt="Exported 15m chart" data-lightbox role="button" tabindex="0" aria-haspopup="dialog" aria-controls="lightbox">
+                        <img src="images/NQ_5m.png" alt="Exported 5m chart" data-lightbox role="button" tabindex="0" aria-haspopup="dialog" aria-controls="lightbox">
                     </div>
                     <div class="card-content">
                         <h3>ChartExportAddOn <span class="addon-badge">AddOn</span></h3>
@@ -643,8 +655,8 @@
                             <li>GUI configuration via Tools menu with DataGrid editor</li>
                         </ul>
                         <a href="indicators/ChartExportAddOn.zip" class="download-btn">Download ChartExportAddOn</a>
-                        <button class="expand-btn" onclick="toggleExpand('chartexport-details')">Read More</button>
-                        <div id="chartexport-details" class="expanded-description">
+                        <button type="button" class="expand-btn" data-expand-target="chartexport-details" aria-controls="chartexport-details" aria-expanded="false">Read More</button>
+                        <div id="chartexport-details" class="expanded-description" aria-hidden="true">
                             <h4>Bar-Close Detection</h4>
                             <p>The addon intelligently exports only when a new bar closes - 15-minute chart exports at :00, :15, :30, :45. This prevents redundant exports and ensures you always get complete bars.</p>
                             <h4>Recommended Settings for AI Vision</h4>
@@ -680,8 +692,8 @@
                             <li>Single .cs file, MIT licensed, no external dependencies</li>
                         </ul>
                         <a href="indicators/StrategyManagerAddOn.zip" class="download-btn">Download StrategyManagerAddOn</a>
-                        <button class="expand-btn" onclick="toggleExpand('strategymanager-details')">Read More</button>
-                        <div id="strategymanager-details" class="expanded-description">
+                        <button type="button" class="expand-btn" data-expand-target="strategymanager-details" aria-controls="strategymanager-details" aria-expanded="false">Read More</button>
+                        <div id="strategymanager-details" class="expanded-description" aria-hidden="true">
                             <h4>Why the obvious approaches don't work</h4>
                             <p>The Strategies tab checkbox is bound to a WPF routed command - setting the row's IsEnabled property or raising a click event only toggles the checkmark while the strategy stays dead. This addon calls the same internal grid pipeline the checkbox handler calls (verified against NinjaTrader 8.1.5.2), so the full start/stop chain runs: historical load, transition to realtime, everything.</p>
                             <h4>Safety notes</h4>
@@ -717,6 +729,10 @@
             <p style="margin-top: 15px; color: #888;">
                 <strong>For AddOns:</strong> Use <strong>Tools &rarr; Import &rarr; NinjaScript Add-on...</strong> and select the ZIP file directly.
             </p>
+            <p style="margin-top: 15px; color: #888;">
+                <strong>Verify your download:</strong> Compare its SHA-256 digest with the published
+                <a href="SHA256SUMS">checksum manifest</a> before importing it into NinjaTrader.
+            </p>
         </div>
 
         <div class="disclaimer">
@@ -730,32 +746,11 @@
     </div>
 
     <!-- Lightbox -->
-    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-        <span class="lightbox-close">&times;</span>
-        <img id="lightbox-img" src="" alt="Screenshot">
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Screenshot preview">
+        <button type="button" class="lightbox-close" data-lightbox-close aria-label="Close screenshot preview">&times;</button>
+        <img id="lightbox-img" alt="">
     </div>
 
-    <script>
-        function toggleExpand(id) {
-            const el = document.getElementById(id);
-            el.classList.toggle('show');
-        }
-
-        function openLightbox(src) {
-            document.getElementById('lightbox-img').src = src;
-            document.getElementById('lightbox').classList.add('show');
-        }
-
-        function closeLightbox() {
-            document.getElementById('lightbox').classList.remove('show');
-        }
-
-        // Close lightbox on Escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeLightbox();
-            }
-        });
-    </script>
+    <script src="downloads.js" defer></script>
 </body>
 </html>

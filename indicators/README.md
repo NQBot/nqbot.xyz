@@ -70,6 +70,9 @@ Downloads historical bar data to CSV files.
 
 ## Installation
 
+Before importing a ZIP, verify its SHA-256 digest against the repository's
+[`SHA256SUMS`](../SHA256SUMS) manifest.
+
 1. Copy all `.cs` files to:
    ```
    Documents\NinjaTrader 8\bin\Custom\Indicators\

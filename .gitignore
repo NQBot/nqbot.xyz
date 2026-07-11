@@ -1,0 +1,26 @@
+# Local credentials and environment overrides must never be published.
+.env
+.env.*
+!.env.example
+*.credentials.json
+*.key
+*.pem
+*.p12
+*.pfx
+
+# Local editor and operating-system state.
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Python validation artifacts.
+__pycache__/
+*.py[cod]
+
+# Viewer-safe runtime data is published only from the isolated snapshots branch.
+scoreboard_snapshot.json
+scoreboard_state_snapshot.json
+account_daily_pnl_snapshot.json
+account_pnl_history_snapshot.json
+eval_arena_snapshot.json

@@ -1,0 +1,76 @@
+name: Public site security validation
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+# The validator only reads repository content. No write-capable token is needed.
+permissions:
+  contents: read
+
+concurrency:
+  group: public-site-security-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    env:
+      PYTHONDONTWRITEBYTECODE: "1"
+    steps:
+      # actions/checkout v4.2.2, pinned to an immutable commit.
+      - name: Check out site code without persisted credentials
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          path: site
+          persist-credentials: false
+
+      # Snapshot data is never used as workflow or executable code. The trusted
+      # main/PR helper below accepts only the five schema-v2 JSON artifacts.
+      - name: Check out public snapshot data
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: nqbot/nqbot.xyz
+          ref: snapshots
+          path: snapshot-data
+          persist-credentials: false
+
+      # actions/setup-node v4.4.0, pinned to an immutable commit.
+      - name: Select the client-test runtime
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: "20"
+
+      - name: Run dependency-free security unit tests
+        run: python3 -m unittest discover -s site/tests -p 'test_*.py'
+
+      - name: Import exact public snapshot allowlist
+        run: |
+          python3 site/scripts/copy_public_snapshots.py \
+            --source "$GITHUB_WORKSPACE/snapshot-data" \
+            --destination "$GITHUB_WORKSPACE/site"
+
+      - name: Check every top-level client script
+        shell: bash
+        run: |
+          set -euo pipefail
+          found=0
+          for script in site/*.js; do
+            [ -f "$script" ] || continue
+            found=1
+            node --check "$script"
+          done
+          [ "$found" -eq 1 ]
+
+      - name: Run dependency-free client security tests
+        run: node --test site/tests/*.test.js
+
+      - name: Verify download checksum manifest
+        run: python3 site/scripts/generate_checksums.py --root site --check
+
+      - name: Validate public site payloads and assets
+        run: python3 site/scripts/validate_public_site.py --root site

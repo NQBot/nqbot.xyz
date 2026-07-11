@@ -187,7 +187,7 @@
       transition: transform .15s;
     }
     .algo-card:hover { transform: translateY(-2px); }
-    .algo-card.hidden { display: none; }
+    .algo-card.hidden, .cat-header.hidden { display: none; }
 
     .card-head {
       display: flex;
@@ -395,7 +395,7 @@
     <a href="eval-arena.html">Eval Arena</a>
     <a href="analysis.html">Analysis</a>
     <a href="downloads.html">Downloads</a>
-    <a href="https://www.youtube.com/channel/UCylD_vJ1etiLUykGp9Gvnbg" target="_blank">YouTube</a>
+    <a href="https://www.youtube.com/channel/UCylD_vJ1etiLUykGp9Gvnbg" target="_blank" rel="noopener noreferrer">YouTube</a>
   </div>
 </nav>
 
@@ -418,10 +418,10 @@
   </div>
 
   <div class="filter-bar">
-    <button class="filter-btn active" onclick="filterSession('all')">All <span class="count">(22)</span></button>
-    <button class="filter-btn" onclick="filterSession('US')">US <span class="count">(9)</span></button>
-    <button class="filter-btn" onclick="filterSession('Asian')">Asian <span class="count">(8)</span></button>
-    <button class="filter-btn" onclick="filterSession('European')">European <span class="count">(7)</span></button>
+    <button class="filter-btn active" data-session-filter="all" aria-pressed="true">All <span class="count">(22)</span></button>
+    <button class="filter-btn" data-session-filter="US" aria-pressed="false">US <span class="count">(9)</span></button>
+    <button class="filter-btn" data-session-filter="Asian" aria-pressed="false">Asian <span class="count">(8)</span></button>
+    <button class="filter-btn" data-session-filter="European" aria-pressed="false">European <span class="count">(7)</span></button>
   </div>
 
   <!-- TREND FOLLOWING -->
@@ -1008,44 +1008,7 @@
 
 </div>
 
-<script>
-function filterSession(session) {
-  const cards = document.querySelectorAll('.algo-card');
-  const btns = document.querySelectorAll('.filter-btn');
-  const cats = document.querySelectorAll('.cat-header');
-
-  btns.forEach(b => b.classList.remove('active'));
-  event.target.closest('.filter-btn').classList.add('active');
-
-  if (session === 'all') {
-    cards.forEach(c => c.classList.remove('hidden'));
-    cats.forEach(c => c.style.display = '');
-    return;
-  }
-
-  cards.forEach(c => {
-    const sessions = c.dataset.sessions || '';
-    if (sessions.includes(session)) {
-      c.classList.remove('hidden');
-    } else {
-      c.classList.add('hidden');
-    }
-  });
-
-  // Hide category headers if all their cards are hidden
-  cats.forEach(cat => {
-    let next = cat.nextElementSibling;
-    let anyVisible = false;
-    while (next && !next.classList.contains('cat-header') && !next.classList.contains('appointment-box') && !next.classList.contains('summary-section')) {
-      if (next.classList.contains('algo-card') && !next.classList.contains('hidden')) {
-        anyVisible = true;
-      }
-      next = next.nextElementSibling;
-    }
-    cat.style.display = anyVisible ? '' : 'none';
-  });
-}
-</script>
+<script src="algos.js" defer></script>
 
 </body>
 </html>
