@@ -376,18 +376,56 @@
             <h2>Strategies</h2>
             <div class="indicator-grid">
 
+                <!-- Trend Pullback B -->
+                <div class="indicator-card" id="trendpullbackb">
+                    <div class="card-content">
+                        <h3>Trend Pullback B <span class="addon-badge">Strategy + Indicator</span></h3>
+                        <p class="tagline">"The best strategy of the arena, plus the indicator that lets you trade it by hand."</p>
+                        <p>Trend Pullback B finished the Eval Arena with the best record in a field of 32: <strong>20 simulated $50K evaluation attempts, 9 passed, 11 failed - 45%</strong>, between 8 July and 17 September 2026. It ships with a manual signal indicator, because most funding companies will not let a robot trade their account. The indicator marks the setup, prices the entry, the stop and the target, and places no orders - you do.</p>
+                        <ul class="features">
+                            <li><strong>One set of rules, two halves</strong> - the strategy calls the indicator for its signals, so the chart cannot drift away from what the strategy does</li>
+                            <li>Entry is a limit 25% back inside the trigger bar, live for one bar only - a setup that never comes back is declined, not chased</li>
+                            <li>ATR-scaled bracket: stop 1.5 x ATR(14) clamped 15-40 points, target 2R</li>
+                            <li>Hard clock rules compiled in: no new entry from 15:30 ET, flat at 15:45 ET</li>
+                            <li>Account guard for funded rules: profit target, trailing drawdown, daily loss limit, and a resting limit exit that banks the target at an exact price</li>
+                            <li>Three presets in one file - Variant B European, Variant A Asian, Variant A US</li>
+                            <li>Includes CLAUDE.md and AGENTS.md so an AI coding tool inherits the invariants instead of breaking them</li>
+                        </ul>
+                        <a href="indicators/TrendPullbackB.zip" class="download-btn">Download Trend Pullback B</a>
+                        <button type="button" class="expand-btn" data-expand-target="trendpullbackb-details" aria-controls="trendpullbackb-details" aria-expanded="false">Read More</button>
+                        <div id="trendpullbackb-details" class="expanded-description" aria-hidden="true">
+                            <h4>Read the record properly</h4>
+                            <p>Eleven of twenty attempts ended at the drawdown limit. A 45% pass rate was the best number on the board, which says more about how hard evaluations are than about how good any one strategy is. What produces passes is a modest geometric edge plus hard discipline plus an account guard that stops the moment the target is banked - take the discipline away and the number collapses. Simulated fills, one instrument, one ten-week window, no third-party audit.</p>
+                            <h4>Why a manual indicator</h4>
+                            <p>Funding companies generally allow tools but not full automation on an evaluation or funded account. The indicator is the strategy's own signal code with the order routing removed: same trend filter, same pullback measurement, same trigger, same entry price, same bracket. It draws an arrow and the limit line, sounds an alert, then tracks the trade with deliberately pessimistic assumptions - no target credit on the fill bar, ambiguous bars count as stops.</p>
+                            <h4>Requirements</h4>
+                            <ul>
+                                <li>NQ or MNQ on a <strong>1-minute</strong> chart, ETH session template</li>
+                                <li>NinjaTrader set to <strong>US Eastern</strong> - every session hour in the package is Eastern</li>
+                                <li>Both files must be installed; the strategy does not compile without the indicator</li>
+                            </ul>
+                            <div class="who-for">
+                                <span>Evaluation Traders</span>
+                                <span>Manual Execution</span>
+                                <span>NQ Scalpers</span>
+                                <span>Strategy Study</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Strategy Downloads - Coming Soon -->
                 <div class="indicator-card" id="strategy-downloads">
                     <div class="screenshot-gallery">
                         <img src="images/strategies-download-under-construction.webp" alt="Strategies Download - Under Construction" data-lightbox role="button" tabindex="0" aria-haspopup="dialog" aria-controls="lightbox">
                     </div>
                     <div class="card-content">
-                        <h3>NT8 Strategy Downloads <span class="soon-badge">Coming Soon</span></h3>
-                        <p class="tagline">"The same strategies competing in the Eval Arena - headed to the Shed."</p>
-                        <p>The trading strategies you see battling through simulated $50K evaluations on the live
-                           broadcast are built as native NinjaTrader 8 strategy files. We're preparing them for
-                           free download right here - once the first strategies finish their arena runs, this
-                           section opens up.</p>
+                        <h3>More Arena Strategies <span class="soon-badge">Coming Soon</span></h3>
+                        <p class="tagline">"Trend Pullback B landed first. The rest of the arena roster follows."</p>
+                        <p>The trading strategies you saw battling through simulated $50K evaluations on the live
+                           broadcast are built as native NinjaTrader 8 strategy files. The arena has finished and
+                           the first of them - Trend Pullback B - is above. The rest are being prepared for free
+                           download here, each one paired with a manual signal indicator.</p>
                         <ul class="features">
                             <li>Native NinjaScript strategy files - no external dependencies</li>
                             <li>The exact logic competing on the Eval Arena scoreboard</li>

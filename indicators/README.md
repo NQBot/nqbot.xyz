@@ -4,6 +4,26 @@ A collection of utility indicators for NinjaTrader 8 focused on time/session awa
 
 ## Indicators Included
 
+### Strategies
+
+#### Trend Pullback B  (TrendPullbackB.zip)
+Trend + pullback to EMA/VWAP on NQ, shipped as a strategy **and** a manual signal
+indicator so it can be traded by hand where automation is not allowed.
+
+**Contents:**
+- `Strategies/TrendPullbackB.cs` - orders, account guard, clock rules
+- `Indicators/TrendPullbackSignal.cs` - the signal engine and manual display, no orders
+- `README.md`, `CLAUDE.md`, `AGENTS.md`, `LICENSE`
+
+**Notes:**
+- The strategy calls the indicator for its signals, so the two cannot diverge
+- 1-minute NQ/MNQ, ETH template, NinjaTrader set to US Eastern
+- Both files must be installed; the strategy will not compile without the indicator
+- Arena record: 20 simulated $50K evaluation attempts, 9 passed, 11 failed (45%),
+  8 Jul - 17 Sep 2026. Simulated, unaudited, and not a promise of anything.
+
+---
+
 ### Session & Time Tools
 
 #### WorldClock
