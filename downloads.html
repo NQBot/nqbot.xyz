@@ -259,6 +259,29 @@
             color: #00d4ff;
             text-decoration: none;
         }
+        .risk-panel {
+            background: rgba(220, 38, 38, 0.10);
+            border: 1px solid #7f1d1d;
+            border-left: 4px solid #dc2626;
+            border-radius: 10px;
+            padding: 22px 24px;
+            margin-bottom: 30px;
+            font-size: 0.93rem;
+            line-height: 1.65;
+            color: #e8d5d5;
+        }
+        .risk-panel h3 {
+            color: #ff8080;
+            font-size: 1.05rem;
+            margin-bottom: 12px;
+            letter-spacing: .02em;
+            text-transform: uppercase;
+        }
+        .risk-panel p { margin-bottom: 12px; }
+        .risk-panel p:last-child { margin-bottom: 0; }
+        .risk-panel ul { margin: 0 0 12px 20px; }
+        .risk-panel li { margin-bottom: 9px; }
+        .risk-panel strong { color: #ffb3b3; }
         .disclaimer {
             background: rgba(255, 165, 0, 0.1);
             border: 1px solid #664400;
@@ -374,6 +397,62 @@
         <!-- Strategies -->
         <section class="section" id="strategies">
             <h2>Strategies</h2>
+            <div class="risk-panel">
+                <h3>Read this before you download a strategy</h3>
+                <p>
+                    <strong>These are not indicators.</strong> Each download contains a strategy that
+                    <strong>places real orders on whatever account you attach it to</strong>, and an indicator that
+                    tells you a direction, an entry price, a stop and a target. Both are trade signals in every
+                    sense that matters. Treat them that way.
+                </p>
+                <ul>
+                    <li>
+                        <strong>The pass rates on this page are simulated, and they are not a track record.</strong>
+                        They come from simulated evaluation accounts filled by NinjaTrader's simulator, not from
+                        money at risk. Simulated fills do not model slippage, queue position, partial fills,
+                        rejected orders or a thin book, and they never miss a fill that a real broker would have
+                        missed. Results like these are also produced with the benefit of hindsight over the very
+                        period used to measure them. No claim is made or implied that any account will achieve
+                        results like these.
+                    </li>
+                    <li>
+                        <strong>Most of these strategies failed.</strong> Across all 43 arena strategies, 88 of 326
+                        attempts passed &mdash; about 27%. Even the three published here failed more evaluations than
+                        they passed, or close to it. The <a href="eval-arena.html">full final table</a> shows every
+                        result, including the ones that went 0 for 6.
+                    </li>
+                    <li>
+                        <strong>The samples are too small to rank.</strong> Ten to twenty-four attempts each means
+                        the difference between a 46% strategy and a 37% one is statistical noise. Do not read the
+                        ordering as a quality ranking, and do not expect any of these rates to repeat.
+                    </li>
+                    <li>
+                        <strong>Automation can breach your funding agreement.</strong> Most prop firms restrict or
+                        prohibit fully automated trading on evaluation and funded accounts, and the rule is theirs
+                        to change without telling you. That is why each download includes a manual indicator. Read
+                        your own contract; a rule violation can cost you the account regardless of whether you were
+                        profitable.
+                    </li>
+                    <li>
+                        <strong>The account guard is not a safety net.</strong> It only knows about orders it placed
+                        itself. It cannot see trades you take by hand, it depends on values you configure correctly,
+                        and like any software it can fail. It is not a substitute for reading your account rules.
+                    </li>
+                </ul>
+                <p>
+                    <strong>Nothing here is financial advice.</strong> PhillyFrank is not a registered investment
+                    adviser, commodity trading advisor, or broker, and nothing on this site is a recommendation to
+                    buy or sell anything or a solicitation to trade. These files are published for education and
+                    research. Trading futures carries a substantial risk of loss, is not suitable for every
+                    investor, and you can lose more than you deposit. Past performance &mdash; simulated performance
+                    especially &mdash; does not indicate future results.
+                </p>
+                <p>
+                    <strong>You are responsible for every order that reaches the market from your machine.</strong>
+                    Test in simulation first, for long enough to see the strategy lose, and never run anything here
+                    on money you cannot afford to lose.
+                </p>
+            </div>
             <div class="indicator-grid">
 
                 <!-- Trend Pullback B -->
@@ -856,7 +935,7 @@
         </div>
 
         <div class="disclaimer">
-            <strong>Disclaimer:</strong> These indicators are provided as-is for educational purposes. They do not constitute trading advice or signals. Trading futures involves substantial risk of loss and is not suitable for all investors. Use at your own discretion. Always verify critical data against official sources.
+            <strong>Disclaimer:</strong> Everything on this page is provided as-is for education and research, and none of it is financial advice or a recommendation to trade. The utility indicators display information and place no orders. The <a href="#strategies">strategy downloads</a> are different: they generate trade signals and can place live orders &mdash; read the risk notice in that section before using them. Any performance figures shown are from simulated accounts and are not a track record; simulated results have inherent limitations and do not indicate future results. Trading futures involves a substantial risk of loss and is not suitable for all investors. Use at your own discretion, verify critical data against official sources, and never risk money you cannot afford to lose.
         </div>
 
         <footer>
