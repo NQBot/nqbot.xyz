@@ -453,18 +453,61 @@
                     </div>
                 </div>
 
+                <!-- Donchian Breakout -->
+                <div class="indicator-card" id="donchianbreakout">
+                    <div class="card-content">
+                        <h3>Donchian Breakout <span class="addon-badge">Strategy + Indicator</span></h3>
+                        <p class="tagline">"Break the channel, but only with the higher timeframe behind you."</p>
+                        <p>A close beyond the highest high or lowest low of the previous 30 bars, taken only in the direction the 5-minute EMA stack already points. <strong>24 simulated $50K evaluation attempts, 9 passed, 15 failed - 37.5%</strong>, between 6 July and 18 September 2026. The US session entry in the set, and like the others it ships with a manual signal indicator so it can be followed where automation is not allowed.</p>
+                        <ul class="features">
+                            <li><strong>One set of rules, two halves</strong> - the strategy calls the indicator for its signals, so the chart cannot drift away from what the strategy does</li>
+                            <li>Plots the channel and tells you what is gating what: 5m trend direction, which sides are armed, and why a break was skipped</li>
+                            <li>A stop-out disarms that direction until price trades back through the channel midpoint</li>
+                            <li>The 5-minute trend gate fails closed - not enough history means no trade, never a free pass</li>
+                            <li>Entry is a limit 25% back inside the trigger bar, live for one bar only - a break that never comes back is declined, not chased</li>
+                            <li>Account guard for funded rules: Sim, Eval or Off, plus a resting limit exit that banks the profit target at an exact price</li>
+                            <li>Includes CLAUDE.md and AGENTS.md so an AI coding tool inherits the invariants instead of breaking them</li>
+                        </ul>
+                        <a href="indicators/DonchianBreakoutUS.zip" class="download-btn">Download Donchian Breakout</a>
+                        <button type="button" class="expand-btn" data-expand-target="donchianbreakout-details" aria-controls="donchianbreakout-details" aria-expanded="false">Read More</button>
+                        <div id="donchianbreakout-details" class="expanded-description" aria-hidden="true">
+                            <h4>Read the record properly</h4>
+                            <p>This is the weakest of the three published here - Trend Pullback B passed 45% and VWAP Reclaim 46.2%, against 37.5% for this one. Fifteen of twenty-four attempts ended at the drawdown limit. It is still well above the 27% average across all 43 arena strategies, and with samples this size the ordering between the three is inside the noise rather than a ranking.</p>
+                            <h4>The same code on a different session passed 1 of 17</h4>
+                            <p>An Asian-session variant of this exact logic went 1-16 and is deliberately not included in this download. It is the clearest evidence in the whole roster that a session window is not a cosmetic setting: identical rules, different hours, near-total failure. If you move the window you are not tuning, you are testing something new.</p>
+                            <h4>The one place the chart can drift from your account</h4>
+                            <p>Because a stop-out disarms a direction, the signal depends on the outcome of the previous trade rather than on price alone. The indicator arms from its own simulated fills and the strategy uses the indicator's state, so the two halves always agree - but if your real fill differs from the simulation, your account's armed state and the chart's have parted company. No other strategy in this set has that coupling, and the panel always shows the current state so you can see it.</p>
+                            <h4>Requirements</h4>
+                            <ul>
+                                <li>NQ or MNQ on a <strong>1-minute</strong> chart, ETH session template</li>
+                                <li>A <strong>5-minute</strong> series is added automatically; your data connection must be able to load it</li>
+                                <li>NinjaTrader set to <strong>US Eastern</strong></li>
+                                <li>Expect the panel to report nothing allowed until the 5-minute series has enough history - that is the gate failing closed, not a fault</li>
+                                <li>Both files must be installed; the strategy does not compile without the indicator</li>
+                            </ul>
+                            <div class="who-for">
+                                <span>Evaluation Traders</span>
+                                <span>Manual Execution</span>
+                                <span>US Session</span>
+                                <span>Breakout Traders</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Strategy Downloads - Coming Soon -->
                 <div class="indicator-card" id="strategy-downloads">
                     <div class="screenshot-gallery">
                         <img src="images/strategies-download-under-construction.webp" alt="Strategies Download - Under Construction" data-lightbox role="button" tabindex="0" aria-haspopup="dialog" aria-controls="lightbox">
                     </div>
                     <div class="card-content">
-                        <h3>More Arena Strategies <span class="soon-badge">Coming Soon</span></h3>
-                        <p class="tagline">"Two down. The rest of the arena roster follows."</p>
-                        <p>The trading strategies you saw battling through simulated $50K evaluations on the live
-                           broadcast are built as native NinjaTrader 8 strategy files. The arena has finished and
-                           the first two - Trend Pullback B and VWAP Reclaim - are above. The rest are being
-                           prepared for free download here, each one paired with a manual signal indicator.</p>
+                        <h3>The Arena Is Closed</h3>
+                        <p class="tagline">"One winner per session. That is the whole set."</p>
+                        <p>Forty-three strategies ran simulated $50K evaluations on the live broadcast for ten weeks.
+                           Three are published above - the best of each session: VWAP Reclaim for the Asian hours,
+                           Trend Pullback B for the European, Donchian Breakout for the US. The rest of the field
+                           did not earn a place, and the <a href="eval-arena.html">full final table</a> shows exactly
+                           how each one did.</p>
                         <ul class="features">
                             <li>Native NinjaScript strategy files - no external dependencies</li>
                             <li>The exact logic competing on the Eval Arena scoreboard</li>

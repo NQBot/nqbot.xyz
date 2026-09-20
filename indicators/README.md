@@ -24,6 +24,24 @@ indicator so it can be traded by hand where automation is not allowed.
 
 ---
 
+#### Donchian Breakout  (DonchianBreakoutUS.zip)
+N-bar channel breakout taken only with the 5-minute trend. Ships as a strategy **and**
+a manual signal indicator.
+
+**Contents:**
+- `Strategies/DonchianBreakoutUS.cs` - orders, account guard, clock rules
+- `Indicators/DonchianBreakoutFollow.cs` - the signal engine and manual display, no orders
+- `README.md`, `CLAUDE.md`, `AGENTS.md`, `LICENSE`
+
+**Notes:**
+- Adds a 5-minute data series for the trend gate, which fails closed without history
+- A stop-out disarms that direction until price trades back through the channel midpoint,
+  so the signal depends on the outcome of the previous trade
+- Arena record: 24 simulated $50K evaluation attempts, 9 passed, 15 failed (37.5%),
+  6 Jul - 18 Sep 2026. Simulated and unaudited.
+
+---
+
 #### VWAP Reclaim  (VwapReclaimAN.zip)
 Break of the session VWAP then a reclaim of it, traded in the reclaim direction.
 Ships as a strategy **and** a manual signal indicator.

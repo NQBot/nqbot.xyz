@@ -223,6 +223,41 @@
       .cta img { max-width: 320px; }
       .hero h1 { font-size: 30px; }
     }
+
+    /* --- final results (run closed) --- */
+    .final {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); box-shadow: var(--shadow);
+      padding: 22px 22px 24px; margin-bottom: 18px;
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    }
+    .final-head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; }
+    .final-head h2 { margin: 0; font-size: 22px; font-weight: 900; }
+    .final-date { font-size: 12px; color: var(--muted); font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+    .final-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 16px 0 6px; }
+    .final-stat { background: var(--card2); border: 1px solid var(--border); border-radius: 14px; padding: 12px 14px; }
+    .final-stat .label { font-size: 10.5px; letter-spacing: .09em; text-transform: uppercase; color: var(--muted); font-weight: 800; }
+    .final-stat .value { font-size: 26px; font-weight: 900; line-height: 1.15; }
+    .final-stat .value.pos { color: var(--green); }
+    .final p { margin: 12px 0 0; font-size: 14px; line-height: 1.62; }
+    .final h3 { margin: 22px 0 10px; font-size: 16px; font-weight: 900; }
+    .winners { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .winner { background: var(--green-soft); border: 1px solid rgba(22,163,74,.35); border-radius: 14px; padding: 14px 16px; }
+    .winner .sess { font-size: 10.5px; letter-spacing: .09em; text-transform: uppercase; color: var(--muted); font-weight: 800; }
+    .winner .nm { font-size: 17px; font-weight: 900; margin: 2px 0 6px; }
+    .winner .rec { font-size: 13px; font-weight: 700; }
+    .winner .rec b { color: var(--green); }
+    .winner a { display: inline-block; margin-top: 10px; font-size: 13px; font-weight: 800; color: var(--ink); text-decoration: underline; }
+    tr.pub { background: rgba(22,163,74,.09); }
+    .pubtag {
+      display: inline-block; margin-left: 8px; background: var(--green); color: #fff;
+      border-radius: 999px; font-size: 10px; font-weight: 800; padding: 2px 8px;
+      letter-spacing: .05em; text-transform: uppercase;
+    }
+    @media (max-width: 860px) {
+      .final-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .winners { grid-template-columns: 1fr; }
+    }
   </style>
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
@@ -245,22 +280,23 @@
     <!-- HERO -->
     <section class="hero">
       <div class="hero-left">
-        <p class="hero-kicker">Simulated Prop-Firm Gauntlet</p>
+        <p class="hero-kicker">Simulated Prop-Firm Gauntlet &middot; Complete</p>
         <h1>Eval Arena</h1>
-        <p class="hero-sub">Every algo on the broadcast gets its own simulated $50,000 evaluation account
-          and has to earn its way out — pass the profit target without blowing the drawdown, or reset and try again.</p>
+        <p class="hero-sub">Every algo on the broadcast got its own simulated $50,000 evaluation account
+          and had to earn its way out &mdash; pass the profit target without blowing the drawdown, or reset and try again.
+          The run is complete; the final table is below.</p>
         <div class="hero-stats">
           <div class="hero-stat">
             <div class="label">Strategies</div>
-            <div class="value" id="stat-accounts">--</div>
+            <div class="value" id="stat-accounts">43</div>
           </div>
           <div class="hero-stat">
             <div class="label">Passes</div>
-            <div class="value pos" id="stat-passes">--</div>
+            <div class="value pos" id="stat-passes">88</div>
           </div>
           <div class="hero-stat">
             <div class="label">Fails</div>
-            <div class="value neg" id="stat-fails">--</div>
+            <div class="value neg" id="stat-fails">238</div>
           </div>
         </div>
       </div>
@@ -270,6 +306,139 @@
         <div class="rule-line"><span class="rule-label">Drawdown</span><span class="rule-value">Trailing liquidation line</span></div>
         <div class="rule-line"><span class="rule-label">Daily Halt</span><span class="rule-value">Down day stops the strategy until tomorrow</span></div>
         <div class="rule-line"><span class="rule-label">On Pass / Fail</span><span class="rule-value">Attempt is logged, account resets</span></div>
+      </div>
+    </section>
+
+    <!-- FINAL RESULTS -->
+    <section class="final">
+      <div class="final-head">
+        <h2>Final Results</h2>
+        <span class="final-date">5 July &ndash; 18 September 2026 &middot; run closed</span>
+      </div>
+
+      <div class="final-grid">
+        <div class="final-stat"><div class="label">Strategies</div><div class="value">43</div></div>
+        <div class="final-stat"><div class="label">Attempts</div><div class="value">326</div></div>
+        <div class="final-stat"><div class="label">Passes</div><div class="value pos">88</div></div>
+        <div class="final-stat"><div class="label">Field pass rate</div><div class="value">27.0%</div></div>
+      </div>
+
+      <p>
+        Forty-three strategies ran the gauntlet for ten weeks and passed 88 of 326 attempts between them.
+        That 27% is the number worth remembering: the <em>typical</em> strategy here failed roughly three
+        evaluations for every one it passed, and four strategies never completed a single attempt at all.
+        Prop-firm evaluations are hard, and an arena full of algorithms is not exempt from that.
+      </p>
+
+      <h3>One winner per session</h3>
+      <div class="winners">
+        <div class="winner">
+          <div class="sess">Asian &middot; 20:00&ndash;01:30 ET</div>
+          <div class="nm">VWAP Reclaim</div>
+          <div class="rec"><b>6 passes</b> from 13 &middot; 46.2%</div>
+          <a href="downloads.html#vwapreclaim">Download it free</a>
+        </div>
+        <div class="winner">
+          <div class="sess">European &middot; 03:00&ndash;08:00 ET</div>
+          <div class="nm">Trend Pullback B</div>
+          <div class="rec"><b>9 passes</b> from 20 &middot; 45.0%</div>
+          <a href="downloads.html#trendpullbackb">Download it free</a>
+        </div>
+        <div class="winner">
+          <div class="sess">US &middot; 09:30&ndash;15:30 ET</div>
+          <div class="nm">Donchian Breakout</div>
+          <div class="rec"><b>9 passes</b> from 24 &middot; 37.5%</div>
+          <a href="downloads.html#donchianbreakout">Download it free</a>
+        </div>
+      </div>
+
+      <h3>How to read the table below</h3>
+      <p>
+        <strong>Small samples lie.</strong> With ten to twenty-four attempts apiece, the gap between a 46%
+        strategy and a 37% one is not a ranking &mdash; it is noise. The three published above have
+        overlapping confidence intervals, and several strategies further down the table are statistically
+        indistinguishable from them too. They were chosen for having a decent rate <em>and</em> a real
+        sample, one per session, not because the ordering is meaningful.
+      </p>
+      <p>
+        <strong>The top of the table is the trap.</strong> The strategy showing 100% passed a single
+        attempt. Anything with fewer than about ten attempts tells you almost nothing, in either direction.
+      </p>
+      <p>
+        <strong>A pass rate is not an edge.</strong> What produces passes here is a modest geometric edge,
+        hard discipline rules, and an account guard that stops the moment the target is banked. The same
+        Donchian logic run on the Asian session instead of the US one passed 1 attempt in 17 &mdash; identical
+        rules, different hours, near-total failure.
+      </p>
+
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Strategy</th>
+              <th class="num">Attempts</th>
+              <th class="num">Passes</th>
+              <th class="num">Fails</th>
+              <th class="num">Pass %</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="strat">DisplacementFadeAsian</td><td class="num">1</td><td class="num pf-pass">1</td><td class="num pf-fail">0</td><td class="num">100.0%</td></tr>
+            <tr><td class="strat">EMA200PBAN</td><td class="num">4</td><td class="num pf-pass">2</td><td class="num pf-fail">2</td><td class="num">50.0%</td></tr>
+            <tr><td class="strat">LevelBreakC</td><td class="num">2</td><td class="num pf-pass">1</td><td class="num pf-fail">1</td><td class="num">50.0%</td></tr>
+            <tr><td class="strat">VWAPReclaimCUE</td><td class="num">2</td><td class="num pf-pass">1</td><td class="num pf-fail">1</td><td class="num">50.0%</td></tr>
+            <tr class="pub"><td class="strat">VWAPReclaimCAN <span class="pubtag">published</span></td><td class="num">13</td><td class="num pf-pass">6</td><td class="num pf-fail">7</td><td class="num">46.2%</td></tr>
+            <tr><td class="strat">VWAPReclaimC</td><td class="num">11</td><td class="num pf-pass">5</td><td class="num pf-fail">6</td><td class="num">45.5%</td></tr>
+            <tr class="pub"><td class="strat">TrendPullbackB <span class="pubtag">published</span></td><td class="num">20</td><td class="num pf-pass">9</td><td class="num pf-fail">11</td><td class="num">45.0%</td></tr>
+            <tr><td class="strat">FVGEMAUS</td><td class="num">10</td><td class="num pf-pass">4</td><td class="num pf-fail">6</td><td class="num">40.0%</td></tr>
+            <tr class="pub"><td class="strat">DonchianBreakoutBUS <span class="pubtag">published</span></td><td class="num">24</td><td class="num pf-pass">9</td><td class="num pf-fail">15</td><td class="num">37.5%</td></tr>
+            <tr><td class="strat">EMA200PBEU</td><td class="num">8</td><td class="num pf-pass">3</td><td class="num pf-fail">5</td><td class="num">37.5%</td></tr>
+            <tr><td class="strat">EMAPullbackAN</td><td class="num">8</td><td class="num pf-pass">3</td><td class="num pf-fail">5</td><td class="num">37.5%</td></tr>
+            <tr><td class="strat">FVGEMAEU</td><td class="num">8</td><td class="num pf-pass">3</td><td class="num pf-fail">5</td><td class="num">37.5%</td></tr>
+            <tr><td class="strat">IchimokuCloudB</td><td class="num">22</td><td class="num pf-pass">8</td><td class="num pf-fail">14</td><td class="num">36.4%</td></tr>
+            <tr><td class="strat">EMAPullbackDeep20EU</td><td class="num">14</td><td class="num pf-pass">5</td><td class="num pf-fail">9</td><td class="num">35.7%</td></tr>
+            <tr><td class="strat">FadeExtremeC</td><td class="num">16</td><td class="num pf-pass">5</td><td class="num pf-fail">11</td><td class="num">31.2%</td></tr>
+            <tr><td class="strat">BBSqueezeA</td><td class="num">10</td><td class="num pf-pass">3</td><td class="num pf-fail">7</td><td class="num">30.0%</td></tr>
+            <tr><td class="strat">EMA50Pullback</td><td class="num">7</td><td class="num pf-pass">2</td><td class="num pf-fail">5</td><td class="num">28.6%</td></tr>
+            <tr><td class="strat">EMAPullbackEU</td><td class="num">15</td><td class="num pf-pass">4</td><td class="num pf-fail">11</td><td class="num">26.7%</td></tr>
+            <tr><td class="strat">ADXTrendC</td><td class="num">8</td><td class="num pf-pass">2</td><td class="num pf-fail">6</td><td class="num">25.0%</td></tr>
+            <tr><td class="strat">EMA200PBUS</td><td class="num">4</td><td class="num pf-pass">1</td><td class="num pf-fail">3</td><td class="num">25.0%</td></tr>
+            <tr><td class="strat">ICTLiteC</td><td class="num">4</td><td class="num pf-pass">1</td><td class="num pf-fail">3</td><td class="num">25.0%</td></tr>
+            <tr><td class="strat">EMAPullbackDeep20AN</td><td class="num">10</td><td class="num pf-pass">2</td><td class="num pf-fail">8</td><td class="num">20.0%</td></tr>
+            <tr><td class="strat">FVGEMAAN</td><td class="num">11</td><td class="num pf-pass">2</td><td class="num pf-fail">9</td><td class="num">18.2%</td></tr>
+            <tr><td class="strat">StochasticOBOSB</td><td class="num">19</td><td class="num pf-pass">3</td><td class="num pf-fail">16</td><td class="num">15.8%</td></tr>
+            <tr><td class="strat">EMAPullbackDeep20US</td><td class="num">11</td><td class="num pf-pass">1</td><td class="num pf-fail">10</td><td class="num">9.1%</td></tr>
+            <tr><td class="strat">EMAPullbackUS</td><td class="num">16</td><td class="num pf-pass">1</td><td class="num pf-fail">15</td><td class="num">6.2%</td></tr>
+            <tr><td class="strat">DonchianBreakoutB</td><td class="num">17</td><td class="num pf-pass">1</td><td class="num pf-fail">16</td><td class="num">5.9%</td></tr>
+            <tr><td class="strat">IchimokuCloudBUS</td><td class="num">6</td><td class="num pf-pass">0</td><td class="num pf-fail">6</td><td class="num">0.0%</td></tr>
+            <tr><td class="strat">ADXTrendB</td><td class="num">5</td><td class="num pf-pass">0</td><td class="num pf-fail">5</td><td class="num">0.0%</td></tr>
+            <tr><td class="strat">SweepReversalShortUS</td><td class="num">4</td><td class="num pf-pass">0</td><td class="num pf-fail">4</td><td class="num">0.0%</td></tr>
+            <tr><td class="strat">SweepReversalShortMidday</td><td class="num">3</td><td class="num pf-pass">0</td><td class="num pf-fail">3</td><td class="num">0.0%</td></tr>
+            <tr><td class="strat">TrendPullbackA</td><td class="num">3</td><td class="num pf-pass">0</td><td class="num pf-fail">3</td><td class="num">0.0%</td></tr>
+            <tr><td class="strat">MACDHistogramC</td><td class="num">2</td><td class="num pf-pass">0</td><td class="num pf-fail">2</td><td class="num">0.0%</td></tr>
+            <tr><td class="strat">PivotPointFadeC</td><td class="num">2</td><td class="num pf-pass">0</td><td class="num pf-fail">2</td><td class="num">0.0%</td></tr>
+            <tr><td class="strat">TrendPullbackAUS</td><td class="num">2</td><td class="num pf-pass">0</td><td class="num pf-fail">2</td><td class="num">0.0%</td></tr>
+            <tr><td class="strat">BBSqueezeW</td><td class="num">1</td><td class="num pf-pass">0</td><td class="num pf-fail">1</td><td class="num">0.0%</td></tr>
+            <tr><td class="strat">InitialBalanceC</td><td class="num">1</td><td class="num pf-pass">0</td><td class="num pf-fail">1</td><td class="num">0.0%</td></tr>
+            <tr><td class="strat">MomentumContA</td><td class="num">1</td><td class="num pf-pass">0</td><td class="num pf-fail">1</td><td class="num">0.0%</td></tr>
+            <tr><td class="strat">ORBC</td><td class="num">1</td><td class="num pf-pass">0</td><td class="num pf-fail">1</td><td class="num">0.0%</td></tr>
+            <tr><td class="strat">Confluence826Short</td><td class="num">0</td><td class="num pf-pass">0</td><td class="num pf-fail">0</td><td class="num">no attempts</td></tr>
+            <tr><td class="strat">GapFillB</td><td class="num">0</td><td class="num pf-pass">0</td><td class="num pf-fail">0</td><td class="num">no attempts</td></tr>
+            <tr><td class="strat">NYPMSilverBulletC</td><td class="num">0</td><td class="num pf-pass">0</td><td class="num pf-fail">0</td><td class="num">no attempts</td></tr>
+            <tr><td class="strat">PMTrendD</td><td class="num">0</td><td class="num pf-pass">0</td><td class="num pf-fail">0</td><td class="num">no attempts</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note">
+        Counts are the arena's official pass/fail counters. A handful of individual attempt logs are
+        incomplete, so a strategy's logged history can differ from its counter by one.
+        <br><br>
+        <strong>Disclaimer:</strong> The Eval Arena was a fully simulated exercise for educational and
+        entertainment purposes. All accounts, balances, and outcomes were simulated &mdash; no real money was
+        traded and no real evaluation firm was involved. Nothing on this page is trading or investment
+        advice. Trading futures involves substantial risk of loss, and past results &mdash; simulated ones
+        especially &mdash; do not predict future results.
       </div>
     </section>
 
@@ -321,11 +490,12 @@
     <section class="cta">
       <img src="images/strategies-download-under-construction.webp" alt="Strategies Download - Under Construction">
       <div>
-        <h2>Run These Strategies Yourself <span class="soon-badge">Coming Soon</span></h2>
+        <h2>Run These Strategies Yourself</h2>
         <p>
-          The strategies competing in the arena are built as native NinjaTrader 8 strategy files, and we're
-          getting them ready for free download in Philly Frank's Indicator Shed — the same place you'll find
-          our free NT8 indicators and add-ons. Downloads open once the first strategies finish their arena runs.
+          The three session winners are free downloads in Philly Frank's Indicator Shed, as native
+          NinjaTrader 8 files. Each one ships with a manual signal indicator as well as the strategy, because
+          most funding companies will not let a robot trade their account &mdash; the indicator prices the entry,
+          the stop and the target, and you place the orders.
         </p>
         <a class="cta-btn" href="downloads.html#strategies">Visit the Indicator Shed</a>
       </div>
@@ -334,9 +504,13 @@
     <!-- SCOREBOARD -->
     <section class="board">
       <div class="board-head">
-        <h2>Arena Scoreboard</h2>
+        <h2>Last Live Snapshot</h2>
         <span class="freshness" id="freshness">Loading snapshot...</span>
       </div>
+      <p class="note" style="margin: 0 0 12px;">
+        The arena has stopped running, so this table is a leftover from the live broadcast rather than
+        the record. It may be out of date or unavailable. <strong>The final results are above.</strong>
+      </p>
       <div class="table-scroll">
         <table id="arena-table">
           <thead>
