@@ -24,6 +24,24 @@ indicator so it can be traded by hand where automation is not allowed.
 
 ---
 
+#### VWAP Reclaim  (VwapReclaimAN.zip)
+Break of the session VWAP then a reclaim of it, traded in the reclaim direction.
+Ships as a strategy **and** a manual signal indicator.
+
+**Contents:**
+- `Strategies/VWAPReclaimAN.cs` - orders, account guard, clock rules
+- `Indicators/VwapReclaimFollow.cs` - the signal engine and manual display, no orders
+- `README.md`, `CLAUDE.md`, `AGENTS.md`, `LICENSE`
+
+**Notes:**
+- Two presets: Asian with no ATR filter, US with the 15-30 ATR band
+- The VWAP is window-anchored and resets on the first bar of the session, so it will
+  not match a standard VWAP indicator. That is deliberate.
+- Arena record: 13 simulated $50K evaluation attempts on the Asian preset, 6 passed,
+  7 failed (46.2%), 23 Jul - 17 Sep 2026. Simulated, unaudited, small sample.
+
+---
+
 ### Session & Time Tools
 
 #### WorldClock
