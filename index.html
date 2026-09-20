@@ -205,6 +205,42 @@
       font-weight:800;
     }
 
+    .legal{
+      grid-column: 1 / -1;
+      margin-top: 22px;
+      background: linear-gradient(180deg, var(--card) 0%, var(--card2) 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px 26px 24px;
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    }
+    .legal h2{
+      margin: 0 0 12px;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      opacity: .75;
+    }
+    .legal .cftc{
+      font-size: 12.5px;
+      line-height: 1.55;
+      font-weight: 700;
+      letter-spacing: .01em;
+      border-left: 3px solid rgba(11,18,32,.28);
+      padding-left: 14px;
+      margin-bottom: 16px;
+    }
+    .legal p{
+      font-size: 13px;
+      line-height: 1.6;
+      margin: 0 0 10px;
+      opacity: .82;
+      font-weight: 600;
+    }
+    .legal p:last-child{ margin-bottom: 0; }
+    .legal a{ color: inherit; }
     .fineprint{
       opacity:.7;
       font-size: 13px;
@@ -292,7 +328,7 @@
 
         <div class="sub">
           A multi-agent AI market observatory for futures markets.<br/>
-          Open source • No trade signals • Educational research
+          Open source • Educational research • Not financial advice
         </div>
 
         <!-- YouTube Live Stream Embed -->
@@ -357,6 +393,42 @@
         <div class="fineprint">
           Everything here is educational tooling. Verify market hours/holidays and test indicators before live use.
         </div>
+      </section>
+
+      <!-- REQUIRED DISCLOSURES -->
+      <section class="legal">
+        <h2>Required disclosures</h2>
+
+        <p class="cftc">
+          HYPOTHETICAL OR SIMULATED PERFORMANCE DISCLOSURE: THESE RESULTS ARE BASED ON SIMULATED OR
+          HYPOTHETICAL PERFORMANCE RESULTS THAT HAVE CERTAIN INHERENT LIMITATIONS. UNLIKE THE RESULTS
+          SHOWN IN AN ACTUAL PERFORMANCE RECORD, THESE RESULTS DO NOT REPRESENT ACTUAL TRADING. ALSO,
+          BECAUSE THESE TRADES HAVE NOT ACTUALLY BEEN EXECUTED, THESE RESULTS MAY HAVE UNDER-OR
+          OVER-COMPENSATED FOR THE IMPACT, IF ANY, OF CERTAIN MARKET FACTORS, SUCH AS LACK OF LIQUIDITY.
+          SIMULATED OR HYPOTHETICAL TRADING PROGRAMS IN GENERAL ARE ALSO SUBJECT TO THE FACT THAT THEY
+          ARE DESIGNED WITH THE BENEFIT OF HINDSIGHT. NO REPRESENTATION IS BEING MADE THAT ANY ACCOUNT
+          WILL OR IS LIKELY TO ACHIEVE PROFITS OR LOSSES SIMILAR TO THESE BEING SHOWN.
+        </p>
+
+        <p>
+          Every performance figure published on this site &mdash; including the
+          <a href="eval-arena.html">Eval Arena</a> results and the pass rates shown with the
+          <a href="downloads.html#strategies">strategy downloads</a> &mdash; is simulated. No real money was
+          traded to produce them, and they are not a track record.
+        </p>
+
+        <p>
+          Nothing on this site is financial advice, a recommendation to trade, or a solicitation.
+          PhillyFrank is not a registered investment adviser, commodity trading advisor, or broker, and
+          nothing here is tailored to your circumstances. The tools and source code published here are
+          provided for education and research, as-is and without warranty of any kind.
+        </p>
+
+        <p>
+          Trading futures involves a substantial risk of loss, is not suitable for every investor, and you
+          can lose more than your initial deposit. You alone are responsible for every order that reaches
+          the market from your machine. Never trade money you cannot afford to lose.
+        </p>
       </section>
 
     </div>
