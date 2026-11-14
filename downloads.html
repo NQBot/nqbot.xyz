@@ -394,34 +394,167 @@
             <span class="license-badge">MIT License - Free Forever</span>
         </header>
 
-        <!-- Strategy downloads withdrawn -->
-        <section class="section" id="withdrawn">
-            <h2>Strategy Downloads Withdrawn</h2>
+        <!-- Manual follow indicators -->
+        <section class="section" id="followers">
+            <h2>Manual Follow Indicators</h2>
 
             <div class="risk-panel">
-                <h3>The strategy files have been taken down</h3>
+                <h3>Signals for you to act on by hand</h3>
                 <p>
-                    The rules for evaluation accounts have changed: <strong>automated trading is no longer
-                    allowed on them.</strong> A strategy that places orders by itself is exactly that, so the
-                    Trend Pullback B, VWAP Reclaim and Donchian Breakout strategy downloads that were listed
-                    here have been withdrawn and the files are no longer offered from this site.
+                    Each download below is <strong>one indicator and nothing else</strong>. It marks a setup on
+                    your chart and prices an entry, a stop and a target. It places no orders: you do.
+                    There is no strategy file in any of them.
                 </p>
                 <p>
-                    The manual signal indicators that shipped with them will be re-released on their own, as
-                    indicator-only downloads: they mark the setup and price the entry, the stop and the target,
-                    and you place every order yourself. Until they are back, nothing in this section is
-                    available to download.
+                    That is deliberate. The rules for evaluation accounts have changed: <strong>automated
+                    trading is no longer allowed on them</strong>, so the strategy downloads that used to be
+                    listed here have been withdrawn. Read your own account rules; they are yours to know and
+                    your provider's to change.
+                </p>
+                <ul>
+                    <li>
+                        <strong>No edge is claimed.</strong> Our own tests over years of 1-minute NQ data did not
+                        find a reliable edge in any of the three. They are rule sets to watch, study and judge
+                        for yourself.
+                    </li>
+                    <li>
+                        <strong>Their history is simulated.</strong> The same rules once ran as strategies in a
+                        simulated evaluation arena that is now closed. The <a href="eval-arena.html">final
+                        table</a> is a record of simulated accounts, not a track record, and most attempts in it
+                        failed.
+                    </li>
+                    <li>
+                        <strong>What an indicator draws on your chart is a model,</strong> not a record of any
+                        trade anyone took.
+                    </li>
+                </ul>
+                <p>
+                    <strong>Nothing here is financial advice.</strong> PhillyFrank is not a registered investment
+                    adviser, commodity trading advisor, or broker, and nothing on this site is a recommendation to
+                    buy or sell anything or a solicitation to trade. These files are published for education and
+                    research. Trading futures carries a substantial risk of loss, is not suitable for every
+                    investor, and you can lose more than you deposit.
                 </p>
                 <p>
-                    The <a href="eval-arena.html">Eval Arena</a> results stay up as a record of what simulated
-                    accounts did. They are simulated, they are not a track record, and they are not a reason
-                    to trade anything. <strong>Nothing here is financial advice.</strong> PhillyFrank is not a
-                    registered investment adviser, commodity trading advisor, or broker. Trading futures
-                    carries a substantial risk of loss, and you can lose more than you deposit.
+                    <strong>You are responsible for every order you place.</strong> Test in simulation first, for
+                    long enough to see the setup lose, and never trade money you cannot afford to lose.
                 </p>
             </div>
-        </section>
 
+            <div class="indicator-grid">
+
+                <!-- Trend Pullback Signal -->
+                <div class="indicator-card" id="trendpullbacksignal">
+                    <div class="card-content">
+                        <h3>Trend Pullback Signal <span class="addon-badge">Indicator</span></h3>
+                        <p class="tagline">"A trend, a pullback to the level, and a limit price to place by hand."</p>
+                        <p>EMA(20) trending, price pulling back to the EMA or the window VWAP, then a trigger bar. The indicator draws an arrow and a dashed line at the limit price, shows the entry, the stop and the target in a panel, and sounds an alert. It places no orders - you do.</p>
+                        <ul class="features">
+                            <li>Entry is a limit 25% back inside the trigger bar, live for one bar only - a setup that never comes back is declined, not chased</li>
+                            <li>ATR-scaled bracket: stop 1.5 x ATR(14) clamped 15-40 points, target 2R</li>
+                            <li>Three presets - European 03:00-08:00 ET, Asian 20:00-01:30 ET, US 09:30-15:30 ET - plus your own hours</li>
+                            <li>Optional cooldown after each trade - on by default at 15 minutes after a win and 45 after a loss, every number yours to change or switch off</li>
+                            <li>Selectable alert sounds, and a panel and labels you can move and resize</li>
+                            <li>Tracks a simulated trade with deliberately pessimistic assumptions - no target credit on the fill bar, ambiguous bars count as stops</li>
+                        </ul>
+                        <a href="indicators/TrendPullbackSignal.zip" class="download-btn">Download Trend Pullback Signal</a>
+                        <button type="button" class="expand-btn" data-expand-target="trendpullbacksignal-details" aria-controls="trendpullbacksignal-details" aria-expanded="false">Read More</button>
+                        <div id="trendpullbacksignal-details" class="expanded-description" aria-hidden="true">
+                            <h4>What it does not do</h4>
+                            <p>It places no orders and it is not automated: you place every order yourself. It is not a prediction and not advice. Our own tests over years of 1-minute NQ data did not find a reliable edge in this setup, and the simulated outcomes it draws on your chart are a model of what the rules would have done, not a record of any trade anyone took.</p>
+                            <h4>Requirements</h4>
+                            <ul>
+                                <li>NQ or MNQ on a <strong>1-minute</strong> chart, ETH session template</li>
+                                <li>NinjaTrader set to <strong>US Eastern</strong> - every session hour in the package is Eastern</li>
+                                <li>The VWAP it measures against is anchored to the session window on purpose, so it will not match a standard VWAP indicator</li>
+                            </ul>
+                            <div class="who-for">
+                                <span>Manual Execution</span>
+                                <span>NQ Scalpers</span>
+                                <span>Pullback Traders</span>
+                                <span>Rule Study</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VWAP Reclaim Follow -->
+                <div class="indicator-card" id="vwapreclaimfollow">
+                    <div class="card-content">
+                        <h3>VWAP Reclaim Follow <span class="addon-badge">Indicator</span></h3>
+                        <p class="tagline">"Price leaves VWAP, then takes it back. The reclaim is the setup."</p>
+                        <p>A bar closes clear of the session VWAP by 5 points, then closes back through it by 3 within 30 bars, and the reclaim is marked in its own direction. The panel walks you through the break and the reclaim as they happen. It places no orders - you do.</p>
+                        <ul class="features">
+                            <li>The panel follows the state machine with you: broke below, reclaim above 24291.50 for a long, 21 bars left</li>
+                            <li>Plots the session VWAP the setup is actually measured against - window-anchored, not a 24-hour VWAP</li>
+                            <li>Two presets - Asian 20:00-01:30 ET with no ATR filter, US 09:30-15:30 ET with the 15-30 ATR band - plus your own hours</li>
+                            <li>Entry is a limit 25% back inside the trigger bar, live for one bar only - a reclaim that never comes back is declined, not chased</li>
+                            <li>Optional heads-up sound when VWAP breaks, plus setup, fill and expiry sounds you choose</li>
+                            <li>Tracks a simulated trade with deliberately pessimistic assumptions - no target credit on the fill bar, ambiguous bars count as stops</li>
+                        </ul>
+                        <a href="indicators/VwapReclaimFollow.zip" class="download-btn">Download VWAP Reclaim Follow</a>
+                        <button type="button" class="expand-btn" data-expand-target="vwapreclaimfollow-details" aria-controls="vwapreclaimfollow-details" aria-expanded="false">Read More</button>
+                        <div id="vwapreclaimfollow-details" class="expanded-description" aria-hidden="true">
+                            <h4>What it does not do</h4>
+                            <p>It places no orders and it is not automated: you place every order yourself. It is not a prediction and not advice. Our own tests over years of 1-minute NQ data did not find a reliable edge in this setup, and the simulated outcomes it draws on your chart are a model of what the rules would have done, not a record of any trade anyone took.</p>
+                            <h4>Why the Asian preset has no ATR filter</h4>
+                            <p>Asian ATR runs low. An ATR floor derived on US data rejected most Asian signals and did worse out of sample, so the Asian preset takes every qualifying reclaim. The US preset keeps the 15-30 band, and a reclaim rejected on ATR still uses up the break - the panel tells you when that happens.</p>
+                            <h4>Requirements</h4>
+                            <ul>
+                                <li>NQ or MNQ on a <strong>1-minute</strong> chart, ETH session template</li>
+                                <li>NinjaTrader set to <strong>US Eastern</strong> - every session hour in the package is Eastern</li>
+                                <li>The ETH template matters here: the VWAP resets on the first bar of the session, so a different template moves the anchor and changes every signal</li>
+                            </ul>
+                            <div class="who-for">
+                                <span>Manual Execution</span>
+                                <span>Overnight Sessions</span>
+                                <span>VWAP Traders</span>
+                                <span>Rule Study</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Donchian Breakout Follow -->
+                <div class="indicator-card" id="donchianbreakoutfollow">
+                    <div class="card-content">
+                        <h3>Donchian Breakout Follow <span class="addon-badge">Indicator</span></h3>
+                        <p class="tagline">"Break the channel, but only with the higher timeframe behind you."</p>
+                        <p>A close beyond the highest high or lowest low of the previous 30 bars, marked only in the direction the 5-minute EMA stack already points. The channel is plotted and the panel says what is gating what. It places no orders - you do.</p>
+                        <ul class="features">
+                            <li>Plots the channel and tells you the 5-minute trend, which sides are armed, and why a break was skipped</li>
+                            <li>A stop-out disarms that direction until price trades back through the channel midpoint</li>
+                            <li>The 5-minute trend gate fails closed - not enough history means no setup, never a free pass</li>
+                            <li>Entry is a limit 25% back inside the trigger bar, live for one bar only - a break that never comes back is declined, not chased</li>
+                            <li>US session 09:30-15:30 ET, or your own hours</li>
+                            <li>Tracks a simulated trade with deliberately pessimistic assumptions - no target credit on the fill bar, ambiguous bars count as stops</li>
+                        </ul>
+                        <a href="indicators/DonchianBreakoutFollow.zip" class="download-btn">Download Donchian Breakout Follow</a>
+                        <button type="button" class="expand-btn" data-expand-target="donchianbreakoutfollow-details" aria-controls="donchianbreakoutfollow-details" aria-expanded="false">Read More</button>
+                        <div id="donchianbreakoutfollow-details" class="expanded-description" aria-hidden="true">
+                            <h4>What it does not do</h4>
+                            <p>It places no orders and it is not automated: you place every order yourself. It is not a prediction and not advice. Our own tests over years of 1-minute NQ data did not find a reliable edge in this setup, and the simulated outcomes it draws on your chart are a model of what the rules would have done, not a record of any trade anyone took.</p>
+                            <h4>The one place the chart can drift from your account</h4>
+                            <p>Because a stop-out disarms a direction, what the chart arms next depends on how the last trade ended, not only on price. The chart arms and disarms from its own simulated fills. If your real fill differs from the simulation, your account and the chart have parted company - the panel always shows the current armed state so you can see it.</p>
+                            <h4>Requirements</h4>
+                            <ul>
+                                <li>NQ or MNQ on a <strong>1-minute</strong> chart, ETH session template</li>
+                                <li>A <strong>5-minute</strong> series is added automatically; your data connection must be able to load it</li>
+                                <li>NinjaTrader set to <strong>US Eastern</strong></li>
+                                <li>Expect the panel to report nothing allowed until the 5-minute series has enough history - that is the gate failing closed, not a fault</li>
+                            </ul>
+                            <div class="who-for">
+                                <span>Manual Execution</span>
+                                <span>US Session</span>
+                                <span>Breakout Traders</span>
+                                <span>Rule Study</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
 
         <!-- Session & Time Tools -->
         <section class="section">

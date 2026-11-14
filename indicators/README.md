@@ -4,14 +4,29 @@ A collection of utility indicators for NinjaTrader 8 focused on time/session awa
 
 ## Indicators Included
 
-### Strategies
+### Manual follow indicators
 
-The strategy downloads (Trend Pullback B, Donchian Breakout, VWAP Reclaim) have been withdrawn:
-automated trading is no longer allowed on evaluation accounts. Their manual signal indicators will
-be re-released on their own, as indicator-only downloads.
+Three indicator-only downloads. Each marks a setup on a 1-minute NQ chart and prices an entry,
+a stop and a target; none of them places an order. The strategy versions that used to ship with
+them were withdrawn because automated trading is no longer allowed on evaluation accounts.
+
+#### Trend Pullback Signal  (TrendPullbackSignal.zip)
+Trend plus a pullback to the EMA or the window VWAP. Presets: European, Asian, US, Custom hours.
+Optional cooldown after each trade (on by default: 15 min after a win, 45 after a loss).
+
+#### VWAP Reclaim Follow  (VwapReclaimFollow.zip)
+A break of the session VWAP and a reclaim of it, marked in the reclaim direction. Presets: Asian
+(no ATR filter), US (ATR 15-30), Custom hours. The VWAP is window-anchored, so use the ETH template.
+
+#### Donchian Breakout Follow  (DonchianBreakoutFollow.zip)
+A close beyond the previous 30 bars' channel, taken only with the 5-minute trend. A stop-out
+disarms that direction until price trades back through the channel midpoint.
+
+**Notes:**
+- Every indicator is a rule set to study, not a prediction. No edge is claimed.
+- Simulated outcomes drawn on the chart are a model, not a record of any trade.
 
 ---
-
 
 ### Session & Time Tools
 
