@@ -6,59 +6,12 @@ A collection of utility indicators for NinjaTrader 8 focused on time/session awa
 
 ### Strategies
 
-#### Trend Pullback B  (TrendPullbackB.zip)
-Trend + pullback to EMA/VWAP on NQ, shipped as a strategy **and** a manual signal
-indicator so it can be traded by hand where automation is not allowed.
-
-**Contents:**
-- `Strategies/TrendPullbackB.cs` - orders, account guard, clock rules
-- `Indicators/TrendPullbackSignal.cs` - the signal engine and manual display, no orders
-- `README.md`, `CLAUDE.md`, `AGENTS.md`, `LICENSE`
-
-**Notes:**
-- The strategy calls the indicator for its signals, so the two cannot diverge
-- 1-minute NQ/MNQ, ETH template, NinjaTrader set to US Eastern
-- Both files must be installed; the strategy will not compile without the indicator
-- Arena record: 20 simulated $50K evaluation attempts, 9 passed, 11 failed (45%),
-  8 Jul - 17 Sep 2026. Simulated, unaudited, and not a promise of anything.
+The strategy downloads (Trend Pullback B, Donchian Breakout, VWAP Reclaim) have been withdrawn:
+automated trading is no longer allowed on evaluation accounts. Their manual signal indicators will
+be re-released on their own, as indicator-only downloads.
 
 ---
 
-#### Donchian Breakout  (DonchianBreakoutUS.zip)
-N-bar channel breakout taken only with the 5-minute trend. Ships as a strategy **and**
-a manual signal indicator.
-
-**Contents:**
-- `Strategies/DonchianBreakoutUS.cs` - orders, account guard, clock rules
-- `Indicators/DonchianBreakoutFollow.cs` - the signal engine and manual display, no orders
-- `README.md`, `CLAUDE.md`, `AGENTS.md`, `LICENSE`
-
-**Notes:**
-- Adds a 5-minute data series for the trend gate, which fails closed without history
-- A stop-out disarms that direction until price trades back through the channel midpoint,
-  so the signal depends on the outcome of the previous trade
-- Arena record: 24 simulated $50K evaluation attempts, 9 passed, 15 failed (37.5%),
-  6 Jul - 18 Sep 2026. Simulated and unaudited.
-
----
-
-#### VWAP Reclaim  (VwapReclaimAN.zip)
-Break of the session VWAP then a reclaim of it, traded in the reclaim direction.
-Ships as a strategy **and** a manual signal indicator.
-
-**Contents:**
-- `Strategies/VWAPReclaimAN.cs` - orders, account guard, clock rules
-- `Indicators/VwapReclaimFollow.cs` - the signal engine and manual display, no orders
-- `README.md`, `CLAUDE.md`, `AGENTS.md`, `LICENSE`
-
-**Notes:**
-- Two presets: Asian with no ATR filter, US with the 15-30 ATR band
-- The VWAP is window-anchored and resets on the first bar of the session, so it will
-  not match a standard VWAP indicator. That is deliberate.
-- Arena record: 13 simulated $50K evaluation attempts on the Asian preset, 6 passed,
-  7 failed (46.2%), 23 Jul - 17 Sep 2026. Simulated, unaudited, small sample.
-
----
 
 ### Session & Time Tools
 

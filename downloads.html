@@ -394,211 +394,34 @@
             <span class="license-badge">MIT License - Free Forever</span>
         </header>
 
-        <!-- Strategies -->
-        <section class="section" id="strategies">
-            <h2>Strategies</h2>
+        <!-- Strategy downloads withdrawn -->
+        <section class="section" id="withdrawn">
+            <h2>Strategy Downloads Withdrawn</h2>
+
             <div class="risk-panel">
-                <h3>Read this before you download a strategy</h3>
+                <h3>The strategy files have been taken down</h3>
                 <p>
-                    <strong>These are not indicators.</strong> Each download contains a strategy that
-                    <strong>places real orders on whatever account you attach it to</strong>, and an indicator that
-                    tells you a direction, an entry price, a stop and a target. Both are trade signals in every
-                    sense that matters. Treat them that way.
-                </p>
-                <ul>
-                    <li>
-                        <strong>The pass rates on this page are simulated, and they are not a track record.</strong>
-                        They come from simulated evaluation accounts filled by NinjaTrader's simulator, not from
-                        money at risk. Simulated fills do not model slippage, queue position, partial fills,
-                        rejected orders or a thin book, and they never miss a fill that a real broker would have
-                        missed. Results like these are also produced with the benefit of hindsight over the very
-                        period used to measure them. No claim is made or implied that any account will achieve
-                        results like these.
-                    </li>
-                    <li>
-                        <strong>Most of these strategies failed.</strong> Across all 43 arena strategies, 88 of 326
-                        attempts passed &mdash; about 27%. Even the three published here failed more evaluations than
-                        they passed, or close to it. The <a href="eval-arena.html">full final table</a> shows every
-                        result, including the ones that went 0 for 6.
-                    </li>
-                    <li>
-                        <strong>The samples are too small to rank.</strong> Ten to twenty-four attempts each means
-                        the difference between a 46% strategy and a 37% one is statistical noise. Do not read the
-                        ordering as a quality ranking, and do not expect any of these rates to repeat.
-                    </li>
-                    <li>
-                        <strong>Automation can breach your funding agreement.</strong> Most prop firms restrict or
-                        prohibit fully automated trading on evaluation and funded accounts, and the rule is theirs
-                        to change without telling you. That is why each download includes a manual indicator. Read
-                        your own contract; a rule violation can cost you the account regardless of whether you were
-                        profitable.
-                    </li>
-                    <li>
-                        <strong>The account guard is not a safety net.</strong> It only knows about orders it placed
-                        itself. It cannot see trades you take by hand, it depends on values you configure correctly,
-                        and like any software it can fail. It is not a substitute for reading your account rules.
-                    </li>
-                </ul>
-                <p>
-                    <strong>Nothing here is financial advice.</strong> PhillyFrank is not a registered investment
-                    adviser, commodity trading advisor, or broker, and nothing on this site is a recommendation to
-                    buy or sell anything or a solicitation to trade. These files are published for education and
-                    research. Trading futures carries a substantial risk of loss, is not suitable for every
-                    investor, and you can lose more than you deposit. Past performance &mdash; simulated performance
-                    especially &mdash; does not indicate future results.
+                    The rules for evaluation accounts have changed: <strong>automated trading is no longer
+                    allowed on them.</strong> A strategy that places orders by itself is exactly that, so the
+                    Trend Pullback B, VWAP Reclaim and Donchian Breakout strategy downloads that were listed
+                    here have been withdrawn and the files are no longer offered from this site.
                 </p>
                 <p>
-                    <strong>You are responsible for every order that reaches the market from your machine.</strong>
-                    Test in simulation first, for long enough to see the strategy lose, and never run anything here
-                    on money you cannot afford to lose.
+                    The manual signal indicators that shipped with them will be re-released on their own, as
+                    indicator-only downloads: they mark the setup and price the entry, the stop and the target,
+                    and you place every order yourself. Until they are back, nothing in this section is
+                    available to download.
                 </p>
-            </div>
-            <div class="indicator-grid">
-
-                <!-- Trend Pullback B -->
-                <div class="indicator-card" id="trendpullbackb">
-                    <div class="card-content">
-                        <h3>Trend Pullback B <span class="addon-badge">Strategy + Indicator</span></h3>
-                        <p class="tagline">"The best strategy of the arena, plus the indicator that lets you trade it by hand."</p>
-                        <p>Trend Pullback B finished the Eval Arena with the best record in a field of 32: <strong>20 simulated $50K evaluation attempts, 9 passed, 11 failed - 45%</strong>, between 8 July and 17 September 2026. It ships with a manual signal indicator, because most funding companies will not let a robot trade their account. The indicator marks the setup, prices the entry, the stop and the target, and places no orders - you do.</p>
-                        <ul class="features">
-                            <li><strong>One set of rules, two halves</strong> - the strategy calls the indicator for its signals, so the chart cannot drift away from what the strategy does</li>
-                            <li>Entry is a limit 25% back inside the trigger bar, live for one bar only - a setup that never comes back is declined, not chased</li>
-                            <li>ATR-scaled bracket: stop 1.5 x ATR(14) clamped 15-40 points, target 2R</li>
-                            <li>Hard clock rules compiled in: no new entry from 15:30 ET, flat at 15:45 ET</li>
-                            <li>Account guard for funded rules: profit target, trailing drawdown, daily loss limit, and a resting limit exit that banks the target at an exact price</li>
-                            <li>Three presets in one file - Variant B European, Variant A Asian, Variant A US</li>
-                            <li>Includes CLAUDE.md and AGENTS.md so an AI coding tool inherits the invariants instead of breaking them</li>
-                        </ul>
-                        <a href="indicators/TrendPullbackB.zip" class="download-btn">Download Trend Pullback B</a>
-                        <button type="button" class="expand-btn" data-expand-target="trendpullbackb-details" aria-controls="trendpullbackb-details" aria-expanded="false">Read More</button>
-                        <div id="trendpullbackb-details" class="expanded-description" aria-hidden="true">
-                            <h4>Read the record properly</h4>
-                            <p>Eleven of twenty attempts ended at the drawdown limit. A 45% pass rate was the best number on the board, which says more about how hard evaluations are than about how good any one strategy is. What produces passes is a modest geometric edge plus hard discipline plus an account guard that stops the moment the target is banked - take the discipline away and the number collapses. Simulated fills, one instrument, one ten-week window, no third-party audit.</p>
-                            <h4>Why a manual indicator</h4>
-                            <p>Funding companies generally allow tools but not full automation on an evaluation or funded account. The indicator is the strategy's own signal code with the order routing removed: same trend filter, same pullback measurement, same trigger, same entry price, same bracket. It draws an arrow and the limit line, sounds an alert, then tracks the trade with deliberately pessimistic assumptions - no target credit on the fill bar, ambiguous bars count as stops.</p>
-                            <h4>Requirements</h4>
-                            <ul>
-                                <li>NQ or MNQ on a <strong>1-minute</strong> chart, ETH session template</li>
-                                <li>NinjaTrader set to <strong>US Eastern</strong> - every session hour in the package is Eastern</li>
-                                <li>Both files must be installed; the strategy does not compile without the indicator</li>
-                            </ul>
-                            <div class="who-for">
-                                <span>Evaluation Traders</span>
-                                <span>Manual Execution</span>
-                                <span>NQ Scalpers</span>
-                                <span>Strategy Study</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- VWAP Reclaim -->
-                <div class="indicator-card" id="vwapreclaim">
-                    <div class="card-content">
-                        <h3>VWAP Reclaim <span class="addon-badge">Strategy + Indicator</span></h3>
-                        <p class="tagline">"Price leaves VWAP, then takes it back. The reclaim is the trade."</p>
-                        <p>A bar closes clear of the session VWAP by 5 points, then closes back through it by 3 within 30 bars - and the reclaim is entered in its own direction. <strong>13 simulated $50K evaluation attempts on the Asian session, 6 passed, 7 failed - 46.2%</strong>, between 23 July and 17 September 2026. Like every strategy here it ships with a manual signal indicator, because most funding companies will not let a robot trade their account.</p>
-                        <ul class="features">
-                            <li><strong>One set of rules, two halves</strong> - the strategy calls the indicator for its signals, so the chart cannot drift away from what the strategy does</li>
-                            <li>The panel walks the state machine with you: broke below, reclaim above 24291.50 for a long, 21 bars left</li>
-                            <li>Plots the session VWAP the setup is actually measured against - window-anchored, not a 24-hour VWAP</li>
-                            <li>Two presets in one file - Asian with no ATR filter, US with the 15-30 ATR band</li>
-                            <li>Entry is a limit 25% back inside the trigger bar, live for one bar only - a reclaim that never comes back is declined, not chased</li>
-                            <li>Account guard for funded rules: Sim, Eval or Off, plus a resting limit exit that banks the profit target at an exact price</li>
-                            <li>Includes CLAUDE.md and AGENTS.md so an AI coding tool inherits the invariants instead of breaking them</li>
-                        </ul>
-                        <a href="indicators/VwapReclaimAN.zip" class="download-btn">Download VWAP Reclaim</a>
-                        <button type="button" class="expand-btn" data-expand-target="vwapreclaim-details" aria-controls="vwapreclaim-details" aria-expanded="false">Read More</button>
-                        <div id="vwapreclaim-details" class="expanded-description" aria-hidden="true">
-                            <h4>Read the record properly</h4>
-                            <p>Seven of thirteen attempts ended at the drawdown limit, and thirteen attempts is a small sample - the gap between this and anything else in the roster is well inside the noise, so do not read the ordering as a ranking. What produces passes is a modest geometric edge plus hard discipline plus an account guard that stops the moment the target is banked. Simulated fills, one instrument, one nine-week window, no third-party audit. The US preset over its own run: 5 passes from 11.</p>
-                            <h4>Why the Asian preset has no ATR filter</h4>
-                            <p>Asian ATR runs low. An ATR floor derived on US data rejected most Asian signals and was a net loser out of sample, so the Asian preset takes every qualifying reclaim. The US preset keeps the 15-30 band: under 15 the move is too small to pay for the stop, at 30 and above is the instant-stop regime. On the US preset a reclaim rejected on ATR still consumes the break - the panel tells you when that happens.</p>
-                            <h4>Requirements</h4>
-                            <ul>
-                                <li>NQ or MNQ on a <strong>1-minute</strong> chart, ETH session template</li>
-                                <li>NinjaTrader set to <strong>US Eastern</strong> - every session hour in the package is Eastern</li>
-                                <li>The ETH template matters here: the VWAP resets on the first bar of the session, so a different template moves the anchor and changes every signal</li>
-                                <li>Both files must be installed; the strategy does not compile without the indicator</li>
-                            </ul>
-                            <div class="who-for">
-                                <span>Evaluation Traders</span>
-                                <span>Manual Execution</span>
-                                <span>Overnight Sessions</span>
-                                <span>VWAP Traders</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Donchian Breakout -->
-                <div class="indicator-card" id="donchianbreakout">
-                    <div class="card-content">
-                        <h3>Donchian Breakout <span class="addon-badge">Strategy + Indicator</span></h3>
-                        <p class="tagline">"Break the channel, but only with the higher timeframe behind you."</p>
-                        <p>A close beyond the highest high or lowest low of the previous 30 bars, taken only in the direction the 5-minute EMA stack already points. <strong>24 simulated $50K evaluation attempts, 9 passed, 15 failed - 37.5%</strong>, between 6 July and 18 September 2026. The US session entry in the set, and like the others it ships with a manual signal indicator so it can be followed where automation is not allowed.</p>
-                        <ul class="features">
-                            <li><strong>One set of rules, two halves</strong> - the strategy calls the indicator for its signals, so the chart cannot drift away from what the strategy does</li>
-                            <li>Plots the channel and tells you what is gating what: 5m trend direction, which sides are armed, and why a break was skipped</li>
-                            <li>A stop-out disarms that direction until price trades back through the channel midpoint</li>
-                            <li>The 5-minute trend gate fails closed - not enough history means no trade, never a free pass</li>
-                            <li>Entry is a limit 25% back inside the trigger bar, live for one bar only - a break that never comes back is declined, not chased</li>
-                            <li>Account guard for funded rules: Sim, Eval or Off, plus a resting limit exit that banks the profit target at an exact price</li>
-                            <li>Includes CLAUDE.md and AGENTS.md so an AI coding tool inherits the invariants instead of breaking them</li>
-                        </ul>
-                        <a href="indicators/DonchianBreakoutUS.zip" class="download-btn">Download Donchian Breakout</a>
-                        <button type="button" class="expand-btn" data-expand-target="donchianbreakout-details" aria-controls="donchianbreakout-details" aria-expanded="false">Read More</button>
-                        <div id="donchianbreakout-details" class="expanded-description" aria-hidden="true">
-                            <h4>Read the record properly</h4>
-                            <p>This is the weakest of the three published here - Trend Pullback B passed 45% and VWAP Reclaim 46.2%, against 37.5% for this one. Fifteen of twenty-four attempts ended at the drawdown limit. It is still well above the 27% average across all 43 arena strategies, and with samples this size the ordering between the three is inside the noise rather than a ranking.</p>
-                            <h4>The same code on a different session passed 1 of 17</h4>
-                            <p>An Asian-session variant of this exact logic went 1-16 and is deliberately not included in this download. It is the clearest evidence in the whole roster that a session window is not a cosmetic setting: identical rules, different hours, near-total failure. If you move the window you are not tuning, you are testing something new.</p>
-                            <h4>The one place the chart can drift from your account</h4>
-                            <p>Because a stop-out disarms a direction, the signal depends on the outcome of the previous trade rather than on price alone. The indicator arms from its own simulated fills and the strategy uses the indicator's state, so the two halves always agree - but if your real fill differs from the simulation, your account's armed state and the chart's have parted company. No other strategy in this set has that coupling, and the panel always shows the current state so you can see it.</p>
-                            <h4>Requirements</h4>
-                            <ul>
-                                <li>NQ or MNQ on a <strong>1-minute</strong> chart, ETH session template</li>
-                                <li>A <strong>5-minute</strong> series is added automatically; your data connection must be able to load it</li>
-                                <li>NinjaTrader set to <strong>US Eastern</strong></li>
-                                <li>Expect the panel to report nothing allowed until the 5-minute series has enough history - that is the gate failing closed, not a fault</li>
-                                <li>Both files must be installed; the strategy does not compile without the indicator</li>
-                            </ul>
-                            <div class="who-for">
-                                <span>Evaluation Traders</span>
-                                <span>Manual Execution</span>
-                                <span>US Session</span>
-                                <span>Breakout Traders</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Strategy Downloads - Coming Soon -->
-                <div class="indicator-card" id="strategy-downloads">
-                    <div class="screenshot-gallery">
-                        <img src="images/strategies-download-under-construction.webp" alt="Strategies Download - Under Construction" data-lightbox role="button" tabindex="0" aria-haspopup="dialog" aria-controls="lightbox">
-                    </div>
-                    <div class="card-content">
-                        <h3>The Arena Is Closed</h3>
-                        <p class="tagline">"One winner per session. That is the whole set."</p>
-                        <p>Forty-three strategies ran simulated $50K evaluations on the live broadcast for ten weeks.
-                           Three are published above - the best of each session: VWAP Reclaim for the Asian hours,
-                           Trend Pullback B for the European, Donchian Breakout for the US. The rest of the field
-                           did not earn a place, and the <a href="eval-arena.html">full final table</a> shows exactly
-                           how each one did.</p>
-                        <ul class="features">
-                            <li>Native NinjaScript strategy files - no external dependencies</li>
-                            <li>The exact logic competing on the Eval Arena scoreboard</li>
-                            <li>Session-aware: Asian, European, and US variants</li>
-                            <li>Free and open source, like everything else in the Shed</li>
-                        </ul>
-                        <a href="eval-arena.html" class="download-btn">Watch Them Compete in the Eval Arena</a>
-                    </div>
-                </div>
-
+                <p>
+                    The <a href="eval-arena.html">Eval Arena</a> results stay up as a record of what simulated
+                    accounts did. They are simulated, they are not a track record, and they are not a reason
+                    to trade anything. <strong>Nothing here is financial advice.</strong> PhillyFrank is not a
+                    registered investment adviser, commodity trading advisor, or broker. Trading futures
+                    carries a substantial risk of loss, and you can lose more than you deposit.
+                </p>
             </div>
         </section>
+
 
         <!-- Session & Time Tools -->
         <section class="section">
@@ -935,7 +758,7 @@
         </div>
 
         <div class="disclaimer">
-            <strong>Disclaimer:</strong> Everything on this page is provided as-is for education and research, and none of it is financial advice or a recommendation to trade. The utility indicators display information and place no orders. The <a href="#strategies">strategy downloads</a> are different: they generate trade signals and can place live orders &mdash; read the risk notice in that section before using them. Any performance figures shown are from simulated accounts and are not a track record; simulated results have inherent limitations and do not indicate future results. Trading futures involves a substantial risk of loss and is not suitable for all investors. Use at your own discretion, verify critical data against official sources, and never risk money you cannot afford to lose.
+            <strong>Disclaimer:</strong> Everything on this page is provided as-is for education and research, and none of it is financial advice or a recommendation to trade. The utility indicators display information and place no orders. The strategy files that were once listed here have been withdrawn. Any performance figures shown are from simulated accounts and are not a track record; simulated results have inherent limitations and do not indicate future results. Trading futures involves a substantial risk of loss and is not suitable for all investors. Use at your own discretion, verify critical data against official sources, and never risk money you cannot afford to lose.
         </div>
 
         <footer>
