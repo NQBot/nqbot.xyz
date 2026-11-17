@@ -415,7 +415,7 @@
                 <ul>
                     <li>
                         <strong>No edge is claimed.</strong> Our own tests over years of 1-minute NQ data did not
-                        find a reliable edge in any of the three. They are rule sets to watch, study and judge
+                        find a reliable edge in any of them. They are rule sets to watch, study and judge
                         for yourself.
                     </li>
                     <li>
@@ -553,6 +553,44 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Ichimoku Follow -->
+                <div class="indicator-card" id="ichimokufollow">
+                    <div class="card-content">
+                        <h3>Ichimoku Follow <span class="addon-badge">Indicator</span></h3>
+                        <p class="tagline">"The cross counts only when price is already clear of the cloud."</p>
+                        <p>Plots a 7/22/44 Ichimoku cloud and marks a Tenkan/Kijun cross that happens outside it - a long only above the cloud, a short only below. The panel says what it is waiting for and why a cross was skipped. It places no orders - you do.</p>
+                        <ul class="features">
+                            <li>The cloud on your chart is the cloud the rule measures against - nothing is shifted forward - with the Tenkan, Kijun and cloud edges plotted and the cloud shaded</li>
+                            <li>A cross with price inside the cloud, or on the wrong side of it, is skipped and the panel tells you so</li>
+                            <li>Three presets with identical rules and different hours - Asian 20:00-01:30 ET, European 03:00-08:00 ET, US 09:30-15:30 ET - plus your own hours and settings</li>
+                            <li>Entry is a limit 25% back inside the trigger bar, live for one bar only; stop is 1.5 x ATR(14) between 15 and 40 points, target is 2R</li>
+                            <li>Entry, stop and target are also plots, so you can read them in the Data Box or use them as an input to another indicator or alert</li>
+                            <li>Tracks a simulated trade with deliberately pessimistic assumptions - no target credit on the fill bar, ambiguous bars count as stops</li>
+                        </ul>
+                        <a href="indicators/IchimokuFollow.zip" class="download-btn">Download Ichimoku Follow</a>
+                        <button type="button" class="expand-btn" data-expand-target="ichimokufollow-details" aria-controls="ichimokufollow-details" aria-expanded="false">Read More</button>
+                        <div id="ichimokufollow-details" class="expanded-description" aria-hidden="true">
+                            <h4>What it does not do</h4>
+                            <p>It places no orders and it is not automated: you place every order yourself. It is not a prediction and not advice. Our own tests over years of 1-minute NQ data, in all three sessions and on a later period we kept back until the end, did not find a reliable edge: after costs the average trade was slightly negative in every session. The three sessions differ only in their hours and the differences between them are inside the noise, so the order they are listed in is not a ranking. The simulated outcomes it draws on your chart are a model of what the rules would have done, not a record of any trade anyone took.</p>
+                            <h4>Expect a lot of setups</h4>
+                            <p>Roughly 2 to 6 a day depending on the session, so costs and the orders you miss matter a great deal. Often a third or more of them never come back to the limit and are simply skipped - not chasing the bar that triggered it is the design. The ATR rule is in absolute points (at least 5), which was rarely true on older, lower-priced NQ data, so the evidence behind the statements above is mostly 2019 onward.</p>
+                            <h4>Requirements</h4>
+                            <ul>
+                                <li>NQ or MNQ on a <strong>1-minute</strong> chart, ETH session template</li>
+                                <li>NinjaTrader set to <strong>US Eastern</strong> - every session hour in the package is Eastern</li>
+                                <li>About 50 bars of history before the first signal</li>
+                            </ul>
+                            <div class="who-for">
+                                <span>Manual Execution</span>
+                                <span>Trend Followers</span>
+                                <span>Ichimoku Traders</span>
+                                <span>Rule Study</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 
             </div>
         </section>

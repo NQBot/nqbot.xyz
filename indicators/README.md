@@ -6,7 +6,7 @@ A collection of utility indicators for NinjaTrader 8 focused on time/session awa
 
 ### Manual follow indicators
 
-Three indicator-only downloads. Each marks a setup on a 1-minute NQ chart and prices an entry,
+Four indicator-only downloads. Each marks a setup on a 1-minute NQ chart and prices an entry,
 a stop and a target; none of them places an order. The strategy versions that used to ship with
 them were withdrawn because automated trading is no longer allowed on evaluation accounts.
 
@@ -21,6 +21,10 @@ A break of the session VWAP and a reclaim of it, marked in the reclaim direction
 #### Donchian Breakout Follow  (DonchianBreakoutFollow.zip)
 A close beyond the previous 30 bars' channel, taken only with the 5-minute trend. A stop-out
 disarms that direction until price trades back through the channel midpoint.
+
+#### Ichimoku Follow  (IchimokuFollow.zip)
+A Tenkan/Kijun cross on a 7/22/44 cloud, taken only when price is already outside the cloud. Presets:
+Asian, European, US (same rules, different hours) and Custom. The cloud is plotted and shaded.
 
 **Notes:**
 - Every indicator is a rule set to study, not a prediction. No edge is claimed.
